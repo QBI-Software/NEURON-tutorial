@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>{{ page.title }}</title>
+			<!-- link to main stylesheet -->
+			<link rel="stylesheet" type="text/css" href="/css/main.css">
+		</head>
+		<body>
+			<nav>
+	    		<ul>
+        		<li><a href="/">Home</a></li>
+	        	<li><a href="/setup">Setup</a></li>
+        		<li><a href="/lesson/intro">Lesson:Intro</a></li>
+        		<li><a href="/lesson/model">Lesson:Models</a></li>
+        		<li><a href="/lesson/network">Lesson:Network</a></li>
+    		</ul>
+			</nav>
+			<div class="container">
+			
+			{{ content }}
+			
+			</div><!-- /.container -->
+			<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2017 Queensland Brain Institute
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	<a href="{{ site.github.repository_url }}/">Source</a>
+	/
+	<a href="{{ site.github.repository_url }}/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="mailto:{{ site.email }}">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+		</body>
+	</html>
