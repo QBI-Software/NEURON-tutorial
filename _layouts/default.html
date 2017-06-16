@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-	<html>
-		<head>
-			<title>{{ page.title }}</title>
-		
-		</head>
+{% include header.html %}
 		<body>
 			<nav>
 	    		<ul>
@@ -14,6 +9,11 @@
         		<li><a href="{{ site.github.repository_url }}/lesson/network">Lesson:Network</a></li>
     		</ul>
 			</nav>
+
+    <section class="page-header">
+      <h1 class="project-name">NEURON Tutorial</h1>
+      <h2 class="project-tagline">QBI Software presents an introductory tutorial to NEURON for neuroscientists.</h2>
+    </section>
 			<div class="container">
 			
 			{{ content }}
