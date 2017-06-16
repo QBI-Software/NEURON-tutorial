@@ -8,7 +8,7 @@ We are offering an introductory workshop based on the recommended tutorials as w
 
 | Time | Lesson | Duration |
 | ------------- | ------------- | ------------- |
-| 9:00-9:30 | Intro and overview (info from Powerpoint and website)with step-by-step setup | 30 mins|
+| 9:00-9:30 | [Intro and overview](lessons/intro) (info from Powerpoint and website)with step-by-step setup | 30 mins|
 | 9:30-10:30 | UK tutorial (focussing on navigating the interface, compiling hoc files, running a basic model) - PARTS A,B,C | 60 mins|
 | 10:30-10:45 | Morning tea | 15 mins |
 | 10:45-12:00 | UK tutorial - PARTS D,E | 75 mins | 
@@ -20,5 +20,5 @@ We are offering an introductory workshop based on the recommended tutorials as w
 
 ### Installation
 
-NEURON software is freely available from https://www.neuron.yale.edu/neuron/.
+NEURON software is freely available from [https://www.neuron.yale.edu/neuron/](https://www.neuron.yale.edu/neuron/).
 Prior to the tutorial, please download and install NEURON on your system.
