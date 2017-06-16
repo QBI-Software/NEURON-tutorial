@@ -22,3 +22,26 @@ We are offering an introductory workshop based on the recommended tutorials as w
 
 NEURON software is freely available from [https://www.neuron.yale.edu/neuron/](https://www.neuron.yale.edu/neuron/).
 Prior to the tutorial, please download and install NEURON on your system.
+
+### Code
+```python
+proc init() { local dtsav, temp
+  finitialize( v_init)
+  t = -1e10
+  dtsav = dt
+  dt = 1e9
+  // if cvode is on, turn it off to do large fixed step
+  temp = cvode.active()
+  if (temp!=0) { cvode.active(0) }
+  while (t<-1e9) { fadvance() }
+  // restore cvode if necessary
+  if (temp!=0) { cvode.active(1) }
+  dt = dtsav
+  t = 0
+  if (cvode.active()) {
+    cvode.re_init()
+  } else {
+    fcurrent()
+  }
+  frecord_init()
+}
