@@ -27,7 +27,7 @@ Prior to the tutorial, please download and install NEURON on your system - you c
 The course material is largely compiled from the online NEURON documentation as referenced here:
 
 1. Official NEURON documentation 
-  1. [Neuron @ Yale](http://www.neuron.yale.edu/neuron/docs)
-  2. [Neuron @ Duke](http://neuron.duke.edu/)
+    1. [Neuron @ Yale](http://www.neuron.yale.edu/neuron/docs)
+    2. [Neuron @ Duke](http://neuron.duke.edu/)
 2. NEURON tutorial from University of Edinburgh by Andrew Gillies and David Sterratt [Neuron Tutorial](http://web.mit.edu/neuron_v7.4/nrntuthtml/index.html)
 2. Neurons in Action by John H. Moore and Ann E. Stuart [Neurons in Action](http://neuronsinaction.com/tutorials/overview)
