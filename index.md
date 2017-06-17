@@ -4,11 +4,16 @@ NEURON is a powerful simulation environment, allowing the detailed simulation of
 
 We are offering an introductory workshop based on the recommended tutorials as well as actual experience used in generating models for research publications.  This is a one day workshop running through the basics of the NEURON interface then working up to loading experimental data and running simulations. 
 
+### Installation
+
+NEURON software is freely available from [https://www.neuron.yale.edu/neuron/](https://www.neuron.yale.edu/neuron/).
+Prior to the tutorial, please download and install NEURON on your system - you can refer to our [Quick Setup](setup). 
+
 ### Course syllabus
 
 | Time | Lesson | Duration |
 | ------------- | ------------- | ------------- |
-| 9:00-9:30 | [Intro and overview](lessons/intro) (info from Powerpoint and website)with step-by-step setup | 30 mins|
+| 9:00-9:30 | [Introduction](lessons/intro) (info from Powerpoint and website)with step-by-step setup | 30 mins|
 | 9:30-10:30 | UK tutorial (focussing on navigating the interface, compiling hoc files, running a basic model) - PARTS A,B,C | 60 mins|
 | 10:30-10:45 | Morning tea | 15 mins |
 | 10:45-12:00 | UK tutorial - PARTS D,E | 75 mins | 
@@ -17,32 +22,12 @@ We are offering an introductory workshop based on the recommended tutorials as w
 | 14:30-14:45 | Afternoon tea | 15 mins | 
 | 14:45-16:30 | Final session to cover using a ModelDB model, Simple networks | 135 mins | 
 
+### Acknowledgements
 
-### Installation
+The course material is largely compiled from the online NEURON documentation as referenced here:
 
-NEURON software is freely available from [https://www.neuron.yale.edu/neuron/](https://www.neuron.yale.edu/neuron/).
-Prior to the tutorial, please download and install NEURON on your system.
-
-### Code
-```python
-proc init() { local dtsav, temp
-  finitialize( v_init)
-  t = -1e10
-  dtsav = dt
-  dt = 1e9
-  // if cvode is on, turn it off to do large fixed step
-  temp = cvode.active()
-  if (temp!=0) { cvode.active(0) }
-  while (t<-1e9) { fadvance() }
-  // restore cvode if necessary
-  if (temp!=0) { cvode.active(1) }
-  dt = dtsav
-  t = 0
-  if (cvode.active()) {
-    cvode.re_init()
-  } else {
-    fcurrent()
-  }
-  frecord_init()
-}
-```
+1. Official NEURON documentation 
+  1. [Neuron @ Yale](http://www.neuron.yale.edu/neuron/docs)
+  2. [Neuron @ Duke](http://neuron.duke.edu/)
+2. NEURON tutorial from University of Edinburgh by Andrew Gillies and David Sterratt [Neuron Tutorial](http://web.mit.edu/neuron_v7.4/nrntuthtml/index.html)
+2. Neurons in Action by John H. Moore and Ann E. Stuart [Neurons in Action](http://neuronsinaction.com/tutorials/overview)
