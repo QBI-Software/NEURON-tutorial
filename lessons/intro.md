@@ -1,5 +1,7 @@
 ---
 lesson: 1
+layout: default
+title: Introduction
 ---
 
 ## Introduction to NEURON
