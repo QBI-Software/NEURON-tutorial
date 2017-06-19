@@ -1,8 +1,13 @@
 docs_list_title: NEURON Tutorial Lessons
 docs:
 
+- title: Home
+  url: index
+  pagurl: ../index
+  
 - title: Setup
   url: setup
+  pagurl: ../setup
   
 - title: Introduction
   url: lessons/intro
@@ -11,18 +16,14 @@ docs:
 - title: Simple model
   url: lessons/simple
   pagurl: simple
-  
-- title: Reusable models (HOC)
-  url: lessons/hoc
-  pagurl: hoc
 
-- title: Synaptic integration
+- title: Synaptic model
   url: lessons/synaptic
   pagurl: synaptic
   
-- title: Importing real data
-  url: lessons/real
-  pagurl: real
+- title: Complex model (HOC)
+  url: lessons/complex
+  pagurl: complex
   
 - title: Simple Network
   url: lessons/network
