@@ -9,17 +9,17 @@ The influence of different channel types with specific conductance and activatio
 
 Several commonly used features are provided with NEURON, some of which we will use:
 
-1. Hodgkin-Huxley (HH) current [1]
-2. Moore-Cox sodium channel
-3. Ca channel
-4. Ca-sensitive K channels
++ Hodgkin-Huxley (HH) current [1]
++ Moore-Cox sodium channel
++ Ca channel
++ Ca-sensitive K channels
 
 Additional standard mechanisms included are:
 
-1. Na/Ca exchange
-1. Metabolically driven Ca pump
-1. Intracellular Ca binding
-1. Intracellular Ca diffusion.
++ Na/Ca exchange
++ Metabolically driven Ca pump
++ Intracellular Ca binding
++ Intracellular Ca diffusion.
 
 ## Overview of the tutorial
 
@@ -62,7 +62,8 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 1. Click on **Topology**
 1. The components will be displayed graphically in the white *canvas* region - a soma is created automatically.
-1. Click on **Basename** and type in `ap` ![alt text][basename]
+1. Click on **Basename** and type in `ap` 
+![alt text][basename]
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
 1. This generates `ap` and `ap[1]`
 
@@ -96,6 +97,7 @@ Now, we need to specify our lengths and diameters:
 <a class="btn btn-default" href="{{ next.url }}" title="{{ next.title }}">Next</a>
 </div>
 
+--------
 
 ## References
 [Using the CellBuilder](https://www.neuron.yale.edu/neuron/static/docs/cbtut/main.html)
