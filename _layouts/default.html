@@ -26,7 +26,7 @@
     <div id="main_content_wrap" class="outer">
       <div class="col-md-3">{% include nav.html %}</div>
       <section id="main_content" class="inner">{{ content }}</section>
-      {% if site.page.lesson %}
+      {% if page.lesson %}
       {% include paginator.html %}
       {% endif %}
 
