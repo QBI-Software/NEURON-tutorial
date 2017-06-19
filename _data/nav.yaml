@@ -1,0 +1,11 @@
+docs_list_title: NEURON Tutorial Lessons
+docs:
+
+- title: Introduction
+  url: lessons/intro
+
+- title: Setup
+  url: setup
+
+- title: Models
+  url: model
