@@ -53,8 +53,6 @@ Now, we need to specify our lengths and diameters:
 <h4>Save Me</h4> <p>Now save this to a file called <em>bscell.ses</em> using the <b>File->Save session</b> command from the Main Menu window.</p>
 </div>
 
-{% include paginator %}
-
 --------
 
 ## References
