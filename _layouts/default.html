@@ -17,8 +17,6 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
-
           <h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1>
           <h2 id="project_tagline">{{ site.description | default: site.github.project_tagline }}</h2>
 
@@ -32,20 +30,20 @@
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="main_content" class="outer">
+    <div id="main_content_wrap" class="outer">
    
-        <div class="col-md-2">{% include nav.html %}</div>
-        <div class="col-md-10">	{{ content }} </div>
 
+{{ content }}
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         {% if site.github.is_project_page %}
-        <p class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+        <small class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></small>
         {% endif %}
         <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+        <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
       </footer>
     </div>
 
