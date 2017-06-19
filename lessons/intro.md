@@ -1,3 +1,6 @@
+---
+lesson: 1
+---
 
 ## Introduction to NEURON
 
@@ -90,12 +93,7 @@ Now, we need to specify our lengths and diameters:
 <h4>Save Me</h4> <p>Now save this to a file called <em>bscell.ses</em> using the <b>File->Save session</b> command from the Main Menu window.</p>
 </div>
 
-<div class="paginator">
-{% assign back = site.data.nav.docs[0] %}
-{% assign next = site.data.nav.docs[2] %}
-<a class="btn btn-default" href="{{ back.url }}" title="{{ back.title }}">Back</a>
-<a class="btn btn-default" href="{{ next.url }}" title="{{ next.title }}">Next</a>
-</div>
+{% include paginator %}
 
 --------
 
