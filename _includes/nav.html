@@ -2,7 +2,7 @@
 <ul class="nav nav-pills nav-stacked">
 {% for nav in site.data.nav.docs %}
   <li>
-    <a href="https://github.com/{{ nav.url }}">
+    <a href="{{ site.url }}/{{ nav.url }}">
       {{ nav.title }}
     </a>
   </li>
