@@ -58,8 +58,6 @@ Don't lose this window!  We will be using it to launch:
 4. Load our saved files
 
 
-{% include paginator %}
-
 --------
 
 ## References
