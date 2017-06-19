@@ -85,7 +85,7 @@ Now, we need to specify our lengths and diameters:
 ![alt text][strategy_done]
 
 
-<div class="alert alert-error">
+<div class="alert alert-danger">
 <h4>Save</h4> Now save this to file called <em>bscell.ses</em> using the <b>File->Save session</b> command from the Main Menu window
 </div>
 
