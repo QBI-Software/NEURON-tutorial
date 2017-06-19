@@ -1,4 +1,4 @@
-{% include ../header.html %}
+{% include header.html %}
 ## Introduction to NEURON
 
 > NEURON is an advanced simulation environment for realistic modeling of biological neurons and neural circuits
