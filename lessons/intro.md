@@ -68,19 +68,39 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 ![alt text][canvas]
 
-<div class="alert alert-success">
-  <strong>Save</strong> Now save this to file called *bscell.ses* using the **File->Save session** command from the Main Menu window
+### STEP 3: Specify dimensions of components
+
+1. Click on **Geometry**
+1. `all` should be selected by default - if not, select `all` in the side panel
+1. Ensure **Specify Strategy** is selected
+1. Select `L`, `diam` from **Distinct values over subset**
+1. Select `d_lambda` from **Spatial grid** (This parameter specifies a maximum length for each segment as a fraction of the AC length constant ensuring segments are dynamically distributed [2]). 
+![alt text][strategy]
+1. Unselect **Specify Strategy**
+1. `d-lambda` is by default set to 0.1 which is suitable for most models
+
+Now, we need to specify our lengths and diameters:
+1. In the number box next to `soma.L (um)`, enter 20 as per our characteristics in the table above
+1. Enter the remaining values in the appropriate fields so that the final result looks like:
+![alt text][strategy_done]
+
+
+<div class="alert alert-error">
+<h4>Save</h4> Now save this to file called <em>bscell.ses</em> using the <b>File->Save session</b> command from the Main Menu window
 </div>
 
-### STEP 3: Add conductances
-
+<div class="paginator">
+{% assign back = site.data.nav.docs[0] %}
+{% assign next = site.data.nav.docs[2] %}
+<a class="btn btn-default" href={{ back }}>Back</a>
+<a class="btn btn-default" href={{ next }}>Next</a>
 
 
 ## References
 [Using the CellBuilder](https://www.neuron.yale.edu/neuron/static/docs/cbtut/main.html)
 
 [1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
-
+[2]: https://www.neuron.yale.edu/neuron/static/docs/d_lambda/d_lambda.html
 
 [mainmenu]: {{ site.github.repository_url }}/raw/gh-pages/img/MainMenu.PNG "NEURON's main menu"
 
@@ -89,3 +109,7 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 [basename]: {{ site.github.repository_url }}/raw/gh-pages/img/Basename.PNG "Enter Basename of component"
 
 [canvas]: {{ site.github.repository_url }}/raw/gh-pages/img/Canvas.PNG "Cell builder canvas with Ball and Stick model"
+
+[strategy]: {{ site.github.repository_url }}/raw/gh-pages/img/Strategy_all.PNG "Strategy for Geometry"
+
+[strategy_done]: {{ site.github.repository_url }}/raw/gh-pages/img/Strategy_done.PNG "Manually entered Geometry"
