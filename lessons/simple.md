@@ -1,5 +1,7 @@
 ---
 lesson: 2
+layout: default
+title: Simple Model
 ---
 ## A simple model
 
@@ -13,10 +15,13 @@ We will now create a "Ball and Stick" soma-dendrite model with the following cha
 
 > Note: **reduced HH** indicates the Na+ and K+ conductances are reduced to 10% of normal and the equilibrium potential of the HH leak current is set to -64 mV.
 
-### STEP 1: Create morphology with CellBuilder
+### STEP 1: Launch CellBuilder
 
+CellBuilder is a graphical interface used to generate the basic morphology of a neuron.  
 From the **Build** menu on the Main Menu window, select **CellBuilder**
 ![alt text][cellbuilder]
+
+### STEP 2: Create morphology with CellBuilder
 
 1. Click on **Topology**
 1. The components will be displayed graphically in the white *canvas* region - a soma is created automatically.
