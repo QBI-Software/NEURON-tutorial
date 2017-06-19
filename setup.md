@@ -1,3 +1,8 @@
+---
+layout: default
+title: Quick setup
+---
+
 # Quick Setup Guide for NEURON
 
 ## Download
