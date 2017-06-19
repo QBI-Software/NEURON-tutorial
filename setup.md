@@ -18,4 +18,4 @@ If it all works, exit the application interface from the window called "NEURON M
 
 
 
-[demo]: {{ site.github.repository_url }}/img/NeuronDemo.png "NEURON Demo for testing"
+[demo]: {{ site.github.repository_url }}/blob/gh-pages/img/NeuronDemo.png "NEURON Demo for testing"
