@@ -26,12 +26,13 @@ Additional standard mechanisms included are:
 
 ## Overview of the tutorial
 
-*The following overview assumes you have already installed NEURON on your system. If not, please go to [Setup](../setup).*
+*The following overview assumes you have already installed NEURON on your system. If not, please go to [Setup]({{ site.data.nav.docs[0].url }}).*
 
 The main aim of this course is to understand how you can produce a simulated electrophysiological response with the NEURON application.  
 1. We will start with a simple model of a soma and single dendrite, commonly known as a "Ball and Stick" model. 
-1. Once you are familiar with how to model the electrophysiological components of a single neuron, we will then provide a second stimulating neuron and thus model a simple synaptic integration. 
-1. We will then proceed to the establishment of a network model using these two neuronal types.
+1. Once you are familiar with how to model the electrophysiological components of a single neuron, we will then provide a second stimulating neuron and thus model a simple synaptic integration.
+1. To provide a more useful scenario, we will load actual Neurolucida data for a realistic neuron model.
+1. We will then proceed to the establishment of a simple network model using this.
 
 ## Getting started
 
@@ -60,19 +61,8 @@ Don't lose this window!  We will be using it to launch:
 --------
 
 ## References
-[Using the CellBuilder](https://www.neuron.yale.edu/neuron/static/docs/cbtut/main.html)
 
 [1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
-[2]: https://www.neuron.yale.edu/neuron/static/docs/d_lambda/d_lambda.html
 
 [mainmenu]: {{ site.github.repository_url }}/raw/gh-pages/img/MainMenu.PNG "NEURON's main menu"
 
-[cellbuilder]: {{ site.github.repository_url }}/raw/gh-pages/img/CellBuilder.PNG "Cell builder for morphology"
-
-[basename]: {{ site.github.repository_url }}/raw/gh-pages/img/Basename.PNG "Enter Basename of component"
-
-[canvas]: {{ site.github.repository_url }}/raw/gh-pages/img/Canvas.PNG "Cell builder canvas with Ball and Stick model"
-
-[strategy]: {{ site.github.repository_url }}/raw/gh-pages/img/Strategy_all.PNG "Strategy for Geometry"
-
-[strategy_done]: {{ site.github.repository_url }}/raw/gh-pages/img/Strategy_done.PNG "Manually entered Geometry"
