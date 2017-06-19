@@ -77,17 +77,17 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 1. Select `L`, `diam` from **Distinct values over subset**
 1. Select `d_lambda` from **Spatial grid** (This parameter specifies a maximum length for each segment as a fraction of the AC length constant ensuring segments are dynamically distributed [2]). 
 ![alt text][strategy]
-1. Unselect **Specify Strategy**
-1. `d-lambda` is by default set to 0.1 which is suitable for most models
 
 Now, we need to specify our lengths and diameters:
+1. Unselect **Specify Strategy**
+1. `d-lambda` is by default set to 0.1 which is suitable for most models
 1. In the number box next to `soma.L (um)`, enter 20 as per our characteristics in the table above
 1. Enter the remaining values in the appropriate fields so that the final result looks like:
 ![alt text][strategy_done]
 
 
-<div class="alert alert-danger">
-<h4>Save</h4> Now save this to file called <em>bscell.ses</em> using the <b>File->Save session</b> command from the Main Menu window
+<div class="alert alert-warning">
+<h4>Save Me</h4> <p>Now save this to a file called <em>bscell.ses</em> using the <b>File->Save session</b> command from the Main Menu window.</p>
 </div>
 
 <div class="paginator">
