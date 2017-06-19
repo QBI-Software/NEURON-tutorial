@@ -92,8 +92,8 @@ Now, we need to specify our lengths and diameters:
 <div class="paginator">
 {% assign back = site.data.nav.docs[0] %}
 {% assign next = site.data.nav.docs[2] %}
-<a class="btn btn-default" href={{ back }}>Back</a>
-<a class="btn btn-default" href={{ next }}>Next</a>
+<a class="btn btn-default" href={{ back.url }} title={{ back.title }}>Back</a>
+<a class="btn btn-default" href={{ next.url }} title={{ next.title }}>Next</a>
 </div>
 
 
