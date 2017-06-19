@@ -1,4 +1,4 @@
-{% include header.html %}
+
 ## Introduction to NEURON
 
 > NEURON is an advanced simulation environment for realistic modeling of biological neurons and neural circuits
@@ -16,16 +16,19 @@ Several commonly used features are provided with NEURON, some of which we will u
 
 Additional standard mechanisms included are:
 
-1. a Na/Ca exchange,
-1. a metabolically driven Ca pump,
-1. intracellular Ca binding, and
-1. intracellular Ca diffusion.
+1. Na/Ca exchange
+1. Metabolically driven Ca pump
+1. Intracellular Ca binding
+1. Intracellular Ca diffusion.
 
 ## Overview of the tutorial
 
 *The following overview assumes you have already installed NEURON on your system. If not, please go to [Setup](../setup).*
 
-The main aim of this course is to understand how you can produce a simulated electrophysiological response with the NEURON application.  We will start with a simple model of a soma and single dendrite, commonly known as a "Ball and Stick" model. Once you are familiar with how to model the electrophysiological components of a single neuron, we will then provide a second stimulating neuron and thus model a simple synaptic integration. We will then proceed to the establishment of a network model using these two neuronal types.
+The main aim of this course is to understand how you can produce a simulated electrophysiological response with the NEURON application.  
+1. We will start with a simple model of a soma and single dendrite, commonly known as a "Ball and Stick" model. 
+1. Once you are familiar with how to model the electrophysiological components of a single neuron, we will then provide a second stimulating neuron and thus model a simple synaptic integration. 
+1. We will then proceed to the establishment of a network model using these two neuronal types.
 
 ## Getting started
 
@@ -41,6 +44,8 @@ load_file(“nrngui.hoc”)
 You will get a tiny window called **NEURON Main Menu**
 ![alt text][mainmenu]
 
+
+
 ### STEP 2: Create morphology with CellBuilder
 
 We will now create a "Ball and Stick" soma-dendrite model with the following characteristics:
@@ -48,8 +53,8 @@ We will now create a "Ball and Stick" soma-dendrite model with the following cha
 | Section | Ref | Length (um) | Diameter (um) | Biophysics |
 | ---- | ---- | ---- | ---- | ----|
 | Soma | `soma` | 20 | 20 | hh [1]|
-| Apical dendrite (hillock) | `ap[0]` | 400 | 2 | reduced hh [2]|
-| Apical dendrite | `ap[1]` | 300 | 1 | reduced hh [2]|
+| Apical dendrite (hillock) | `ap[0]` | 400 | 2 | <a href="#" data-toggle="tooltip" title="gnabar_hh and gkbar_hh are reduced to 10% of normal and el_hh (equilibrium potential of the hh leak current) is changed to -64 mV.">reduced hh</a> |
+| Apical dendrite | `ap[1]` | 300 | 1 | <a href="#" data-toggle="tooltip" title="gnabar_hh and gkbar_hh are reduced to 10% of normal and el_hh (equilibrium potential of the hh leak current) is changed to -64 mV.">reduced hh</a>|
 
 
 From the **Build** menu on the Main Menu window, select **CellBuilder**
@@ -57,9 +62,14 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 1. Click on **Topology**
 1. The components will be displayed graphically in the white *canvas* region - a soma is created automatically.
-1. Click on **Basename** and type in `ap`
+1. Click on **Basename** and type in `ap` ![alt text][basename]
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
 1. This generates `ap` and `ap[1]`
+
+![alt text][canvas]
+
+
+### STEP 3: Add conductances
 
 
 
@@ -68,8 +78,11 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 [1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
 
-[2]: "gnabar_hh and gkbar_hh are reduced to 10% of normal and el_hh (equilibrium potential of the hh leak current) is changed to -64 mV."
 
 [mainmenu]: {{ site.github.repository_url }}/raw/gh-pages/img/MainMenu.PNG "NEURON's main menu"
 
 [cellbuilder]: {{ site.github.repository_url }}/raw/gh-pages/img/CellBuilder.PNG "Cell builder for morphology"
+
+[basename]: {{ site.github.repository_url }}/raw/gh-pages/img/Basename.PNG "Enter Basename of component"
+
+[canvas]: {{ site.github.repository_url }}/raw/gh-pages/img/Canvas.PNG "Cell builder canvas with Ball and Stick model"
