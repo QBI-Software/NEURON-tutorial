@@ -1,3 +1,6 @@
+---
+layout: default
+---
 ## Welcome to the QBI NEURON tutorial
 
 NEURON is a powerful simulation environment, allowing the detailed simulation of the nervous system in a wide range of scales - from channels to individual neurons to networks of neurons. In addition to the thousands of studies that have used NEURON, it is also the simulation environment used for large-scale projects such as the Blue Brain/Human Brain Projects. 
