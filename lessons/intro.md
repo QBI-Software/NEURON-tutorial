@@ -94,6 +94,7 @@ Now, we need to specify our lengths and diameters:
 {% assign next = site.data.nav.docs[2] %}
 <a class="btn btn-default" href={{ back }}>Back</a>
 <a class="btn btn-default" href={{ next }}>Next</a>
+</div>
 
 
 ## References
