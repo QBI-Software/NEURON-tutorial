@@ -68,6 +68,9 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 ![alt text][canvas]
 
+<div class="alert alert-success">
+  <strong>Save</strong> Now save this to file called *bscell.ses* using the **File->Save session** command from the Main Menu window
+</div>
 
 ### STEP 3: Add conductances
 
