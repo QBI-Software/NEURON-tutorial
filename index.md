@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Welcome
 ---
 ## Welcome to the QBI NEURON tutorial
 
