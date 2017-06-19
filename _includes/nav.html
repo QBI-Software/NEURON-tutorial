@@ -1,7 +1,10 @@
+<!--Navigation bar -->
 <ul class="nav nav-pills nav-stacked">
-  <li><a href="{{ site.github.repository_url }}/">Home</a></li>
-  <li><a href="{{ site.github.repository_url }}/setup">Setup</a></li>
-  <li><a href="{{ site.github.repository_url }}/lessons/intro">Intro</a></li>
-  <li><a href="{{ site.github.repository_url }}/lessons/model">Simple Model</a></li>
-  <li><a href="{{ site.github.repository_url }}/lessons/network">Simple Network</a></li>
+{% for member in site.data.nav %}
+  <li>
+    <a href="https://github.com/{{ nav.url }}">
+      {{ nav.title }}
+    </a>
+  </li>
+{% endfor %}
 </ul>
