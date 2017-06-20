@@ -115,7 +115,7 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
 1. Now in the **RunControl** window, click **Init &amp; Run**
 
-> Voila! Have a look in the graph and you should see your current!
+> Voila! Have a look in the graph and you should see your AP!
 
 > ![alt text][simpleoutput]
 
