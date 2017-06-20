@@ -126,12 +126,17 @@ Because we are running in **Continuous Create** mode, you can make changes in **
 <h4>"Too Easy" Task</h4> 
 <p>To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:</p>
 
-| Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
-| ---- | ---- | ---- | ---- | ----|
-| Basal dendrite | `bas` | 200 | 3 | pas |
-| Axon | `axon` | 800 | 1 | hh |
+<table>
+  <thead> 
+  <tr><th>Section</th><th>Ref</th><th>Length (&micro;m)</th><th>Diameter (&micro;m)</th><th>Biophysics</th></tr>
+  </thead>
+  <tbody>
+  <tr><td>Basal dendrite</td><td>`bas`</td><td>200</td><td>3</td><td>pas</td></tr>
+  <tr><td>Axon</td><td>`axon`</td><td>800</td><td>1</td><td>hh</td></tr>
+  </tbody>
+</table>
 
-where `pas` is a passive current with a reversal potential (`e_pas`) of -65mV
+<p>where `pas` is a passive current with a reversal potential (`e_pas`) of -65mV<p>
 
 </div>
 
@@ -161,8 +166,8 @@ where `pas` is a passive current with a reversal potential (`e_pas`) of -65mV
 
 [biophys_reducedhh]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophys_rhh.PNG "Biophysics properties for reduced HH"
 
-[pointprocess]: {{ site.github.repository_url }}/raw/gh-pages/img/Pointprocess.PNG "iClamp point process"
+[pointprocess]: {{ site.github.repository_url }}/raw/gh-pages/img/PointProcess.PNG "iClamp point process"
 
-[runcontrol]: {{ site.github.repository_url }}/raw/gh-pages/img/Runcontrol.PNG "Run control window"
+[runcontrol]: {{ site.github.repository_url }}/raw/gh-pages/img/RunControl.PNG "Run control window"
 
-[simpleoutput]: {{ site.github.repository_url }}/raw/gh-pages/img/Simpleoutput.PNG "Output of Simple Model"
+[simpleoutput]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleOutput.PNG "Output of Simple Model"
