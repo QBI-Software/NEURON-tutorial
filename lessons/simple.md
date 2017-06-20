@@ -7,9 +7,9 @@ title: Simple Model
 
 We will now create a "Ball and Stick" soma-dendrite model with the following characteristics:
 
-Resting potential = -65 mV throughout the cell.
-Capacitance (cm) = 1 &micro;f/cm<super>2</super>
-Membrane resistance (Ra) = 160 ohm cm.
++ Resting potential = -65 mV throughout the cell.
++ Capacitance (cm) = 1 &micro;f/cm2
++ Membrane resistance (Ra) = 160 ohm cm.
 
 | Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
 | ---- | ---- | ---- | ---- | ----|
@@ -103,12 +103,37 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will need to create a stimulus which is known as a **Point Process** so from the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
 1. In the **PointProcessManager** window, click on **SelectPointProcess**, then select **IClamp**
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
-1. We will insert a 0.6nA current of 1ms pulse width starting at t=5ms (allows for initialization)
+1. We will insert a 0.6nA current of 1ms pulse width starting at t=5ms (allows for initialization) so enter the values as shown.
 ![alt text][pointprocess]
 
 1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
-1. We will need to see an output of the simulation, so from the Main Menu, select 
+1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
+![alt text][runcontrol]
 
+1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
+1. Now in the **RunControl** window, click **Init & Run **
+
+> Voila! Have a look in the graph and you should see your current!
+> ![alt text][simpleoutput]
+
+Because we are running in **Continuous Create** mode, you can make changes in **CellBuilder** and rerun the simulator to see the effect.
+
+<div class="alert alert-info">
+<h4>Save Me</h4> <p>You can save this to a **NEW** file called <em>iclamprig.ses</em> using the <b>File->Save session</b> command from the Main Menu window.</p>
+</div>
+--------
+<div class="alert alert-warning">
+<h4>"Too Easy" Task</h4> 
+<p>To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:</p>
+
+| Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
+| ---- | ---- | ---- | ---- | ----|
+| Basal dendrite | `bas` | 200 | 3 | pas |
+| Axon | `axon` | 800 | 1 | hh |
+
+where `pas` is a passive current with a reversal potential (`e_pas`) of -65mV
+
+</div>
 
 --------
 
@@ -135,3 +160,9 @@ We are now ready to load the specifications of our model into the NEURON simulat
 [biophys_all]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophys_all.PNG "Biophysics properties for ALL"
 
 [biophys_reducedhh]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophys_rhh.PNG "Biophysics properties for reduced HH"
+
+[pointprocess]: {{ site.github.repository_url }}/raw/gh-pages/img/Pointprocess.PNG "iClamp point process"
+
+[runcontrol]: {{ site.github.repository_url }}/raw/gh-pages/img/Runcontrol.PNG "Run control window"
+
+[simpleoutput]: {{ site.github.repository_url }}/raw/gh-pages/img/Simpleoutput.PNG "Output of Simple Model"
