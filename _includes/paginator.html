@@ -1,7 +1,7 @@
 <div class="paginator">
  
-{% assign num0 = {{page.lesson | minus: 1}} %}
-{% assign num1 = {{page.lesson | plus: 1}} %}
+{% assign num0 = page.lesson | minus: 1 %}
+{% assign num1 = page.lesson | plus: 1 %}
 {% assign back = site.data.nav.docs[num0] %}
 {% assign next = site.data.nav.docs[num1] %}
 
