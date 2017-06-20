@@ -131,12 +131,12 @@ Because we are running in **Continuous Create** mode, you can make changes in **
   <tr><th>Section</th><th>Ref</th><th>Length (&micro;m)</th><th>Diameter (&micro;m)</th><th>Biophysics</th></tr>
   </thead>
   <tbody>
-  <tr><td>Basal dendrite</td><td>`bas`</td><td>200</td><td>3</td><td>pas</td></tr>
-  <tr><td>Axon</td><td>`axon`</td><td>800</td><td>1</td><td>hh</td></tr>
+  <tr><td>Basal dendrite</td><td><code class="highlighter-rouge">bas</code></td><td>200</td><td>3</td><td>pas</td></tr>
+  <tr><td>Axon</td><td><code class="highlighter-rouge">axon</code></td><td>800</td><td>1</td><td>hh</td></tr>
   </tbody>
 </table>
 
-<p>where `pas` is a passive current with a reversal potential (`e_pas`) of -65mV<p>
+<p>where <strong>pas</strong> is a passive current with a reversal potential (<code class="highlighter-rouge">e_pas</code>) of <code class="highlighter-rouge">-65mV</code>.</p>
 
 </div>
 
