@@ -1,10 +1,10 @@
 <div class="paginator">
 {% assign num = page.lesson %}
-  <span>num = {% increment num %}</span>
+  <span>num = {{ num }}</span>
  
 {% assign back = site.data.nav.docs[{% decrement num %}] %}
 {% assign next = site.data.nav.docs[{% increment num %}] %}
-   <span>back url = {{back}}.url</span>
+
 <a class="btn btn-default" href="{{ back.pagurl }}" title="{{ back.title }}">Back</a>
 <a class="btn btn-default" href="{{ next.pagurl }}" title="{{ next.title }}">Next</a>
 </div>
