@@ -30,8 +30,8 @@ Additional standard mechanisms included are:
 
 The main aim of this course is to understand how you can produce a simulated electrophysiological response with the NEURON application.  
 1. **Simple Model**: We will start with a simple model of a soma and single dendrite, commonly known as a "Ball and Stick" model and cover the basics of running a simple simulation. 
-1. **Synaptic Model**: Once you are familiar with how to model the electrophysiological components of a single neuron, we will use a more complex neuron and then provide a second stimulating neuron to model a simple synaptic integration.
-1. **Complex Model**:To provide a more realistic scenario, we will load actual Neurolucida data and create a model from experimental data using NEURON's own integrative language called HOC.
+1. **Synaptic Model**: Once you are familiar with how to model the electrophysiological components of a single neuron, we will use NEURON's own integrative language called HOC to develop a more complex neuron and then provide a simulated synapse with AlphaSynapse to model a simple synaptic input.
+1. **Complex Model**:To provide a more realistic scenario, we will load actual Neurolucida data and create a model from experimental data using some advanced techniques.
 1. **Network Model**: We will then proceed to the establishment of a simple network model.
 
 ## Background knowledge
