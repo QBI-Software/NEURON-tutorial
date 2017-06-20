@@ -31,7 +31,7 @@ Creating a cell type class, allows us to use this in network models as well as a
   <li>A procedure must first be <em>defined</em> which is written as <code>proc methodname()</code> and contains the actual code to run within curly brackets <code>{}</code></li>
   <li>To get the procedure to run, it is <em>called</em> by the name and parentheses <code>methodname()</code>.</li>
 </ol> 
-</div>
+</div>"
 
 ----------
 
