@@ -17,14 +17,14 @@ Prior to the tutorial, please download and install NEURON on your system - you c
 
 | Time | Lesson | Duration |
 | ------------- | ------------- | ------------- |
-| 9:00-9:30 | [Introduction](lessons/intro) (info from Powerpoint and website)with step-by-step setup | 30 mins|
-| 9:30-10:30 | UK tutorial (focussing on navigating the interface, compiling hoc files, running a basic model) - PARTS A,B,C | 60 mins|
+| 9:00-9:30 | [Introduction](lessons/intro) | 30 mins|
+| 9:30-10:30 | [A simple model](lessons/simple) (focussing on navigating the interface, using CellBuilder and running a basic model) | 60 mins|
 | 10:30-10:45 | Morning tea | 15 mins |
-| 10:45-12:00 | UK tutorial - PARTS D,E | 75 mins | 
+| 10:45-12:00 | [A synaptic model](lessons/synaptic) (creating a model with HOC, simulating a synaptic input) | 75 mins | 
 | 12:00-13:00 | Lunch | 60 mins | 
-| 13:00-14:30 | ACAN tutorial showing how it might actually be used with a real Neurolucida model. | 90 mins | 
+| 13:00-14:30 | [A complex model](lessons/complex) (loading a Neurolucida model with experimental data) | 90 mins | 
 | 14:30-14:45 | Afternoon tea | 15 mins | 
-| 14:45-16:30 | Final session to cover using a ModelDB model, Simple networks | 135 mins | 
+| 14:45-16:30 | [A simple network](lessons/network) | 135 mins | 
 
 ### Acknowledgements
 
