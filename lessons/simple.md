@@ -14,8 +14,8 @@ We will now create a "Ball and Stick" soma-dendrite model with the following cha
 | Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
 | ---- | ---- | ---- | ---- | ----|
 | Soma | `soma` | 20 | 20 | hh [1]|
-| Apical dendrite (hillock) | `ap` | 400 | 2 | reduced hh |
-| Apical dendrite | `ap[1]` | 300 | 1 | reduced hh |
+| Apical dendrite | `ap` | 400 | 2 | reduced hh |
+| Apical dendrite branch | `ap[1]` | 300 | 1 | reduced hh |
 
 > Note: **reduced HH** indicates the Na+ and K+ conductances are reduced to 10% of normal and the equilibrium potential of the HH leak current is set to -64 mV.
 
