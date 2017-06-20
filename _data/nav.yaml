@@ -28,3 +28,7 @@ docs:
 - title: Simple Network
   url: lessons/network
   pagurl: network
+  
+ - title: Help
+  url: lessons/help
+  pagurl: help
