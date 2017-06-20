@@ -160,11 +160,11 @@ Because we are running in **Continuous Create** mode, you can make changes in **
 
 [strategy_done]: {{ site.github.repository_url }}/raw/gh-pages/img/Strategy_done.PNG "Manually entered Geometry"
 
-[biophys]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophys.PNG "Strategy for Biophysics"
+[biophys]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics.PNG "Strategy for Biophysics"
 
-[biophys_all]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophys_all.PNG "Biophysics properties for ALL"
+[biophys_all]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics_all.PNG "Biophysics properties for ALL"
 
-[biophys_reducedhh]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophys_rhh.PNG "Biophysics properties for reduced HH"
+[biophys_reducedhh]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics_rhh.PNG "Biophysics properties for reduced HH"
 
 [pointprocess]: {{ site.github.repository_url }}/raw/gh-pages/img/PointProcess.PNG "iClamp point process"
 
