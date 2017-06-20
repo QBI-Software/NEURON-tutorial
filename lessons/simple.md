@@ -104,16 +104,19 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. In the **PointProcessManager** window, click on **SelectPointProcess**, then select **IClamp**
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
 1. We will insert a 0.6nA current of 1ms pulse width starting at t=5ms (allows for initialization) so enter the values as shown.
+
 ![alt text][pointprocess]
 
 1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
 1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
+
 ![alt text][runcontrol]
 
 1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
-1. Now in the **RunControl** window, click **Init & Run **
+1. Now in the **RunControl** window, click **Init &amp; Run**
 
 > Voila! Have a look in the graph and you should see your current!
+
 > ![alt text][simpleoutput]
 
 Because we are running in **Continuous Create** mode, you can make changes in **CellBuilder** and rerun the simulator to see the effect.
