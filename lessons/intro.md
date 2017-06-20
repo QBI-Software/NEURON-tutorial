@@ -1,5 +1,5 @@
 ---
-lesson: 1
+lesson: 2
 layout: default
 title: Introduction
 ---
