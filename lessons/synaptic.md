@@ -76,5 +76,7 @@ As each procedure completes, the next in the list is run, so this would be follo
 
 --------
 ## References
+
 [HOC keywords](http://www.neuron.yale.edu/neuron/static/new_doc/programming/ockeywor.html)
+
 [HOC syntax](http://www.neuron.yale.edu/neuron/static/new_doc/programming/hocsyntax.html)
