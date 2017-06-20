@@ -1,4 +1,7 @@
-
+---
+layout: default
+title: Help
+---
 ## Some programming concepts for non-programmers
 
 ### Variable
