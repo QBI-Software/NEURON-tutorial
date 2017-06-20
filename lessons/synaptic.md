@@ -17,7 +17,7 @@ From our CellBuilder model, we can generate HOC code to get started.
 
 Creating a cell type class, allows us to use this in network models as well as allowing more complexity to be added.  We are now going to see what has been generated.
 
-### STEP2: Understanding the HOC code
+### STEP 2: Understanding the HOC code
 
 1. Open a plain text editor of your choice (a few recommendations are on the [Setup](setup) page)
 2. Open the `bscell.hoc` file
@@ -59,7 +59,7 @@ proc init() {
 }
 ```
 
-Each procedure listed in `init()` is run in sequential order.  So to begin, the first call is to `topol()` (ie, topology). This was where we added the soma and two dendrites in the CellBuilder.  `topol()` is defined as:
+Each procedure listed in `init()` is run in sequential order.  So to begin, the first call is to `topol()` (topology). This was where we added the soma and two dendrites in the CellBuilder.  `topol()` is defined as:
 
 ```
 proc topol() { local i
@@ -69,10 +69,43 @@ proc topol() { local i
 }
 ```
 
-So here we see that the items in the `ap` list (which contains our dendrites, `ap` and `ap[1]`) are connected to the soma object. `ap(0)` refers to the **start of the segment** and `ap(1)` refers to the **end of the segment**.  The method then calls `basic_shape()` which you can see shown next in the code.
+So here we see that the items in the `ap` list (which contains our dendrites, `ap` and `ap[1]`) are connected to the soma object and each other, respectively. `ap(0)` refers to the **start of the segment** and `ap(1)` refers to the **end of the segment**.  The method then calls `basic_shape()` then returns to `init()` to run the next procedure in the list which is `subsets()` and so on.
 
-As each procedure completes, the next in the list is run, so this would be followed by `subsets()` and so on.
+### STEP 3: Adding an axon segment via HOC
 
+Now if we want to add an **axon**, we can add this to the code rather than returning to CellBuilder.
+
+1. Add `axon` as a variable - append this to the line `public soma, ap`
+
+```
+public soma, ap, axon
+```
+
+1. Add axon in the `topol()` procedure
+
+```
+proc topol() { local i
+  connect ap(0), soma(1)
+  connect ap[1](0), ap(1)
+  **connect axon(0), soma(0)**
+  basic_shape()
+}
+```
+1. Specify the length, diam in the `geom()` procedure
+[TODO]
+
+1. Specify Ra, cm and hh in the `biophys()` procedure
+[TODO]
+
+Hopefully, it is now apparent that the procedures parallel the tasks undertaken in CellBuilder.
+
+### STEP 4: Adding an AlphaSynapse
+
+
+### STEP 5: Inserting an NMDA receptor
+
+
+### STEP 6: Compiling and running the simulation
 
 --------
 ## References
