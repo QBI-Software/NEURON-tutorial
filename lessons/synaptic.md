@@ -6,25 +6,40 @@ title: Synaptic Model
 # A synaptic model
 
 In this lesson, we will be stimulating our neuron with a synaptic input instead of current injection.  There are two types of synaptic input available in NEURON:
-1. **Alpha Synapse (AlphaSynapse)** [1] : represents a single conductance transient of a particular peak amplitude that starts at a fixed time. It is not meant to connect neurons but to simulate the impact of a synaptic type of stimulus.
-1. **Exponential Synapses (ExpSyn and Exp2Syn)** [2][3] : represent event-driven conductance-changing weighted mechanisms (with single or double decay rate constants, respectively).  They will not activate unless triggered by a Network Connection object (NetCon) where the amplitude is controlled by the NetCon weight but the time course and reversal potential is controlled by the ExpSyn or Exp2Syn.
+1. **AlphaSynapse [1]** : represents a single conductance transient of a particular peak amplitude that starts at a fixed time. It is not meant to connect neurons but to simulate the impact of a synaptic type of stimulus.
+1. **ExpSyn[2] and Exp2Syn [3]** : represent event-driven conductance-changing weighted mechanisms (with single or double decay rate constants, respectively).  They will not activate unless triggered by a Network Connection object (NetCon) where the amplitude is controlled by the NetCon weight but the time course and reversal potential is controlled by the ExpSyn or Exp2Syn.
 
 In NEURON, these are managed as **Point Process** stimuli.
 
-1. Firstly, we will add an **AlphaSynapse** to our Ball and Stick cell created in the previous lesson.
-1. Then we will be ready to take a look under the hood of NEURON at the code which runs through the simulator.  The code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code rather than having to write it.
-
 ## Part A: Using CellBuilder
 
+1. Firstly, we will add an **AlphaSynapse** to our *Ball and Stick cell* created in the previous lesson.
 1. Launch a fresh version of NEURON via `nrngui`
 1. Load up the "Ball and Stick cell" from the file *bs_cell.ses*
 1. In the **CellBuilder** window, click on the **Continuous Create** button
 1. From the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
 1. In the **PointProcessManager** window, click on **SelectPointProcess**, then select **AlphaSynapse**
-1. 
+
+The panel for control of the AlphaSynapse has four parameters, enter the initial values:
+
+| Parameter | Description    | Value |
+| :------------- | :------------- | :------------- |
+| onset | The time before the change in postsynaptic conductance begins | `0 ms`|
+| tau | The time to peak of the conductance change | `0.1 ms`|
+| gmax | The peak conductance change | `10 µS`|
+| e | The reversal potential for the synaptic current | `-15 mV`|
+
+1. Open a **RunControl** and **Graph -> voltage axis**
+1. Run with **Init &amp; Run** where `Tstop` = `10`
+
+![simplealpha]  ![simplealpha_params]
+
+
+
 
 ## Part B: Using HOC
 
+We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code rather than having to write it.
 ### STEP 1: Generate a cell class
 
 From our CellBuilder model, we can generate HOC code to get started.
@@ -139,3 +154,7 @@ Hopefully, it is now apparent that the procedures parallel the tasks undertaken 
 [2]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn)
 
 [3]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn)
+
+[simplealpha]: {{ site.github.repository_url }}/raw/gh-pages/img/Simplealpha.PNG "Simple AlphaSynapse"
+
+[simplealpha_params]: {{ site.github.repository_url }}/raw/gh-pages/img/Simplealpha_params.PNG "Simple AlphaSynapse Parameters"
