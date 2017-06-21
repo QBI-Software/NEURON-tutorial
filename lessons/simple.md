@@ -195,12 +195,15 @@ For all the dendrites, we need to enter a reduced HH which means altering the st
 1. Click on **Biophysics**
 1. Ensure **Specify Strategy** is ticked
 1. Select `apicals` then tick `hh`
+
+![alt text][biophys2]
+
 1. Now untick **Specify Strategy**
 1. Select `hh` under `apicals` and enter 10% of the Na+ (`gnabar_hh`) and  K+ (`gnakbar_hh`) conductance values
 1. No change to leak current of HH (`gl_hh`)
 1. For the equilibrium potential (`el_hh`), change this to `-64mV`
 
-![alt text][biophys_reducedhh]
+![alt text][biophys_reducedhh2]
 
 <aside class="notice">
 **Save Me**
@@ -251,9 +254,13 @@ Now rerun the simulation
 
 [biophys]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics_bs.PNG "Strategy for Biophysics"
 
+[biophys2]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics.PNG "Strategy for Biophysics"
+
 [biophys_all]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics_bs_all.PNG "Biophysics properties for ALL"
 
 [biophys_reducedhh]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics_bs_rhh.PNG "Biophysics properties for reduced HH"
+
+[biophys_reducedhh2]: {{ site.github.repository_url }}/raw/gh-pages/img/Biophysics_rhh.PNG "Biophysics properties for reduced HH"
 
 [pointprocess]: {{ site.github.repository_url }}/raw/gh-pages/img/PointProcess_bs.PNG "iClamp point process"
 
