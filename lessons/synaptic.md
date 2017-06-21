@@ -29,7 +29,7 @@ at: dend[1]
 
 ![alphasyn]
 
-The panel for control of the **AlphaSynapse** has four parameters, enter the initial values:
+Click on **Show** then **Parameters** which shows the panel for control of the **AlphaSynapse** which has four parameters:
 
 | Parameter | Description    | Value | Units |
 | :------------- | :------------- | :------------- |:------------- |
@@ -38,6 +38,7 @@ The panel for control of the **AlphaSynapse** has four parameters, enter the ini
 | `gmax` | The peak conductance change | `10`|µS|
 | `e` | The reversal potential for the synaptic current | `-15`|mV|
 
+1. Enter the values as shown in the table
 1. Open a **RunControl** and **Graph -> voltage axis**
 1. Run with **Init &amp; Run** where `Tstop` = `10`
 
@@ -50,10 +51,10 @@ We are now ready to take a look under the hood of NEURON at the code which runs 
 
 **Recommended structure of a HOC program:**
 
-+ specify model topology (create sections, connect sections)
-+ specify model geometry (stylized (L, diam) or pt3d method as appropriate)
-+ specify instrumentation (IClamps, SEClamps, other Point Processes, graphs)
-+ specify simulation flow control (RunControl panel is sufficient for most purposes)
+1. specify model topology (create sections, connect sections)
+1. specify model geometry (stylized (L, diam) or pt3d method as appropriate)
+1. specify instrumentation (IClamps, SEClamps, other Point Processes, graphs)
+1. specify simulation flow control (RunControl panel is sufficient for most purposes)
 
 ### STEP 1: Generate a cell class
 
@@ -77,14 +78,14 @@ begintemplate BScell
 endtemplate BScell
 ```
 
-**Global variables** are indicated by the starting word: `public`. You should recognize a few names from our CellBuilder model: `soma`, `ap`, etc.
+**Global variables** are indicated by the starting word: `public`. You should recognize a few names from our CellBuilder model: `soma`, `dend`
 
 ```
 public soma, dend
 public all
 ```
 
-When the code is first loaded in the NEURON interpreter, it creates the `soma` and `dend`:
+When the code is first loaded in the NEURON interpreter, it creates the `soma` and `dend` sections:
 
 ```
 create soma, dend
@@ -124,13 +125,11 @@ Now if we want to add an **axon**, we can add this to the code rather than retur
 | ---- | ---- | ---- | ---- | ----|
 | Axon | `axon` | 800 | 1 | hh |
 
-1. Add `axon` as a variable - append this to the line `public soma, dend`
+1. Declare `axon` as a variable - append this to the line `public soma, dend`
 
 ```
 public soma, dend, axon
 ```
-
-1. Add `axon` in the `topol()` and `basic_shape()` procedures
 
 #### Geometry parameters explained
 
@@ -142,31 +141,39 @@ public soma, dend, axon
 | Resistivity | Ra | Axial resistivity in ohm-cm.|
 | connectivity | | Established with the connect command and defines the parent of the section, which end of the section is attached to the parent, and where on the parent the attachment takes place. To avoid confusion, it is best to attach the 0 end of a section to the 1 end of its parent.[4]|
 
+
+1. Add `axon` in the `topol()` and `basic_shape()` procedures
+
 ```c
 proc topol() { local i
   connect dend(0), soma(1)
-  connect axon(0), soma(0)                                        //Add this line
+  connect axon(0), soma(0)     //Add this line
   basic_shape()
 }
 
 proc basic_shape() {
-  soma {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}      //pt3dadd(x,y,z,diam pt)
+  //pt3dadd(x,y,z,diam pt)
+  soma {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}      
   dend {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(150, 0, 0, 1)}
-  axon {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-119, 0, 0, 1)}    //Add this line
+  //Add this line
+  axon {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-119, 0, 0, 1)}    
 }
 
 ```
 
-1. Specify the length, diam in the `geom()` procedure.
-Note the different possible notations here which all do the same thing:
-    1. `axon` `diam` = 20   //separated by space
-    1. `axon.diam` = 20     //separated by dot
-    1. `axon` {             //grouped with other parameters by {}
-      `diam` = 20
-    }
-    1. `access axon`    //sets the default section
-       `diam = 20`      //so it can be followed without further specifying
+#### Different possible notations which all do the same thing:
 
+| Command | Explanation     |
+| :------------- | :------------- |
+| `axon` `diam`  = 20     | separated by space       |
+| `axon.diam` = 20    | separated by dot|
+| `axon` {             
+      `diam` = 20
+    } |grouped with other parameters by {}|
+| `access axon` |  sets the default section ...|
+|  `diam = 20` | ...so it can be followed without further specifying |
+
+1. Specify the length, diam in the `geom()` procedure.
 
 ```c
 proc geom() {
@@ -180,8 +187,7 @@ proc geom() {
 }
 ```
 
-1. To specify *hh* in the `biophys()` procedure:
- - make a copy of the `soma` code and call it `axon`
+1. To specify *hh* in the `biophys()` procedure, make a copy of the `soma` code and call it `axon`.
 (Alternatively, the common code could be moved to the `forsec all` and `soma` and `axon` sections deleted but this makes it harder to manage if more sections are added later or if parameters are changed.)
 
 ```c
@@ -204,9 +210,9 @@ proc biophys() {
        gl_hh = 0.0003
        el_hh = -64
    }
-   axon {                              //Copy soma here and rename as axon
-     insert hh                         //insert HH Mechanism
-       gnabar_hh = 0.12                //define the properties of the HH Mechanism
+   axon {                      //Copy soma here and rename as axon
+     insert hh                 //insert HH Mechanism
+       gnabar_hh = 0.12        //define the properties of the HH Mechanism
        gkbar_hh = 0.036
        gl_hh = 0.0003
        el_hh = -54.3
@@ -226,16 +232,16 @@ proc subsets() { local i
     axon all.append()
 }
 ```
+------------------
 
 <div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <i>bscellaxon.hoc</i> then load into NEURON with <b>File->load hoc</b> command from the Main Menu window.</p>
- <p>Have a look in CellBuilder at the new axon</p>
+ <h4>Save Me</h4> <p>You can save this to a file called <b>bscellaxon.hoc</b> then load into NEURON with <b>File->load hoc</b> command from the Main Menu window.</p>
+ <p>Have a look in CellBuilder at the new axon.</p>
 </div>
-
 
 ![axoncell]
 
-> Hopefully, it is now apparent that the procedures parallel the tasks undertaken in CellBuilder.
+> Hopefully, it is now apparent that the HOC procedures parallel the tasks undertaken in CellBuilder.
 
 ### STEP 4: Checking sections in the console
 
@@ -267,13 +273,13 @@ oc> forall psection()
 
 [HOC syntax](http://www.neuron.yale.edu/neuron/static/new_doc/programming/hocsyntax.html)
 
-[1]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#AlphaSynapse) "AlphaSynapse definition"
+[1]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#AlphaSynapse "AlphaSynapse definition"
 
-[2]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn) "ExpSynapse definition"
+[2]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn "ExpSynapse definition"
 
-[3]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn) "Exp2Synapse definition"
+[3]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn "Exp2Synapse definition"
 
-[4]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/geometry.html) "Geometry definition"
+[4]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/geometry.html "Geometry definition"
 
 [alphasyn]: {{ site.github.repository_url }}/raw/gh-pages/img/Alphasynapse_shape.PNG "AlphaSynapse shape"
 

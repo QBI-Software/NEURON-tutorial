@@ -89,7 +89,7 @@ For the dendrite, we need to enter a reduced HH which means altering the standar
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>bs_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
- <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
+ <p><i>TIP: set your working directory via <b>File -> working dir</b> first	</i></p>
 </div>
 
 
