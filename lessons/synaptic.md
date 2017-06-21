@@ -3,27 +3,9 @@ lesson: 3
 layout: default
 title: Synaptic Model
 ---
-# A synaptic model
+## A synaptic model
 
-In this lesson, we will be stimulating our neuron with a synaptic input instead of current injection.  There are two types of synaptic input available in NEURON:
-1. **Alpha Synapse (AlphaSynapse)** [1] : represents a single conductance transient of a particular peak amplitude that starts at a fixed time. It is not meant to connect neurons but to simulate the impact of a synaptic type of stimulus.
-1. **Exponential Synapses (ExpSyn and Exp2Syn)** [2][3] : represent event-driven conductance-changing weighted mechanisms (with single or double decay rate constants, respectively).  They will not activate unless triggered by a Network Connection object (NetCon) where the amplitude is controlled by the NetCon weight but the time course and reversal potential is controlled by the ExpSyn or Exp2Syn.
-
-In NEURON, these are managed as **Point Process** stimuli.
-
-1. Firstly, we will add an **AlphaSynapse** to our Ball and Stick cell created in the previous lesson.
-1. Then we will be ready to take a look under the hood of NEURON at the code which runs through the simulator.  The code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code rather than having to write it.
-
-## Part A: Using CellBuilder
-
-1. Launch a fresh version of NEURON via `nrngui`
-1. Load up the "Ball and Stick cell" from the file *bs_cell.ses*
-1. In the **CellBuilder** window, click on the **Continuous Create** button
-1. From the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
-1. In the **PointProcessManager** window, click on **SelectPointProcess**, then select **AlphaSynapse**
-1. 
-
-## Part B: Using HOC
+We would now like to make a more interesting model to simulate synaptic input.  In this lesson, we will take a look under the hood of NEURON at the code which runs through the simulator.  The code is written in HOC which is an interpretive version of C code developed specifically for NEURON.  
 
 ### STEP 1: Generate a cell class
 
@@ -39,7 +21,7 @@ Creating a cell type class, allows us to use this in network models as well as a
 
 1. Open a plain text editor of your choice (a few recommendations are on the [Setup](setup) page)
 2. Open the `bscell.hoc` file
-The class is defined by the lines at the top and bottom of the file:
+The class is defined by the lines at the top and bottom of the file: 
 
 ```
 begintemplate BSCell
@@ -128,14 +110,6 @@ Hopefully, it is now apparent that the procedures parallel the tasks undertaken 
 --------
 ## References
 
-[Point Process](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#pointprocesses)
-
 [HOC keywords](http://www.neuron.yale.edu/neuron/static/new_doc/programming/ockeywor.html)
 
 [HOC syntax](http://www.neuron.yale.edu/neuron/static/new_doc/programming/hocsyntax.html)
-
-[1]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#AlphaSynapse)
-
-[2]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn)
-
-[3]:(https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn)
