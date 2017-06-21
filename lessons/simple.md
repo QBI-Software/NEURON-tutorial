@@ -139,17 +139,6 @@ As the session was saved, it can be reloaded with all the parameters already set
 1. Restart with `nrngui`
 1. Under **File -> Load session**, select *bs_iclamprig.ses* and Voila!
 
-<aside class="warning">
-**TIP**: The NEURON GUI is a wrapper around code which can be run directly from the commandline.  
-In the console window, type
-
-```
-soma psection()
-```
-
-More on this later when we look at the HOC code.
-</aside>
-
 
 ## Part B: Simple neuron model
 
