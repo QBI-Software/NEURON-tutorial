@@ -87,11 +87,11 @@ For the dendrite, we need to enter a reduced HH which means altering the standar
 
 ![alt text][biophys_reducedhh]
 
-<aside class="notice">
-**Save Me**
-You can save this to a file called *bs_cell.ses* using the **File -> Save session** command from the Main Menu window.
-*TIP:* set your working directory via **File -> working dir** first
-</aside>
+<div class="alert alert-info">
+ <h4>Save Me</h4> <p>You can save this to a file called <i>bs_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
+ <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
+</div>
+
 
 ### STEP A5: Running a simple simulation
 
@@ -113,9 +113,9 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
 1. Now in the **RunControl** window, click **Init &amp; Run**
 
-<aside class="warning">
-Voila! Have a look in the graph and you should see your AP!
-</aside>
+<div class="alert alert-warning">
+<p>Voila! Have a look in the graph and you should see your AP!</p>
+</div>
 
 ![alt text][ap1]
 
@@ -126,10 +126,11 @@ Because we are running in **Continuous Create** mode, you can make changes in **
 
 ![alt text][ap2]
 
-<aside class="notice">
-**Save Me**
-You can save this to a **NEW** file called *bs_iclamprig.ses* using the **File -> Save session** command from the Main Menu window.
-</aside>
+<div class="alert alert-info">
+ <h4>Save Me</h4> <p>You can save this to a file called <i>bs_iclamprig.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
+ <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
+</div>
+
 
 ### STEP A6: NEURON sessions
 
@@ -194,24 +195,29 @@ For all the dendrites, we need to enter a reduced HH which means altering the st
 
 ![alt text][biophys_reducedhh2]
 
-<aside class="notice">
-**Save Me**
-You can save this to a file called *simple_cell.ses* using the **File -> Save session** command from the Main Menu window.
-</aside>
+<div class="alert alert-info">
+ <h4>Save Me</h4> <p>You can save this to a file called <i>simple_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
+ <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
+</div>
+
 
 --------
-<aside class="warning">
-**"Too Easy" Task**
-To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:
+<div class="alert alert-warning">
+<h4>"Too Easy" Task</h4>
+<p>To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:</p>
+<table>		 
+   <thead> 		  
+   <tr><th>Section</th><th>Ref</th><th>Length (&micro;m)</th><th>Diameter (&micro;m)</th><th>Biophysics</th></tr>		 
+   </thead>		
+   <tbody>		
+   <tr><td>Basal dendrite</td><td><code class="highlighter-rouge">bas</code></td><td>200</td><td>3</td><td>pas</td></tr>		
+   <tr><td>Axon</td><td><code class="highlighter-rouge">axon</code></td><td>800</td><td>1</td><td>hh</td></tr>		
+   </tbody>		
+ </table>
 
-| Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
-| ---- | ---- | ---- | ---- | ----|
-| Basal dendrite | `bas` | 200 | 3 | pas|
-| Axon | `axon` | 800 | 1 | hh |
-
-where *pas* is a passive current with a reversal potential (`e_pas`) of `-65mV`.
-Now rerun the simulation
-</aside>
+<p>where <i>pas</i> is a passive current with a reversal potential (<code>e_pas</code>) of <code>-65mV</code>.
+Now rerun the simulation.</p>
+</div>
 
 --------
 

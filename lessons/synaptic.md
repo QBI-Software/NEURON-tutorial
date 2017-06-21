@@ -26,6 +26,7 @@ In NEURON, these are managed as **Point Process** stimuli.
 AlphaSynapse[0]
 at: dend[1]
 ```
+
 ![alphasyn]
 
 The panel for control of the **AlphaSynapse** has four parameters, enter the initial values:
@@ -225,8 +226,12 @@ proc subsets() { local i
     axon all.append()
 }
 ```
-1. Now save this to a new file *bscellaxon.hoc* and load into NEURON with **File -> load hoc**
-1. Have a look in CellBuilder at the new axon
+
+<div class="alert alert-info">
+ <h4>Save Me</h4> <p>You can save this to a file called <i>bscellaxon.hoc</i> then load into NEURON with <b>File->load hoc</b> command from the Main Menu window.</p>
+ <p>Have a look in CellBuilder at the new axon</p>
+</div>
+
 
 ![axoncell]
 
