@@ -161,7 +161,7 @@ Finally, lets create some output graphs:
 
 Now we have a whole rig:
 
-![iclamprig]
+![iclamp_rig]
 
 <div class="alert alert-info">
 <h4>Save Me</h4><p>Save the rig (4 windows) to a new session file as <i>iclamprig.ses</i>.</p>
@@ -214,20 +214,20 @@ Now it's time to do your own investigations:
 > How do passive dendrites (as modeled here) influence axo-somatic voltage and action potential firing as a function of distance?
 
 To find out path distance (distance along the neuron) of a particular section, in the console, type:
- ```c
- forall {
- soma distance()
- print secname(), " ", distance(1)
- }
- ```
+```c
+forall {
+soma distance()
+print secname(), " ", distance(1)
+}
+```
 
- This will print the name of the section and the path distance in microns from the soma (0.5) to the section (1). Change values if you would like to measure distance from/to somewhere else.
+This will print the name of the section and the path distance in microns from the soma (0.5) to the section (1). Change values if you would like to measure distance from/to somewhere else.
 
- > You can add this to your model_run.hoc so every time you open the model, it will display the distances to each section. Alternatively, type it out and paste it into the console which opens with NEURON.
+> You can add this to your model_run.hoc so every time you open the model, it will display the distances to each section. Alternatively, type it out and paste it into the console which opens with NEURON.
 
- ## Extra analysis – Impedance tools
+## Extra analysis – Impedance tools
 
- NEURON is very powerful and has a number of extra additions that can aid your analysis of results. For example we can observe voltage decay throughout the cell using the impedance tools. Discover for yourself how these work and how they may aid your analysis.
+NEURON is very powerful and has a number of extra additions that can aid your analysis of results. For example we can observe voltage decay throughout the cell using the impedance tools. Discover for yourself how these work and how they may aid your analysis.
 
 ![impedance]
 
