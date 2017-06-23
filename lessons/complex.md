@@ -252,7 +252,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [printfilemanager2]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilemanager2.png "Print File manager window"
 
-[spatialgrid1]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid1.png "Geometry strategy - specify"
+[spatialgrid1]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid.png "Geometry strategy - specify"
 
 [spatialgrid2]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid2.png "Geometry strategy - set"
 
