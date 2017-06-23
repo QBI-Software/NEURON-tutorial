@@ -119,19 +119,18 @@ We would also like our neuron to be able to fire action potentials. Let's add so
 1. Finally, check **Continuous create**. We want our model to update in real time if we change any of its properties.
 
 <div class="alert alert-info">
- <h4>Save Me</h4><p>We will modularize the model, meaning to create different aspects of the model in parts. This allows each part of the model to be individually modified more easily. Hence, select just the <b>Cellbuilder</b> window to save and <b>session -> save selected</b>. Save as <i>pyramidal_cb.ses</i>.</p>
- <p>We can also create a run file in a text editor
- </div>
+<h4>Save Me</h4><p>We will modularize the model, meaning to create different aspects of the model in parts. This allows each part of the model to be individually modified more easily. Hence, select just the <b>Cellbuilder</b> window to save and <b>session -> save selected</b>. Save as <i>pyramidal_cb.ses</i>.</p>
+</div>
 
- 1. As before, we can create a run file to keep it together.  In a text editor, create a new file called *model_run.hoc*.
- 1. It should contain the following:
- ```
- load_file("nrngui.hoc")
- load_file("pyramidal_cb.ses")
+1. As before, we can create a run file to keep it together.  In a text editor, create a new file called *model_run.hoc*.
+1. It should contain the following:
+```
+load_file("nrngui.hoc")
+load_file("pyramidal_cb.ses")
 
- ```
+```
 
- >Test it out! Close NEURON. And double click your *model_run.hoc* file. Make sure all your values have loaded up correctly. Its good practice to restart your model often. This will help you detect any bugs and know at what step they arose.
+>Test it out! Close NEURON. And double click your *model_run.hoc* file. Make sure all your values have loaded up correctly. Its good practice to restart your model often. This will help you detect any bugs and know at what step they arose.
 
 ### Step 4. Creating a virtual patch clamp rig.
 
@@ -164,9 +163,9 @@ Now we have a whole rig:
 ![iclamprig]
 
 <div class="alert alert-info">
- <h4>Save Me</h4><p>Save the rig (4 windows) to a new session file as <i>iclamprig.ses</i>.</p>
- <p>Add a line to load the rig in your <i>model_run.hoc</i> file and restart your model.</p>
- </div>
+<h4>Save Me</h4><p>Save the rig (4 windows) to a new session file as <i>iclamprig.ses</i>.</p>
+<p>Add a line to load the rig in your <i>model_run.hoc</i> file and restart your model.</p>
+</div>
 
 ## Step 5. Conducting a virtual patch clamp experiment.
 
