@@ -44,6 +44,15 @@ Click on **Show** then **Parameters** which shows the panel for control of the *
 
 ![simplealpha_params]  ![simplealpha]  
 
+#### Commands in the console
+
+A console window running the HOC interpreter is launched when `nrngui` is run. The HOC code can be run directly from the commandline which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
+
+```
+oc> soma psection()
+```
+
+![console_soma]
 
 ## Part B: Using HOC
 
@@ -172,7 +181,6 @@ proc basic_shape() {
 
 ```
 
-![connect]
 
 #### Different possible notations which all do the same thing:
 
@@ -252,10 +260,9 @@ proc subsets() { local i
 ------------------
 
 <div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <b>bscellaxon.hoc</b></p>
+ <h4>Save Me</h4> <p>You can save this to a file called <i>bscellaxon.hoc</i>.</p>
 </div>
 
-![axoncell]
 
 > Hopefully, it is now apparent that the HOC code is underlying the tasks undertaken in CellBuilder.
 
@@ -308,18 +315,10 @@ proc synapses() {
 
 ```
 
-### STEP 5: Commands in the console
-
-A console window running the HOC interpreter is launched when `nrngui` is run. The HOC code can be run directly from the commandline which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
-
-```
-oc> soma psection()
-```
-
-![console_soma]
 
 
-### STEP 6: Running the HOC code
+
+### STEP 5: Running the HOC code
 
 So now how do we get this code into NEURON.
 
@@ -349,17 +348,17 @@ The contents of `init.hoc` should look like:
 load_file("nrngui.hoc")
 // load our hoc file
 load_file("bscellaxon.hoc")
-//=============================================================================
+//=================================================
 // Create our cell from the template
-//=============================================================================
+//=================================================
 objectvar bsa
 
 bsa = new BScellAxon()
 bsa init()
 
-//=============================================================================
+//==================================================
 //Run Control
-//=============================================================================
+//==================================================
 tstop = 20
 dt = 0.025 //ms 40khz
 
@@ -465,8 +464,8 @@ A space plot allows you to view the changes in conductance along a section.
 
 [connect]:{{ site.github.repository_url }}/raw/gh-pages/img/sthAeqsec.gif "Connecting sections"
 
-[console_init]:{{ site.github.repository_url }}/raw/gh-pages/img/console_init.PNG "Console init"
+[console_init]:{{ site.github.repository_url }}/raw/gh-pages/img/Console_init.PNG "Console init"
 
-[console_bsa]:{{ site.github.repository_url }}/raw/gh-pages/img/console_bsa.PNG "Console with bsa output"
+[console_bsa]:{{ site.github.repository_url }}/raw/gh-pages/img/Console_bsa.PNG "Console with bsa output"
 
 [hocoutput]:{{ site.github.repository_url }}/raw/gh-pages/img/hocoutput.PNG "Running our HOC code"
