@@ -246,11 +246,11 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [cellbuilder_topol]: {{ site.github.repository_url }}/raw/gh-pages/img/cellbuilder_topol.png "CellBuilder window"
 
-[printfilemanager]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilenamager.png "Print File manager window"
+[printfilemanager]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilemanager.png "Print File manager window"
 
-[printfilemanager1]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilenamager1.png "Print File manager window"
+[printfilemanager1]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilemanager1.png "Print File manager window"
 
-[printfilemanager2]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilenamager2.png "Print File manager window"
+[printfilemanager2]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilemanager2.png "Print File manager window"
 
 [spatialgrid1]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid1.png "Geometry strategy - specify"
 
