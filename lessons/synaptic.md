@@ -47,7 +47,7 @@ Click on **Show** then **Parameters** which shows the panel for control of the *
 
 ## Part B: Using HOC
 
-We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code rather than having to write it.
+We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code more than having to write it.
 
 **Recommended structure of a HOC program:**
 
@@ -77,13 +77,16 @@ begintemplate BScell
 ...
 endtemplate BScell
 ```
+#### Variables
 
-**Global variables** are indicated by the starting word: `public`. You should recognize a few names from our CellBuilder model: `soma`, `dend`
++ **Global variables** are indicated by the starting word: `public`. You should recognize a few names from our CellBuilder model: `soma`, `dend`
++ **Local variables** are indicated by the starting word: `objref` or `objvar `
 
 ```
 public soma, dend
 public all
 ```
+#### Program Sequence
 
 When the code is first loaded in the NEURON interpreter, it creates the `soma` and `dend` sections:
 
@@ -115,9 +118,13 @@ proc topol() { local i
 }
 ```
 
-So here we see that the `dend` is connected to the soma object. Each segment is indexed from 0 to 1 along it's length so that `dend(0)` refers to the **start of the segment** and `dend(1)` refers to the **end of the segment**.  The method then calls `basic_shape()` then returns to `init()` to run the next procedure in the list which is `subsets()` and so on.
+So here we see that the `dend` is connected to the soma object. Each section is indexed from 0 to 1 along it's length so that `dend(0)` refers to the **start of the section** and `dend(1)` refers to the **end of the section**.  
 
-### STEP 3: Adding an axon segment via HOC
+![connect]
+
+The method then calls `basic_shape()` then returns to `init()` to run the next procedure in the list which is `subsets()` and so on.
+
+### STEP 3: Adding an axon section via HOC
 
 Now if we want to add an **axon**, we can add this to the code rather than returning to **CellBuilder**.
 
@@ -133,13 +140,17 @@ public soma, dend, axon
 
 #### Geometry parameters explained
 
+It is important to refer to the `soma` and `dendrite` as *sections* rather than *segments*. A **section** contains one or more segments (`nseg`) and it is by dividing the section this way into smaller compartmental units which can provide the fine-grained detail underlying a more realistic model.
+
+Each section has the following parameters:
+
 | Parameter     | Symbol | Description     |
 | :------------- | :------------- |:------------- |
 | Length | L  | For each section, L is the length of the entire section in microns.       |
 | Segments | nseg | The section is divided into nseg compartments of length L/nseg. Membrane potential will be computed at the ends of the section and the middle of each compartment. |
 | Diameter | diam | The diameter in microns. Note that diam is a range variable and therefore must be respecified whenever nseg is changed.|
 | Resistivity | Ra | Axial resistivity in ohm-cm.|
-| connectivity | | Established with the connect command and defines the parent of the section, which end of the section is attached to the parent, and where on the parent the attachment takes place. To avoid confusion, it is best to attach the 0 end of a section to the 1 end of its parent.[4]|
+| connectivity | connect | Defines the parent of the section, which end of the section is attached to the parent, and where on the parent the attachment takes place [4].|
 
 
 1. Add `axon` in the `topol()` and `basic_shape()` procedures
@@ -152,7 +163,7 @@ proc topol() { local i
 }
 
 proc basic_shape() {
-  //pt3dadd(x,y,z,diam pt)
+  //The parameters for this function are: pt3dadd(x,y,z,diam pt)
   soma {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}      
   dend {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(150, 0, 0, 1)}
   //Add this line
@@ -161,19 +172,19 @@ proc basic_shape() {
 
 ```
 
+![connect]
+
 #### Different possible notations which all do the same thing:
 
-| Command | Explanation     |
-| :------------- | :------------- |
-| `axon` `diam`  = 20     | separated by space       |
-| `axon.diam` = 20    | separated by dot|
-| `axon` {             
-      `diam` = 20
-    } |grouped with other parameters by {}|
-| `access axon` |  sets the default section ...|
-|  `diam = 20` | ...so it can be followed without further specifying |
+| Notation | Example |Explanation     |
+| :------------- | :------------- |:------------- |
+|Space Notation| `axon` `diam`  = 20     | separated by space       |
+|Dot Notation| `axon.diam` = 20    | separated by dot|
+|Stack Notation| `axon` { `diam` = 20 } |grouped with other parameters by {}|
+|Default access| `access axon` |  sets the default section ...|
+| |  `diam = 20` | ...so it can be followed without further specifying |
 
-1. Specify the length, diam in the `geom()` procedure.
+1. Specify the length and diam in the `geom()` procedure.
 
 ```c
 proc geom() {
@@ -186,9 +197,12 @@ proc geom() {
    axon.diam = 1            //Add this
 }
 ```
+#### Repeated actions with Loops
+
+HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall` [5].
 
 1. To specify *hh* in the `biophys()` procedure, make a copy of the `soma` code and call it `axon`.
-(Alternatively, the common code could be moved to the `forsec all` and `soma` and `axon` sections deleted but this makes it harder to manage if more sections are added later or if parameters are changed.)
+(Alternatively, the common code could be moved to the `forsec all` and `soma` and `axon` sections deleted but this makes it harder to manage later.)
 
 ```c
 proc biophys() {
@@ -211,8 +225,8 @@ proc biophys() {
        el_hh = -64
    }
    axon {                      //Copy soma here and rename as axon
-     insert hh                 //insert HH Mechanism
-       gnabar_hh = 0.12        //define the properties of the HH Mechanism
+     insert hh                 
+       gnabar_hh = 0.12        
        gkbar_hh = 0.036
        gl_hh = 0.0003
        el_hh = -54.3
@@ -220,8 +234,10 @@ proc biophys() {
  }
 
 ```
+#### SectionList
 
-1. The final addition is the `subsets()` procedure where the axon is added to the SectionList:
+Sections are added to a list called a **SectionList** to group components together under one reference name [6].
+1. In the `subsets()` procedure add the `axon` to a SectionList called `all`:
 
 ```c
 proc subsets() { local i
@@ -235,34 +251,179 @@ proc subsets() { local i
 ------------------
 
 <div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <b>bscellaxon.hoc</b> then load into NEURON with <b>File->load hoc</b> command from the Main Menu window.</p>
- <p>Have a look in CellBuilder at the new axon.</p>
+ <h4>Save Me</h4> <p>You can save this to a file called <b>bscellaxon.hoc</b>
 </div>
 
 ![axoncell]
 
-> Hopefully, it is now apparent that the HOC procedures parallel the tasks undertaken in CellBuilder.
+> Hopefully, it is now apparent that the HOC code is underlying the tasks undertaken in CellBuilder.
 
-### STEP 4: Checking sections in the console
+### STEP 4: Adding an AlphaSynapse
 
-The **NEURON GUI** is really a wrapper around code which can be run directly from the commandline.  
-In the console window, type
+1. Locate the procedure `synapses()` near the end of the file. We will enter our code within the `{}`
+
+```c
+proc synapses() {}
+```
+
+1. To insert an AlphaSynapse, we create an instance of it with
+
+```c
+objectvar syn
+syn = new AlphaSynapse(x)
+```
+where `x` is the location on the section.
+
+1. So to insert an AlphaSynapse at the distal end of the dendrite, we specify the section first and the location as `1`:
+
+```c
+objectvar syn
+dend syn = new AlphaSynapse(1)
+```
+
+2. Now we can set the properties as per our table, similar to the parameters window in the previous lesson:
+
+```c
+syn.onset = 0     // time to onset in ms
+syn.tau	  = 0.1   // rise time constant in ms
+syn.gmax  = 10    // peak conductance	in &mmicro;S (umho)
+syn.e	    = -15   // reversal potential in	mV
+syn.i     = 0     //	nA
+```
+
+so the final code is:
+
+```c
+objectvar syn       // this must be outside the procedure
+proc synapses() {
+  access dend       // add synapse to the dendrite
+  syn = new AlphaSynapse(1) // position is end of dendrite
+  syn.onset = 0     // time to onset in ms
+  syn.tau	  = 0.1   // rise time constant in ms
+  syn.gmax  = 10    // peak conductance	in %mmicro;S (umho)
+  syn.e	    = -15   // reversal potential in	mV
+  syn.i     = 0     //	nA
+}
+
+```
+
+### STEP 5: Commands in the console
+
+A console window running the HOC interpreter is launched when `nrngui` is run. The HOC code can be run directly from the commandline which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
 
 ```
 oc> soma psection()
-oc> forall psection()
 ```
 
 ![console_soma]
 
 
-### STEP 4: Adding an AlphaSynapse
+### STEP 6: Running the HOC code
+
+So now how do we get this code into NEURON.
+
+#### Loading the HOC
+
+To recap, what we have done so far is create a *template* for a neuron.  The neuron itself will not exist until we run a command such as (where `bsa` is our neuron):
+
+```c
+objectvar bsa
+
+bsa = new BScellAxon()
+bsa init()              // not strictly necessary but ensures it is run
+```
+
+1. Create a file called `init.hoc` which we will use to set everything up.
+1. We will need to load the NEURON libraries via `nrngui.hoc`
+1. Then we load our template file `bscellaxon.hoc`
+1. Then we add our code above to create an instance of our template called `bsa`
+
+The contents of `init.hoc` should look like:
+
+```c
+/* init.hoc for BScellAxon
+*/
+
+// start the GUI
+load_file("nrngui.hoc")
+// load our hoc file
+load_file("bscellaxon.hoc")
+//=============================================================================
+// Create our cell from the template
+//=============================================================================
+objectvar bsa
+
+bsa = new BScellAxon()
+bsa init()
+
+//=============================================================================
+//Run Control
+//=============================================================================
+tstop = 20
+dt = 0.025 //ms 40khz
+
+```
+
+(*Note we have also set a couple of variables for the RunControl panel*)
+
+1. Now relaunch NEURON (`nrngui`)
+1. Reset working dir with **File -> recent dir**
+1. Open `init.hoc` with **File -> load hoc**
+1. All you should now see is a console window as shown here (any errors will show up here):
+
+![console_init]
+
+To test that our code has actually loaded we will use the console commands:
+
+```
+oc> bsa
+oc> bsa.soma psection()
+oc> bsa.dend psection()
+
+```
+
+This should show the following output:
+
+![console_bsa]
+
+If it works, you can see that
++ the `bsa` object is our template `BScellAxon`
++ the `soma` has all the properties we set in the template code
++ the `dendrite` also has the `AlphaSynapse` connected and ready to go
 
 
-### STEP 5: Inserting an NMDA receptor
+#### Runnning the HOC
 
+Now we will launch a couple of windows to run the code (this can also be automated but let's just do it this way for now).
 
-### STEP 6: Compiling and running the simulation
+1. Open the **File -> RunControl** (you will see our parameters in the `init.hoc` are set)
+1. Open a **Graph -> Voltage Axis** window
+1. Click on **Init &amp; Run** -> Voila!
+
+![hocoutput]
+
+> CONGRATULATIONS! This is no mean feat and you deserve a MEDAL!!
+
+#### Creating a Space Plot
+
+A space plot allows you to view the changes in conductance along a section.
+
+1. To create a space plot, select **Shape plot** from the **Graph** menu in the NEURON Main Menu.
+1. From this window, you can select from the plot menu with the *right mouse button*.
+1. Select a **Space Plot**.
+1. By default, voltage is the variable to plot, but you can change this with the **Plot What?** menu item.
+1. The plot shown is a schematic of our neuron so just looks like a straight line.
+
+![space1]
+
+1. To create the space plot graph, you need to select a section of the neuron to include in the space plot by clicking the left mouse button at the beginning of the section, dragging the mouse across the section you want to plot (while holding the mouse button down), and releasing the mouse button when you have covered the sections you want to plot. A line will appear from where you first clicked the mouse button to the current location of the pointer. When you release the mouse button, the sections you selected will be highlighted in colour, and a new window with the space plot will be opened.
+1. Press the **Init &amp; Run** button in the **RunControl** window to see the space plot in action.
+1. You may have to zoom in with **right-click menu -> View... -> View = plot**
+
+![space2]
+
+2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**. (This won't do much with our model but good for branching dendrites.)
+3. The middle mouse button is used to move the whole representation.
 
 --------
 ## References
@@ -273,6 +434,8 @@ oc> forall psection()
 
 [HOC syntax](http://www.neuron.yale.edu/neuron/static/new_doc/programming/hocsyntax.html)
 
+[Programming HOC guide](http://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic.html)
+
 [1]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#AlphaSynapse "AlphaSynapse definition"
 
 [2]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn "ExpSynapse definition"
@@ -280,6 +443,10 @@ oc> forall psection()
 [3]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn "Exp2Synapse definition"
 
 [4]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/geometry.html "Geometry definition"
+
+[5]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/secspec.html "Section access definition"
+
+[6]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/classes/seclist.html#SectionList "SectionList definition"
 
 [alphasyn]: {{ site.github.repository_url }}/raw/gh-pages/img/Alphasynapse_shape.PNG "AlphaSynapse shape"
 
@@ -290,3 +457,15 @@ oc> forall psection()
 [axoncell]: {{ site.github.repository_url }}/raw/gh-pages/img/Axoncell.PNG "Axon added to BS cell"
 
 [console_soma]:{{ site.github.repository_url }}/raw/gh-pages/img/Console_soma.PNG "Console with soma"
+
+[space1]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.gif "Space plot window"
+
+[space2]:{{ site.github.repository_url }}/raw/gh-pages/img/spaceplot.gif "Space plot trace"
+
+[connect]:{{ site.github.repository_url }}/raw/gh-pages/img/sthAeqsec.gif "Connecting sections"
+
+[console_init]:{{ site.github.repository_url }}/raw/gh-pages/img/console_init.PNG "Console init"
+
+[console_bsa]:{{ site.github.repository_url }}/raw/gh-pages/img/console_bsa.PNG "Console with bsa output"
+
+[hocoutput]:{{ site.github.repository_url }}/raw/gh-pages/img/hocoutput.PNG "Running our HOC code"
