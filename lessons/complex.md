@@ -232,7 +232,8 @@ To find out path distance (distance along the neuron) of a particular section, i
 
  NEURON is very powerful and has a number of extra additions that can aid your analysis of results. For example we can observe voltage decay throughout the cell using the impedance tools. Discover for yourself how these work and how they may aid your analysis.
 
-  
+![impedance]
+
 ---------------------
 ## References
 
@@ -281,3 +282,5 @@ To find out path distance (distance along the neuron) of a particular section, i
 [igraph]:{{ site.github.repository_url }}/raw/gh-pages/img/igraph.png "Graph I vs t"
 
 [iclamp_rig]:{{ site.github.repository_url }}/raw/gh-pages/img/iclamp_rig.png "Virtual IClamp rig"
+
+[impedance]:{{ site.github.repository_url }}/raw/gh-pages/img/impedance.png "Impedance tools"
