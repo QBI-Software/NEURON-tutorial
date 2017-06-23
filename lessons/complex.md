@@ -77,12 +77,10 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 
 1. Select `all` (all segments should be red) then select `d_lambda`.
 
-![spatialgrid1]
+![spatialgrid]
 
 1. Uncheck **Specify strategy** which allows us to set a value for `d_lambda`. Let's go with the default, `0.1`.
 
-
-![spatialgrid2]
 
 
 #### Biophysical properties
@@ -252,9 +250,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [printfilemanager2]: {{ site.github.repository_url }}/raw/gh-pages/img/printfilemanager2.png "Print File manager window"
 
-[spatialgrid1]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid.png "Geometry strategy - specify"
-
-[spatialgrid2]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid2.png "Geometry strategy - set"
+[spatialgrid]: {{ site.github.repository_url }}/raw/gh-pages/img/spatialgrid.png "Geometry strategy - specify"
 
 [biophys1]: {{ site.github.repository_url }}/raw/gh-pages/img/biophys1.png "Biophysics strategy"
 
