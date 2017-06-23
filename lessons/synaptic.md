@@ -44,15 +44,6 @@ Click on **Show** then **Parameters** which shows the panel for control of the *
 
 ![simplealpha_params]  ![simplealpha]  
 
-#### Commands in the console
-
-A console window running the HOC interpreter is launched when `nrngui` is run. The HOC code can be run directly from the commandline which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
-
-```
-oc> soma psection()
-```
-
-![console_soma]
 
 ## Part B: Using HOC
 
@@ -64,6 +55,19 @@ We are now ready to take a look under the hood of NEURON at the code which runs 
 1. specify model geometry (stylized (L, diam) or pt3d method as appropriate)
 1. specify instrumentation (IClamps, SEClamps, other Point Processes, graphs)
 1. specify simulation flow control (RunControl panel is sufficient for most purposes)
+
+#### Commands in the console
+
+A console window running the HOC interpreter is launched when `nrngui` is run. The HOC code can be run directly from the commandline which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
+
+```
+oc> soma psection()
+```
+
+![console_soma]
+
+The output will be explained as we investigate HOC further.
+
 
 ### STEP 1: Generate a cell class
 
