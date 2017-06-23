@@ -33,12 +33,10 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 
 ![cellbuilder]
 
+![printfilemanager]
 
 <div class="alert alert-info">
  <h4>Save Me Using the Print &amp; File Window Manager</h4>
-
-  ![printfilemanager]
-
  <ol>
  <li>From the Main Menu, select <b>Window</b> then <b>Print &amp; File Window Manager</b></li>
  <li>The display shows red and blue boxes. The left red square represents your screen, and the blue squares are individual NEURON windows.</li>
@@ -46,10 +44,9 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
  <li>Click <b>Session -> Save selected</b> OR click <b>Session ->Save all</b> to save all windows open. </li>
  <li>You can save this session to a file called <i>pyramidal.ses</i>. </li>
  </ol>
-
- ![printfilemanager1]  ![printfilemanager2]
-
 </div>
+
+![printfilemanager1]  ![printfilemanager2]
 
 ## Step 2. Viewing the cell morphology
 
