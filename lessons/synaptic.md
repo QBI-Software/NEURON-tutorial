@@ -178,11 +178,12 @@ proc basic_shape() {
 
 | Notation | Example |Explanation     |
 | :------------- | :------------- |:------------- |
-|Space Notation| `axon` `diam`  = 20     | separated by space       |
-|Dot Notation| `axon.diam` = 20    | separated by dot|
-|Stack Notation| `axon` { `diam` = 20 } |grouped with other parameters by {}|
-|Default access| `access axon` |  sets the default section ...|
+| Space Notation | `axon` `diam`  = 20     | separated by space       |
+| Dot Notation | `axon.diam` = 20    | separated by dot |
+| Stack Notation | `axon` { `diam` = 20 } | grouped with other parameters by {} |
+| Default access | `access axon` |  sets the default section ... |
 | |  `diam = 20` | ...so it can be followed without further specifying |
+
 
 1. Specify the length and diam in the `geom()` procedure.
 
@@ -251,7 +252,7 @@ proc subsets() { local i
 ------------------
 
 <div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <b>bscellaxon.hoc</b>
+ <h4>Save Me</h4> <p>You can save this to a file called <b>bscellaxon.hoc</b></p>
 </div>
 
 ![axoncell]
