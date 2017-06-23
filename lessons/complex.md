@@ -238,9 +238,9 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [pyramidalneuron]: {{ site.github.repository_url }}/raw/gh-pages/img/pyramidal.png "Pyramidal Neuron (Neurolucida)"
 
-[importneuron1]: {{ site.github.repository_url }}/raw/gh-pages/img/importneuron1.png "Pyramidal Neuron (Neurolucida) - loaded"
+[importneuron1]: {{ site.github.repository_url }}/raw/gh-pages/img/loadedneuron1.png "Pyramidal Neuron (Neurolucida) - loaded"
 
-[importneuron2]: {{ site.github.repository_url }}/raw/gh-pages/img/importneuron2.png "Pyramidal Neuron (Neurolucida) - loaded"
+[importneuron2]: {{ site.github.repository_url }}/raw/gh-pages/img/loadedneuron2.png "Pyramidal Neuron (Neurolucida) - loaded"
 
 [cellbuilder]: {{ site.github.repository_url }}/raw/gh-pages/img/cellbuilder.png "CellBuilder window"
 
