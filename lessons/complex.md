@@ -124,6 +124,7 @@ We would also like our neuron to be able to fire action potentials. Let's add so
 
 1. As before, we can create a run file to keep it together.  In a text editor, create a new file called *model_run.hoc*.
 1. It should contain the following:
+
 ```
 load_file("nrngui.hoc")
 load_file("pyramidal_cb.ses")
