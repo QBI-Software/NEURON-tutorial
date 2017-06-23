@@ -140,15 +140,15 @@ The first experiment we will conduct with our neuron is to inject a current step
 1. Open **Tools -> Run control**
 1. Set `Tstop` to `1000` ms. This makes our recorded period 1000 ms long.
 
-![menu_runcontrol]  ![runcontrol]
+![runcontrol]
 
 Next, we will create a current clamp electrode (a type of **Point process**).
 1. Open **Tools > Point Processes > Managers > Point manager**
 1. By default, the IClamp point process is positioned half-way along the `soma`.  We will accept this default.
 
-![menu_pointprocess]  ![iclamp]
+![iclamp]
 
-1. Click **SelectPointProcessors** and select **IClamp**.
+1. Click **SelectPointProcess** and select **IClamp**.
 1. Create a step current of duration `600 ms`, amplitude of `100 pA` and a delay of `200 ms`.
 
 ![menu_iclamp]  ![iclamp_params]
