@@ -9,7 +9,7 @@ title: Quick setup
 
 NEURON can be downloaded for Windows, MAC and Linux from: [http://www.neuron.yale.edu/neuron/download](http://www.neuron.yale.edu/neuron/download)
 
-## Test 
+## Test
 
 To test your installation, click on (WIN) **NEURON demo** OR (MAC) **neurondemo**.  
 
@@ -23,7 +23,7 @@ If it all works, exit the application interface from the window called "NEURON M
 
 ## Text editor
 
-A plain text editor is required for editing the HOC code. (Programs like WORD are not plain text editors and cannot be used for code). The following editors are recommended if you don't have a favourite already.
+A plain text editor is required for editing the HOC code. (Programs like WORD are not plain text editors and cannot be used for code.) Your computer will have a basic text editor such as wordpad (Windows) or TextEdit (Mac). However these will be the most basic of text editors. The following editors are recommended if you don't have a favourite already.
 
 1. [ATOM](https://atom.io) - the only editor I know of with HOC syntax highlighting! (to install this, go to Packages, search for `language-hoc` and install) - Multi-platform and very cool
 1. [JEdit](http://jedit.org) - my favourite - extremely easy to use and Multi-platform

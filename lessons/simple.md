@@ -7,7 +7,9 @@ title: Simple Model
 
 ## Part A: "Ball and Stick" model
 
-We will now create a "Ball and Stick" soma-dendrite model with the following characteristics:
+We will now create an extremely simple neuron, or a "Ball and Stick" soma-dendrite model. Despite this, it will be able to fire action potentials in response to input into it's dendrite.
+
+To do this, we need to define the anatomy, and biophysics of the neuron. It will have the following characteristics:
 
 + Resting potential (`Vm`) = -65 mV throughout the cell.
 + Specific capacitance (`cm`) = 1 &micro;F/cm^2
@@ -17,14 +19,16 @@ We will now create a "Ball and Stick" soma-dendrite model with the following cha
 | Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
 | ---- | ---- | ---- | ---- | ----|
 | Soma | `soma` | 20 | 20 | hh [1]|
-| Dendrite | `dend` | 1000 | 5 | reduced hh |
+| Dendrite | `dend` | 1000 | 5 | reduced (10%) hh |
 
-> Note: **reduced hh** indicates the Na+ and K+ conductances are reduced to 10% of normal HH and the equilibrium potential of the HH leak current is set to -64 mV.
+> Note: **hh** refers to the combined conductances of voltage-gated Na+ and K+ channels, and the passive leak conductance defined by Hodgkin and Huxley.
+
+> **Reduced hh** indicates the Na+ and K+ conductances are reduced to 10% of normal HH and the equilibrium potential of the HH leak current is set to -64 mV.
 
 
 ### STEP A1: Launch CellBuilder
 
-CellBuilder is a graphical interface used to generate the basic morphology of a neuron.  
+CellBuilder is a graphical interface used to generate the basic morphology and biophysics of a neuron.  
 From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 ![alt text][cellbuilder]
