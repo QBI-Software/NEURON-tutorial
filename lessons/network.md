@@ -4,7 +4,7 @@ layout: default
 title: Network Model
 ---
 # A Network Model
-Now we are going to build a network of two cells. We will build these between two ball and stick neurons but they equally apply to
+Now we are going to build a network of two cells. We will build these between two ball and stick neurons but they equally apply to other models such as those based on neuron reconstructions you have uploaded.
 
 ## Part A:
 
