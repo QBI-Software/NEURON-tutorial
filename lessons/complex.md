@@ -38,6 +38,7 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 <div class="alert alert-info">
  <h4>Save Me Using the Print &amp; File Window Manager</h4>
  <ol>
+ <i>So far we have been saving our entire session. However, it is very useful to save only certain windows.</i>
  <li>From the Main Menu, select <b>Window</b> then <b>Print &amp; File Window Manager</b></li>
  <li>The display shows red and blue boxes. The left red square represents your screen, and the blue squares are individual NEURON windows.</li>
  <li>You can click on those windows you want to save in your session. These will translate to the right red square, which denotes the windows being saved into the session.</li>

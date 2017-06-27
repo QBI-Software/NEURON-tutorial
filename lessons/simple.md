@@ -160,9 +160,11 @@ We will now replace our single dendrite with a tree of branching apical dendrite
 | Apical dendrite branch | `ap[2]` | 300 | 1 | reduced hh |
 
 1. Restart NEURON and load the *bs_cell.ses* session
+1. Uncheck "Continuous build"
 1. From the **CellBuilder**, select **Topology**
 1. Select **Delete Section** then click on `dend` to remove this
-1. Click on **Basename** and type in `ap` and **Accept**
+1. Click through all the tabs in the **CellBuilder** to update NEURON
+1. Go back to **Topology** and click on **Basename** and type in `ap` and **Accept**
 ![alt text][basename]
 1. Click on **Make Section**
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
