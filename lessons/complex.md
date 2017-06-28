@@ -70,12 +70,6 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 1. As in the previous lessons, we can set the geometrical parameters of every section or for a group of sections defined as a subset.
 1. We can set the length (L), diameter (diam) and the degree of compartmentalization of the model (spatial grid). Since our morphology is already imported, including the length and diameter of each segment, all we need to define is the spatial grid.
 
- > The spatial grid here refers to your model and is a computational issue rather than a biological one. A section is divided into one or more segments of uniform conductance properties. A finer spatial grid will therefore produce a more accurate result but this will also increase computational time.
- The spatial grid can be defined three ways:
->> 1. The `nseg` button sets the number of segments.
->> 2. The `d_X` button allows a specification of the maximum physical length, in &micro;m, for each segment.
->> 3. The `d_lambda` button lets us specify a maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. This is often the best choice to use.
-
 1. Select `all` (all segments should be red) then select `d_lambda`.
 
 ![spatialgrid]

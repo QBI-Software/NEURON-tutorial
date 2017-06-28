@@ -28,29 +28,43 @@ To do this, we need to define the anatomy, and biophysics of the neuron. It will
 
 ### STEP A1: Launch CellBuilder
 
-CellBuilder is a graphical interface used to generate the basic morphology and biophysics of a neuron.  
+CellBuilder is a graphical interface used to generate the basic *morphology* and *biophysics* of a neuron.  
 From the **Build** menu on the Main Menu window, select **CellBuilder**
 
 ![alt text][cellbuilder]
 
+There are tabs here to create the **topology** of the neuron, place sections of the neuron into **subsets**, determine the neuron’s **geometry** and **biophysics**, and to **manage** aspects of the cell you create.
+
 ### STEP A2: Create morphology with CellBuilder
 
-1. Click on **Topology**
+NEURON models neuronal cells as distributed electrical cables. Each cell is subdivided into **sections** which are into subdivided into **segments**. Each **section** such as the soma, dendrites, or axon is modelled as a cylinder with set **length** and **diameter**, which either has a sealed or open end depending whether its connected to another section.
+
+1. First, let's click on **Topology**
 1. The components will be displayed graphically in the white *canvas* region - a soma is created automatically.
-1. Note **Basename** is set as default to `dend`
+1. Note **Basename** is set as default to `dend` (Hint: click the grey box)
 1. Create the dendrite component by clicking anywhere on the canvas
 1. This generates a `dend` section
 
 ![alt text][topol]
 
+In the topology window, the size and angle of the **sections** we create do not matter - we define these in the **geometry** tab. Sections are initially created the same, however, once we start defining rules for each type of section, then the categories we call them - axon, dend, soma etc, will matter.
 
 ### STEP A3: Specify morphological dimensions
 
 1. Click on **Geometry**
 1. `all` should be selected by default - if not, select `all` in the side panel
-1. Ensure **Specify Strategy** is ticked
-1. Select `L`, `diam` from **Distinct values over subset**
+1. Ensure **Specify Strategy** is ticked. *(Having **select strategy** checked allows us to select which aspects of the geometry we want to alter)*
+1. Select length `L`, diameter `diam` from **Distinct values over subset**
 1. Select `d_lambda` from **Spatial grid** (This parameter ensures segments are dynamically distributed [2]).
+
+**What is spatial grid?**
+> The spatial grid here refers to your model and is a computational issue rather than a biological one. A section is divided into one or more segments of uniform conductance properties. A finer spatial grid will therefore produce a more accurate result but this will also increase computational time.
+The spatial grid can be defined three ways:
+>> 1. The `nseg` button sets the number of segments.
+>> 2. The `d_X` button allows a specification of the maximum physical length, in &micro;m, for each segment.
+>> 3. The `d_lambda` button lets us specify a maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. This is often the best choice to use.
+
+> **Important note**: *It is best practice to make the number of segments = an odd number with nseg. Why? This will allow there to always be a segment at the centre of the section  (0.5) (nseg = 1 has 1 segment at 0.5, nseg = 2 has one at 0.33 and one at 0.66, nseg = 3 has 0.25, 0.5, 0.75 etc.) If your code calls for a segment that doesnt exist, then NEURON will round to the nearest segment - this may impact the accuracy of your results. *
 
 ![alt text][geo]
 
@@ -65,10 +79,11 @@ Now, we need to specify our lengths and diameters:
 
 ![alt text][geo_done]
 
+We now have created a neuron with a soma that is a cylinder 20um long, 20um wide, with one dendrite protruding out 1000um long, 5um wide. Certainly lives up to the name *ball and stick*!
 
 ### STEP A4: Specify biophysical characteristics
 
-The next part of defining the neuron is to specify the biophysical characteristics such as resistance (Ra), capacitance (cm), ion channels, buffers and pumps.
+The next part of defining the neuron is to specify the biophysical characteristics such as the electrical resistance within the cytoplasm (Ra), the capacitance of the plasma membrane (cm), membrane ion channels, buffers and pumps.
 
 1. Click on **Biophysics**
 1. Ensure **Specify Strategy** is selected.
@@ -84,12 +99,19 @@ Now we will add our values:
 
 ![alt text][biophys_all]
 
+NEURON specifies ion channel density by setting the maximum combined conductance in Siemens of those channels in that particular section.
+
+The generic `hh` conductance is actually 3 conductances: the **voltage-gated Na+ channel** component, **voltage-gated K+** channel component, and the combined **passive leak** conductance.
+
 For the dendrite, we need to enter a reduced HH which means altering the standard HH conductances to be 10% of their initial values.
 1. Select `hh` under `dend` and enter 10% of the Na+ (`gnabar_hh`) and  K+ (`gnakbar_hh`) conductance values
 1. No change to leak current of HH (`gl_hh`)
 1. For the equilibrium potential (`el_hh`), change this to `-64mV`
 
 ![alt text][biophys_reducedhh]
+
+
+*Note: if you have no hh you will need to add the passive leak conductance by selecting `pas` in specify strategy*
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>bs_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
@@ -101,15 +123,19 @@ For the dendrite, we need to enter a reduced HH which means altering the standar
 
 We are now ready to load the specifications of our model into the NEURON simulator.  We will use the **Continuous Create** method which is very useful when initially testing a model. So let's go.
 
-1. Click on the **Continuous Create**
+1. Click on the **Continuous Create**. We want our model to update in real time if we change any of its properties.
 1. We will need to create a stimulus which is known as a **Point Process** so from the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
-1. In the **PointProcessManager** window, click on **SelectPointProcess**, then select **IClamp**
+1. In the **PointProcessManager** window, click on **SelectPointProcess**. Here we have all the different types of experiments you can run on NEURON using a point process. Let's select **IClamp**
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
 1. We will insert a `0.6nA` current of `1ms` pulse width starting at t=`5ms` (allows for initialization) so enter the values as shown.
+
+*Note: Because our cell is distributed in space, and it may have many different ion channels which may voltage-gated, and may have different densities in different parts of the cell, the membrane potential takes some time to come to rest. It is best to leave a period of time before starting your stimulation - run the model for a few thousand milliseconds and see when the membrane potential plateaus. *
 
 ![alt text][pointprocess]
 
 1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
+>Runcontrol allows us to control how our experiment is run. This includes options such as `Init(mV)` which determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start, `Tstop` that will control the duration of our experiment, and `dt/points` `plotted/ms` that will control our temporal resolution of the experiments.
+
 1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
 
 ![alt text][runcontrol]
@@ -118,12 +144,12 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. Now in the **RunControl** window, click **Init &amp; Run**
 
 <div class="alert alert-warning">
-<p>Voila! Have a look in the graph and you should see your AP!</p>
+<p>Voila! Have a look in the graph and you should see your neuron respond to the current.</p>
 </div>
 
 ![alt text][ap1]
 
-Because we are running in **Continuous Create** mode, you can make changes in **CellBuilder** and rerun the simulator to see the effect. This is a bit of a miserable AP so let's increase the current injection amplitude.
+Because we are running in **Continuous Create** mode, you can make changes in **CellBuilder** and rerun the simulator to see the effect. You could try increasing the sodium current to allow the cell to first an action potential. However, lets make our neuron fire an action potential by increasing the current injection amplitude!
 
 1. In the **PointProcess** window, change `0.6` to `1.0` in the `amp(nA)`
 1. Now rerun in the **RunControl** window, by clicking **Init &amp; Run** and we get a lovely AP.
