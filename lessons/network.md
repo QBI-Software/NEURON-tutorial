@@ -6,13 +6,15 @@ title: Network Model
 # A Network Model
 Now we are going to build a network of two cells. We will build these between two ball and stick neurons but they equally apply to other models such as those based on neuron reconstructions you have uploaded.
 
+A connection between cells will be created with **NetCon** and **ExpSyn**.
+
 ## Part A:
 
 ### STEP A1:
 
 Lets create two of our bs cells.
 
-1. Modify your init.hoc file like so:
+1. Modify your `init.hoc` file like so:
 
 ```
 //=================================================
@@ -27,11 +29,11 @@ for i = 0, n_bsa-1 {
     bsa[i] = new BScellAxon()
 }
 ```
-This creates *two* (**n_bsa**) cells; **bsa[0]** and **bsa[1]** both based on the **BScellAxon** template. To create more simply change **n_bsa**.
+This creates *two* (`n_bsa`) cells; `bsa[0]` and `bsa[1]` both based on the `BScellAxon` template. To create more simply change `n_bsa`.
 
-If you want to make any modifications to both cells simply modify the template bscellaxon.hoc file.
+If you want to make any modifications to both cells simply modify the template `bscellaxon.hoc` file.
 
-1. Lets also **comment** out the call for the synapse generation within our init() procedure in bscellaxon.hoc:
+1. Lets also **comment** out the call for the synapse generation within our `init()` procedure in `bscellaxon.hoc`:
 ```
 proc init() {
     topol()
@@ -47,14 +49,14 @@ proc init() {
 
 1. Do the same for the line that centres the x, y, z position of the cells.
 
-1. Let's have a look at what we have created. Double click init.hoc and type  into the command line:
+1. Let's have a look at what we have created. Double click `init.hoc` and type  into the command line:
 ```
 forall {psection()}
 ```
 
-1. Change Tstop to 200ms and observe how it takes some time for both neurons to approach a plateau potential.
+1. Change `Tstop` to 200ms and observe how it takes some time for both neurons to approach a plateau potential.
 
-1. Finally, let's add an alpha synapse to just one cell.
+1. Finally, let's add an **alpha synapse** to just one cell.
 Example code: (hidden by dropdown menu)
 
 ```
@@ -76,22 +78,22 @@ synapses(0, 1)
 ```
 
 
-If you observe the example code provided, we have used two **place holders**, **$1** and **$2**. These placeholders allow you to specify the value in this location when you run the procedure. For example, if we change **synapses(0, 1)** to **synapse(1, 0.5)**, this will instead place our alpha synapse into BScellAxon[1] halfway down the dendrite.
+If you observe the example code provided, we have used two **place holders**, `$1` and `$2`. These placeholders allow you to specify the value in this location when you run the procedure. For example, if we change `synapses(0, 1)` to `synapse(1, 0.5)`, this will instead place our alpha synapse into `BScellAxon[1]` halfway down the dendrite.
 
 ### STEP A2:
 Setting the scene.
-1. Run init.hoc.
+1. Run `init.hoc`.
 
-2. Open a runcontrol window and press init & run.
+2. Open a **runcontrol** window and press `init & run`.
 
-3. Graph a voltage axis and plot the voltage at the soma(0.5) of both cells in different colours (hint right click>color/brush, select the desired cell in the top right).
+3. Graph a **voltage axis** and plot the voltage at the `soma(0.5)` of both cells in different colours (hint right click>color/brush, select the desired cell in the top right).
 
-4. Save the runcontrol and voltage axis in seperate .ses files and make your init.hoc file open them *(make sure to load the voltage axis after you have created the cells in the init.hoc file)*.
+4. Save the **runcontrol** and **voltage axis** in seperate `.ses` files and make your `init.hoc` file open them *(make sure to load the voltage axis after you have created the cells in the `init.hoc` file)*.
 
 ### STEP A3:
 Now lets try connecting our cells.
 
-Lets make BScellAxon[0] the presynaptic cell, and BScellAxon[1] postsynaptic.
+Lets make `BScellAxon[0]` the presynaptic cell, and `BScellAxon[1]` postsynaptic.
 
 The **NetCon** is the method NEURON uses to connect cells. It works by taking a particular *event* which then drives a *point process* in the post synaptic cell. NetCon cannot drive an Alphasynapse, rather, you can use **ExpSyn** for an alpha-like conductance, or **Exp2Syn** to be able to define the rise and decay time constants.
 
@@ -102,25 +104,25 @@ objectvar net_syn[1]
 BScellAxon[1].dend net_syn[0] = new ExpSyn(0.5) //places a ExpSyn point process halfway down the dend of BScellAxon[1]
 ```
 
-1. The parameters of the synaptic connection a defined when you generate the **NetCon**. This takes the form:
+1. The parameters of the synaptic connection are defined when you generate the **NetCon**. This takes the form:
 ```
 new NetCon(&source_v, synapse, threshold, delay, weight)
 ```
-    *source_v* = source voltage - we will use the voltage at the soma of BScellAxon[0]
+    *`source_v`* = source voltage - we will use the voltage at the soma of `BScellAxon[0]`
 
-    *synapse* = refers to the synaptic object receiving the event - net_syn
+    *`synapse`* = refers to the synaptic object receiving the event - `net_syn[0]`
 
-    *threshold* = threshold of the *source_v* to generate the synaptic process
+    *`threshold`* = **threshold** of the *source_v* to generate the synaptic process
 
-    *delay* = connection delay
+    *`delay`* = connection **delay**
 
-    *weight* = connection weight strength at the synapse. Setting the strength this way allows one cell to generate synapses in multiple locations of different weights.
+    *`weight`* = connection **weight** strength at the synapse. Setting the strength this way allows one cell to generate synapses in multiple locations of different weights.
 
 1. Lets do it!
 
 ```
 objectvar con_01
-con_01 = new NetCon(&BScellAxon[0].axon.v(1), net_syn, -20, 1, 0.5) //places a connection that will trigger net_syn when BScellAxon[0] axon's voltage exceeds -20mV
+con_01 = new NetCon(&BScellAxon[0].axon.v(1), net_syn[0], -20, 1, 0.5) //places a connection that will trigger net_syn when BScellAxon[0] axon's voltage exceeds -20mV
 
 ```
 
@@ -128,11 +130,11 @@ Congratulations!!! You have modelled a simple neural network.
 
 ### STEP A4:
 
-Why don't you clean up your network code a little? Its looking filthy.
+Why don't you clean up your network code a little? Its looking a little filthy.
 
-1. Embed your definitions of net_syn and con_01 into a **proc** like we did for the alpha synapse. However, make sure you declare the **objectvar** **outside** the proc.
+1. Embed your definitions of `net_syn` and `con_01` into a **proc** like we did for the alpha synapse. However, make sure you declare the `objectvar` **outside** the proc.
 
-1. Why not try setting all your important network parameters as stand alone variables that is called by the *procs* as placeholders? E.g.
+1. Why not try setting all your important network parameters as stand alone variables that is called by the *procs*? Try using placeholders too! E.g.
 
 ```
 pre_cell = 0
@@ -155,7 +157,7 @@ proc connect_cells () {
 connect_cells(pre_cell, pre_loc, pre_threshold, net_syn_weight, con_delay)
 ```
 
-Why would you do this to yourself? This is an extreme example, but using some of these ideas such as setting variables and using placeholders, will make your code easier to decipher. Also, they come especially in handy when you want to change the parameters of your simulation! Instead of having to go back through your code to find all the places you have to change the particular presynaptic cell, you can just change the pre_cell variable and you are done!
+So why would you do this to yourself? This may seem extreme in this example, but using some of these ideas such as setting variables and using placeholders, will make your code easier to decipher. Also, they come especially in handy when you want to change the parameters of your simulation! Instead of having to go back through your code to find all the places you have to change the particular presynaptic cell, you can just change the pre_cell variable and you are done!
 
 1. Make sure to always add comments to tell yourself and others what it is you are actually doing.  
 
