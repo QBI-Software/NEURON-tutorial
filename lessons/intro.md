@@ -52,11 +52,12 @@ So let's go!
 
 From your NEURON folder created during installation, click on **nrngui**.
 *For those preferring the commandline, type the following from the NEURON directory:*
+
 ```
 load_file(“nrngui.hoc”)
 ```
 You will get a tiny window called **NEURON Main Menu**
-![alt text][mainmenu]
+![mainmenu]
 
 Don't lose this window!  We will be using it to launch:
 

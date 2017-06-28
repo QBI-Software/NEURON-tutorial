@@ -1,5 +1,5 @@
 ---
-lesson: 4
+lesson: 3
 layout: default
 title: Complex Model
 ---
@@ -241,7 +241,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [importneuron2]: {{ site.github.repository_url }}/raw/gh-pages/img/loadedneuron2.png "Pyramidal Neuron (Neurolucida) - loaded"
 
-[cellbuilder]: {{ site.github.repository_url }}/raw/gh-pages/img/cellbuilder.png "CellBuilder window"
+[cellbuilder]: {{ site.github.repository_url }}/raw/gh-pages/img/CellBuilder.png "CellBuilder window"
 
 [cellbuilder_topol]: {{ site.github.repository_url }}/raw/gh-pages/img/cellbuilder_topol.png "CellBuilder window"
 
@@ -259,7 +259,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [menu_runcontrol]:{{ site.github.repository_url }}/raw/gh-pages/img/menu_runcontrol.png "Menu Run Control"
 
-[runcontrol]:{{ site.github.repository_url }}/raw/gh-pages/img/runcontrol.png "Run control panel"
+[runcontrol]:{{ site.github.repository_url }}/raw/gh-pages/img/RunControl.png "Run control panel"
 
 [menu_pointprocess]:{{ site.github.repository_url }}/raw/gh-pages/img/menu_pointprocess.png "Menu PointProcess"  
 

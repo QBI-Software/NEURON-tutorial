@@ -31,7 +31,7 @@ To do this, we need to define the anatomy, and biophysics of the neuron. It will
 CellBuilder is a graphical interface used to generate the basic morphology and biophysics of a neuron.  
 From the **Build** menu on the Main Menu window, select **CellBuilder**
 
-![alt text][cellbuilder]
+![cellbuilder]
 
 ### STEP A2: Create morphology with CellBuilder
 
@@ -41,7 +41,7 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 1. Create the dendrite component by clicking anywhere on the canvas
 1. This generates a `dend` section
 
-![alt text][topol]
+![topol]
 
 
 ### STEP A3: Specify morphological dimensions
@@ -52,7 +52,7 @@ From the **Build** menu on the Main Menu window, select **CellBuilder**
 1. Select `L`, `diam` from **Distinct values over subset**
 1. Select `d_lambda` from **Spatial grid** (This parameter ensures segments are dynamically distributed [2]).
 
-![alt text][geo]
+![geo]
 
 Now, we need to specify our lengths and diameters:
 1. Unselect **Specify Strategy**
@@ -63,7 +63,7 @@ Now, we need to specify our lengths and diameters:
 1. In the number box next to `dend.diam (um)`, enter `5` as per our table above
 1. so that the final result looks like:
 
-![alt text][geo_done]
+![geo_done]
 
 
 ### STEP A4: Specify biophysical characteristics
@@ -75,21 +75,21 @@ The next part of defining the neuron is to specify the biophysical characteristi
 1. **Ra** and **cm** are uniform in this particular model, so we select the `all` subset and then click on the `Ra` and `cm` checkboxes.
 1. We will add **HH** to `soma` and `dend` by selecting each then click on `hh`
 
-![alt text][biophys]
+![biophys]
 
 Now we will add our values:
 1. Now deselect **Specify Strategy**
 1. Select `Ra` under `all` and enter `160`
 1. The default for `cm` is 1 &micro;F/cm^2 which is fine
 
-![alt text][biophys_all]
+![biophys_all]
 
 For the dendrite, we need to enter a reduced HH which means altering the standard HH conductances to be 10% of their initial values.
 1. Select `hh` under `dend` and enter 10% of the Na+ (`gnabar_hh`) and  K+ (`gnakbar_hh`) conductance values
 1. No change to leak current of HH (`gl_hh`)
 1. For the equilibrium potential (`el_hh`), change this to `-64mV`
 
-![alt text][biophys_reducedhh]
+![biophys_reducedhh]
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>bs_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
@@ -107,12 +107,12 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
 1. We will insert a `0.6nA` current of `1ms` pulse width starting at t=`5ms` (allows for initialization) so enter the values as shown.
 
-![alt text][pointprocess]
+![pointprocess]
 
 1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
 1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
 
-![alt text][runcontrol]
+![runcontrol]
 
 1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
 1. Now in the **RunControl** window, click **Init &amp; Run**
@@ -121,14 +121,14 @@ We are now ready to load the specifications of our model into the NEURON simulat
 <p>Voila! Have a look in the graph and you should see your AP!</p>
 </div>
 
-![alt text][ap1]
+![ap1]
 
 Because we are running in **Continuous Create** mode, you can make changes in **CellBuilder** and rerun the simulator to see the effect. This is a bit of a miserable AP so let's increase the current injection amplitude.
 
 1. In the **PointProcess** window, change `0.6` to `1.0` in the `amp(nA)`
 1. Now rerun in the **RunControl** window, by clicking **Init &amp; Run** and we get a lovely AP.
 
-![alt text][ap2]
+![ap2]
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>bs_iclamprig.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
@@ -165,13 +165,13 @@ We will now replace our single dendrite with a tree of branching apical dendrite
 1. Select **Delete Section** then click on `dend` to remove this
 1. Click through all the tabs in the **CellBuilder** to update NEURON
 1. Go back to **Topology** and click on **Basename** and type in `ap` and **Accept**
-![alt text][basename]
+![basename]
 1. Click on **Make Section**
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
 1. Add a third dendrite as a branch by click and hold from the joint of the first two dendrites, then drag and release.  Errors can be rectified by selecting the commands as required.
 1. This generates `ap` (root), `ap[1]` and `ap[2]`
 
-![alt text][canvas]
+![canvas]
 
 1. As they share common properties, we will group the dendrite components so click on **Subsets**
 1. Click on **Select Subtree**
@@ -185,21 +185,21 @@ We will need to specify the morphological characteristics of the new dendrites
 1. Ensure **Specify Strategy** is unticked
 1. Enter the lengths and diameters of the `ap` sections as per the table
 
-![alt text][strategy_done]
+![strategy_done]
 
 For all the dendrites, we need to enter a reduced HH which means altering the standard HH conductances to be 10% of their initial values.
 1. Click on **Biophysics**
 1. Ensure **Specify Strategy** is ticked
 1. Select `apicals` then tick `hh`
 
-![alt text][biophys2]
+![biophys2]
 
 1. Now untick **Specify Strategy**
 1. Select `hh` under `apicals` and enter 10% of the Na+ (`gnabar_hh`) and  K+ (`gnakbar_hh`) conductance values
 1. No change to leak current of HH (`gl_hh`)
 1. For the equilibrium potential (`el_hh`), change this to `-64mV`
 
-![alt text][biophys_reducedhh2]
+![biophys_reducedhh2]
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>simple_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
