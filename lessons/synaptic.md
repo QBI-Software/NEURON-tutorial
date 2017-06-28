@@ -49,7 +49,7 @@ Click on **Show** then **Parameters** which shows the panel for control of the *
 
 We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code more than having to write it.
 
-Everything you just did with the **graphic user interface** can be also done with **hoc**.
+Everything you just did with the **graphic user interface** can be also be done with **hoc**.
 
 You may be wondering why you would do this in hoc if you can more easily make the neuron with the GUI. If you make more complicated models, you will find tasks that are easier to do with hoc code. Likewise, there are some tasks that are simply just easier to do in the GUI. Furthermore, while the using code allows many tasks to be quickly and efficiently carried out, it is often prone to bugs – the worst being those that *do not* break your model. The GUI allows you to see what you are doing and is often very helpful. The most effective use of NEURON is by using **both together**.
 
