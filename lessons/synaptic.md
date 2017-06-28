@@ -49,6 +49,12 @@ Click on **Show** then **Parameters** which shows the panel for control of the *
 
 We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code more than having to write it.
 
+Everything you just did with the **graphic user interface** can be also done with **hoc**.
+
+You may be wondering why you would do this in hoc if you can more easily make the neuron with the GUI. If you make more complicated models, you will find tasks that are easier to do with hoc code. Likewise, there are some tasks that are simply just easier to do in the GUI. Furthermore, while the using code allows many tasks to be quickly and efficiently carried out, it is often prone to bugs – the worst being those that *do not* break your model. The GUI allows you to see what you are doing and is often very helpful. The most effective use of NEURON is by using **both together**.
+
+In the Part, we will use hoc to create a **template** for a cell in NEURON. Templates are very efficient when creating networks as they allow you to generate stereotyped cells.
+
 **Recommended structure of a HOC program:**
 
 1. specify model topology (create sections, connect sections)
@@ -212,7 +218,7 @@ proc geom() {
 ```
 #### Repeated actions with Loops
 
-HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall` [5].
+HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall` [5]. You can also call all segments of a section by imbedding `for (x) { }`
 
 1. To specify *hh* in the `biophys()` procedure, make a copy of the `soma` code and call it `axon`.
 (Alternatively, the common code could be moved to the `forsec all` and `soma` and `axon` sections deleted but this makes it harder to manage later.)
@@ -428,6 +434,24 @@ A space plot allows you to view the changes in conductance along a section.
 
 2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**. (This won't do much with our model but good for branching dendrites.)
 3. The middle mouse button is used to move the whole representation.
+
+## Extra Extra!
+
+Lets try slowing things dooowwwwnnn to be able to see what the voltage is doing in real time. Try putting `50000` into the `Points plotted/ms` box in your **run control**. `Init and Run` and have a look at your **voltage axis** and **space plot**.
+
+From these can you determine:
+
+•	Is the voltage uniform in all parts of the cell? Why/why not?
+
+•	Where does the action potential generate?
+
+•	Does the action potential invade all parts of the cell? What happens to its amplitude when it moves away from its point of origin? What happens when you:
+
+> A) change Ra to 2000
+
+> B) change your dendrite length to 2000um
+
+> C) divide your hh conductance in the soma and dendrite by 10
 
 --------
 ## References

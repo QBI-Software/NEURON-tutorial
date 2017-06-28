@@ -16,6 +16,9 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 
 1. To import a neuron's morphology from a digital reconstruction, click
 **Tools -> Miscellaneous -> Import 3D**
+
+>*If you get multiple windows pop up, you may have a neuron that is not fully connected.*
+
 2. In the **Import3d** window, click on **choose a file** and select the downloaded datafile.
 
 ![pyramidalneuron]
@@ -33,6 +36,30 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 
 ![cellbuilder]
 
+**Important notes** on reconstructing neurons NEURON with neuron tracing programs such as Neurolucida:
+
+>1. All dendrites and axons from a particular neuron must start from within the soma
+
+>1.	All branches must be connected to their parent branch
+
+>1.	Delete any additional content – e.g. such as contours demarking layers etc.
+
+>1.	NEURON will import all 3-dimensional data and the diameter of the processes. Therefore it is important to reconstruct these as accurately as possible.
+
+>1.	Reconstructing the soma is a little particular; in Neurolucida to create a 3D soma that NEURON will detect the volume of correctly you must reconstruct it in the following way:
+>>*	Reconstruct the soma via a series of concentric contours demarking the boundary of the cell body
+>>*	Start at either the top or bottom (in the z-axis) of the soma
+>>*	Trace the boundary in the first z-plane
+>>*	Move one z plane down/up and repeat
+>>*	You MUST move only in one direction – the order in which you trace each contour is important for how NEURON reads the soma data. If it is out of order, NEURON will incorrectly create the somatic volume.
+>>*	You may manually move individual points to correct for errors, but you cannot delete parts and redraw them. If you have to redraw, you must delete all contours past that point.
+>>*	Once you reach the end of the cell body. Select all the contours and right click and select “Set as cell body”. Alternatively, make sure the contour is called “Cell body” or “Soma”
+
+>6.	If you end up with multiple import3D windows with only a soma it may be because you have not maintained the order of the contour series. Unfortunately, the quickest way to remedy this is to retrace the soma in most instances.
+
+>7.	The file must be saved as an .asc ascii file format
+
+
 ![printfilemanager]
 
 <div class="alert alert-info">
@@ -43,7 +70,9 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
  <li>The display shows red and blue boxes. The left red square represents your screen, and the blue squares are individual NEURON windows.</li>
  <li>You can click on those windows you want to save in your session. These will translate to the right red square, which denotes the windows being saved into the session.</li>
  <li>Click <b>Session -> Save selected</b> OR click <b>Session ->Save all</b> to save all windows open. </li>
- <li>You can save this session to a file called <i>pyramidal.ses</i>. </li>
+ <li>You can save this session to a file called <i>pyramidal.ses</i>. You must put in the suffix <i>.ses</i>.  </li>
+ Delete the filter to see all files in the folder and use the ./ to refresh, .// to go back a folder.
+
  </ol>
 </div>
 
@@ -55,7 +84,7 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 
 1. Select **Topology** to display your neuron.
 1. Use the *right click menu* and **View = Plot**, **zoom in/out** or **translate** to observe your neuron.
-1. *Be careful not to left click as you will create new sections! If you make changes you do not want you can always close and reload your model. This is why it is vital to keep saving!*
+1. *Be careful not to left click as you will create new sections! If you make changes you do not want you can always close and reload your model. This is why it is vital to keep saving! Alternatively, observe your neuron in the subsets tab.*
 
 ## Step 3. Building the neuron in NEURON
 
@@ -69,12 +98,6 @@ In this lesson, we will build a simplified thick-tufted layer 5 pyramidal neuron
 1. Select the **Geometry** tab.
 1. As in the previous lessons, we can set the geometrical parameters of every section or for a group of sections defined as a subset.
 1. We can set the length (L), diameter (diam) and the degree of compartmentalization of the model (spatial grid). Since our morphology is already imported, including the length and diameter of each segment, all we need to define is the spatial grid.
-
- > The spatial grid here refers to your model and is a computational issue rather than a biological one. A section is divided into one or more segments of uniform conductance properties. A finer spatial grid will therefore produce a more accurate result but this will also increase computational time.
- The spatial grid can be defined three ways:
->> 1. The `nseg` button sets the number of segments.
->> 2. The `d_X` button allows a specification of the maximum physical length, in &micro;m, for each segment.
->> 3. The `d_lambda` button lets us specify a maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. This is often the best choice to use.
 
 1. Select `all` (all segments should be red) then select `d_lambda`.
 
