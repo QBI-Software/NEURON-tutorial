@@ -57,20 +57,32 @@ In the topology window, the size and angle of the **sections** we create do not 
 1. Select length `L`, diameter `diam` from **Distinct values over subset**
 1. Select `d_lambda` from **Spatial grid** (This parameter ensures segments are dynamically distributed [2]).
 
-<<<<<<< HEAD
+
 ![geo]
-=======
-**What is spatial grid?**
-> The spatial grid here refers to your model and is a computational issue rather than a biological one. A section is divided into one or more segments of uniform conductance properties. A finer spatial grid will therefore produce a more accurate result but this will also increase computational time.
-The spatial grid can be defined three ways:
->> 1. The `nseg` button sets the number of segments.
->> 2. The `d_X` button allows a specification of the maximum physical length, in &micro;m, for each segment.
->> 3. The `d_lambda` button lets us specify a maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. This is often the best choice to use.
 
-> **Important note**: *It is best practice to make the number of segments = an odd number with nseg. Why? This will allow there to always be a segment at the centre of the section  (0.5) (nseg = 1 has 1 segment at 0.5, nseg = 2 has one at 0.33 and one at 0.66, nseg = 3 has 0.25, 0.5, 0.75 etc.) If your code calls for a segment that doesnt exist, then NEURON will round to the nearest segment - this may impact the accuracy of your results. *
+**What is Spatial Grid?**
+<div class="alert alert-success">
+<p>The Spatial Grid here refers to your model and is a computational issue rather than a biological one. A section is divided into one or more segments of uniform conductance properties. A finer Spatial Grid will therefore produce a more accurate result but this will also increase computational time.</p>
+<p>The Spatial Grid can be defined three ways:
+<ol><li>The <code>nseg</code> button sets the number of segments.</li>
+<li>The <code>d_X</code> button allows a specification of the maximum physical length, in &micro;m, for each segment.</li>
+<li>The <code>d_lambda</code> button allows us to specify a maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. This is often the best choice to use.</li>
+</ol></p>
+<button data-toggle="collapse" data-target="#tip1">Important Tip</button>
 
-![alt text][geo]
->>>>>>> origin/gh-pages
+<div id="tip1" class="collapse">
+<p>It is best practice to make the number of segments equal an odd number with <code>nseg</code>. Why? This will ensure there is always a segment at the centre of the section (0.5).</p>
+<table class="table">
+<tr><th><code>nseg</code></th><th>section centre</th></tr>
+<tr><td>1</td><td>0.5</td></tr>
+<tr><td><i>2</i></td><td><i>0.33 and 0.66</i></td></tr>
+<tr><td>3</td><td>0.25, 0.5, 0.75</td></tr>
+</table>
+<p>If your code calls for a segment that doesn't exist, then NEURON will round to the nearest segment - this may impact the accuracy of your results.</p>
+</div>
+</div>
+
+
 
 Now, we need to specify our lengths and diameters:
 1. Unselect **Specify Strategy**
@@ -107,6 +119,8 @@ NEURON specifies ion channel density by setting the maximum combined conductance
 
 The generic `hh` conductance is actually 3 conductances: the **voltage-gated Na+ channel** component, **voltage-gated K+** channel component, and the combined **passive leak** conductance.
 
+*Note: If you have no `hh` you will need to add the passive leak conductance by selecting `pas` in specify strategy.*
+
 For the dendrite, we need to enter a reduced HH which means altering the standard HH conductances to be 10% of their initial values.
 1. Select `hh` under `dend` and enter 10% of the Na+ (`gnabar_hh`) and  K+ (`gnakbar_hh`) conductance values
 1. No change to leak current of HH (`gl_hh`)
@@ -114,8 +128,6 @@ For the dendrite, we need to enter a reduced HH which means altering the standar
 
 ![biophys_reducedhh]
 
-
-*Note: if you have no hh you will need to add the passive leak conductance by selecting `pas` in specify strategy*
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>bs_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
@@ -133,13 +145,11 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
 1. We will insert a `0.6nA` current of `1ms` pulse width starting at t=`5ms` (allows for initialization) so enter the values as shown.
 
-<<<<<<< HEAD
 ![pointprocess]
-=======
-*Note: Because our cell is distributed in space, and it may have many different ion channels which may voltage-gated, and may have different densities in different parts of the cell, the membrane potential takes some time to come to rest. It is best to leave a period of time before starting your stimulation - run the model for a few thousand milliseconds and see when the membrane potential plateaus. *
 
-![alt text][pointprocess]
->>>>>>> origin/gh-pages
+
+*Note: Because our cell is distributed in space, and it may have many different ion channels which may voltage-gated, and may have different densities in different parts of the cell, the membrane potential takes some time to come to rest. It is best to leave a period of time before starting your stimulation - run the model for a few thousand milliseconds and see when the membrane potential plateaus.*
+
 
 1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
 >Runcontrol allows us to control how our experiment is run. This includes options such as `Init(mV)` which determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start, `Tstop` that will control the duration of our experiment, and `dt/points` `plotted/ms` that will control our temporal resolution of the experiments.
