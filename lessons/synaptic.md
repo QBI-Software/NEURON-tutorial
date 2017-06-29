@@ -1,5 +1,5 @@
 ---
-lesson: 3
+lesson: 4
 layout: default
 title: Synaptic Model
 ---
