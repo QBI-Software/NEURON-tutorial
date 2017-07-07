@@ -12,30 +12,28 @@ NEURON was first developed in the early 1990's and has been increasingly used by
 
 Many aspects of neural behaviour can be demonstrated with NEURON, for example, the influence of different channel types in the production or prevention of action potential generation. It is a powerful neuronal simulator that is able to mathematically compute the activation of many conductances simultaneously and describe the resulting electrical outcome both spatially and temporally within the neuron. Further, intra- and extra-cellular conditions such as temperature and ion concentration can be modelled effectively; the flexibility and detail NEURON provides can be adapted to many biological conditions.
 
-Several examples of features that are provided with NEURON, some of which we will use, are:
+Several predefined features are provided with NEURON, some of which we will use, are:
 
 + Hodgkin-Huxley (HH) current [1]
 + Moore-Cox sodium channel
 + Ca channel
 + Ca-sensitive K channels
-+ AMPA, GABAA receptors
-+ … Any type of ligand or voltage gated ion channel
 
-Additional standard mechanisms included are:
+Additional standard mechanisms included in NEURON are:
 
 + Na/Ca exchange
 + Metabolically driven Ca pump
 + Intracellular Ca binding
 + Intracellular Ca diffusion
 
-The community for NEURON is generous, and more often than not, any cellular function you are hoping to incorporate in your model may already be created and shared on the NEURON database, modelDB, for you to use.
+There is an active community for NEURON who contribute a wide range of models and components shared on the NEURON database, [ModelDB](https://senselab.med.yale.edu/modeldb/), for anyone to use (with appropriate citation).
 
 ## Overview of the tutorial
 
 The main aim of this course is to understand how you can produce a simulated electrophysiological response with the NEURON application.  
 1. **Simple Model**: We will start with a simple model of a soma and single dendrite, commonly known as a "Ball and Stick" model and cover the basics of running a simple simulation.
-1. **Synaptic Model**: Once you are familiar with how to model the electrophysiological components of a single neuron, we will use NEURON's own integrative language called HOC to develop a more complex neuron and then provide a simulated synapse with AlphaSynapse to model a simple synaptic input.
-1. **Complex Model**:To provide a more realistic scenario, we will load actual Neurolucida data and create a model from experimental data using some advanced techniques.
+1. **Complex Model**: To provide a more realistic scenario, we will load actual [Neurolucida](http://www.mbfbioscience.com/neurolucida) data and create a model from experimental data.
+1. **Synaptic Model**: We will introduce NEURON's own integrative language called HOC and then create a model with a simple synaptic input.
 1. **Network Model**: We will then proceed to the establishment of a simple network model.
 
 ## Background knowledge

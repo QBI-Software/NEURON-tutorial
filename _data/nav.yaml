@@ -5,10 +5,6 @@ docs:
   url: index
   pagurl: ../index
   
-- title: Setup
-  url: setup
-  pagurl: ../setup
-  
 - title: Introduction
   url: lessons/intro
   pagurl: intro
@@ -17,18 +13,22 @@ docs:
   url: lessons/simple
   pagurl: simple
 
-- title: Synaptic model
-  url: lessons/synaptic
-  pagurl: synaptic
-  
 - title: Complex model
   url: lessons/complex
   pagurl: complex
-  
+
+- title: Synaptic model
+  url: lessons/synaptic
+  pagurl: synaptic
+
 - title: Simple Network
   url: lessons/network
   pagurl: network
-  
+
+- title: Setup
+  url: setup
+  pagurl: ../setup
+
 - title: Help
   url: lessons/help
   pagurl: help
