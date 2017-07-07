@@ -150,15 +150,16 @@ We are now ready to load the specifications of our model into the NEURON simulat
 
 1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip2">More ...</a>
 
-<div id="tip2" class="collapse">
-<p> The <b>Runcontrol</b> window allows us to control how our experiment is run. </p>
-<ul>The following options are important:
+<div id="tip2" class="alert alert-info collapse">
+<h3>Runcontrol window parameters </h3>
+<ul>The following options can be set:
 <li><code>Init(mV)</code> : determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start</li>
 <li> <code>Tstop</code> : controls the duration of our experiment, and</li>
 <li> <code>dt/points</code> and <code>plotted/ms</code> : controls our temporal resolution of the experiments.</li>
 </ul>
 </div>
-<br/>
+
+
 1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
 
 ![runcontrol]
@@ -167,7 +168,7 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. Now in the **RunControl** window, click **Init &amp; Run**
 
 <div class="alert alert-success">
-<h3><span class="glyphicon glyphicon-check"></span>Success!</h3>
+<h3><span class="glyphicon glyphicon-check alert-success"></span>  Success!</h3>
 <p>Have a look in the graph and you should see your neuron respond to the current.</p>
 </div>
 
@@ -210,14 +211,17 @@ We will now replace our single dendrite with a tree of branching apical dendrite
 | Apical dendrite branch | `ap[1]` | 300 | 1 | reduced hh |
 | Apical dendrite branch | `ap[2]` | 300 | 1 | reduced hh |
 
-1. Restart NEURON and load the *bs_cell.ses* session as abov
+1. Restart NEURON and load the *bs_cell.ses* session as above
 1. Ensure **Continuous Create** is not selected
 1. From the **CellBuilder**, select **Topology**
 1. Select **Delete Section** then click on `dend` to remove this
+1. Click on **Basename** and type in `ap` and **Accept**
+
 <!-- Lee - I don't get this error -?windows vs mac - perhaps save this session before proceeding
 1. Click through all the tabs in the **CellBuilder** to update NEURON
 1. Go back to **Topology** and click on **Basename** and type in `ap` and **Accept**
 -->
+
 ![basename]
 1. Click on **Make Section**
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
