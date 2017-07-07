@@ -148,14 +148,14 @@ We are now ready to load the specifications of our model into the NEURON simulat
 ![pointprocess]
 
 
-1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip2">More ...</a></li>
+1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip2">More ...</a>
 
 <div id="tip2" class="collapse">
-<p> The **Runcontrol** window allows us to control how our experiment is run. </p>
+<p> The <b>Runcontrol</b> window allows us to control how our experiment is run. </p>
 <ul>The following options are important:
-<li>`Init(mV)` : determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start</li>
-<li> `Tstop` : controls the duration of our experiment, and</li>
-<li> `dt/points` and `plotted/ms` : controls our temporal resolution of the experiments.</li>
+<li><code>Init(mV)</code> : determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start</li>
+<li> <code>Tstop</code> : controls the duration of our experiment, and</li>
+<li> <code>dt/points</code> and <code>plotted/ms</code> : controls our temporal resolution of the experiments.</li>
 </ul>
 </div>
 <br/>
@@ -166,7 +166,8 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
 1. Now in the **RunControl** window, click **Init &amp; Run**
 
-<div class="alert alert-warning">
+<div class="alert alert-success">
+<h3><span class="glyphicon glyphicon-check"></span>Success!</h3>
 <p>Have a look in the graph and you should see your neuron respond to the current.</p>
 </div>
 
@@ -181,7 +182,7 @@ Because we are running in **Continuous Create** mode, we will make changes in **
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>It would be a nuisance to have to repeat all the procedures above, so we can save the session to a file called <i>bs_iclamprig.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
- <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
+ <p><i>TIP: set your working directory via <b>File -> recent dir</b> first.</i></p>
 </div>
 
 
