@@ -254,7 +254,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 ![impedance]
 
 ---------------------
-## References
+## Resources
 
 [datafile]: {{ site.github.repository_url }}/raw/gh-pages/data/131014_S4L1_C_reconstruct.ASC "Pyramidal neuron Datafile"
 

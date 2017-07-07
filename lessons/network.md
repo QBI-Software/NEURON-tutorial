@@ -173,5 +173,5 @@ Try making the post-synaptic cell the real neuron from the **Complex model** sec
 
 --------
 
-## References
+## Resources
 http://web.mit.edu/neuron_v7.4/nrntuthtml/tutorial/tutC.html

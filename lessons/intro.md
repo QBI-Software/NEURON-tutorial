@@ -68,7 +68,7 @@ Don't lose this window!  We will be using it to launch:
 
 --------
 
-## References
+## Resources
 [What is NEURON](https://www.neuron.yale.edu/neuron/what_is_neuron).
 
 [1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod

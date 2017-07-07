@@ -7,9 +7,8 @@ title: Simple Model
 
 ## Part A: "Ball and Stick" model
 
-We will now create an extremely simple neuron, or a "Ball and Stick" soma-dendrite model. Despite this, it will be able to fire action potentials in response to input into it's dendrite.
-
-To do this, we need to define the anatomy, and biophysics of the neuron. It will have the following characteristics:
+To introduce the sequence of events involved in setting up a model, we will create an extremely simple neuron consisting solely of a soma and a dendrite called a "Ball and Stick" model.
+It will have the following characteristics:
 
 + Resting potential (`Vm`) = -65 mV throughout the cell.
 + Specific capacitance (`cm`) = 1 &micro;F/cm^2
@@ -19,11 +18,11 @@ To do this, we need to define the anatomy, and biophysics of the neuron. It will
 | Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
 | ---- | ---- | ---- | ---- | ----|
 | Soma | `soma` | 20 | 20 | hh [1]|
-| Dendrite | `dend` | 1000 | 5 | reduced (10%) hh |
+| Dendrite | `dend` | 1000 | 5 | 10% reduced hh |
 
-> Note: **hh** refers to the combined conductances of voltage-gated Na+ and K+ channels, and the passive leak conductance defined by Hodgkin and Huxley.
+> Note: **hh** is an in-built component in NEURON which refers to the combined conductances of voltage-gated Na+ and K+ channels, and the passive leak conductance defined by Hodgkin and Huxley.
 
-> **Reduced hh** indicates the Na+ and K+ conductances are reduced to 10% of normal HH and the equilibrium potential of the HH leak current is set to -64 mV.
+> **reduced hh** indicates the Na+ and K+ conductances are reduced to 10% of normal HH and the equilibrium potential of the HH leak current is set to -64 mV.
 
 
 ### STEP A1: Launch CellBuilder
@@ -64,19 +63,20 @@ In the topology window, the size and angle of the **sections** we create do not 
 <div class="alert alert-success">
 <p>The Spatial Grid here refers to your model and is a computational issue rather than a biological one. A section is divided into one or more segments of uniform conductance properties. A finer Spatial Grid will therefore produce a more accurate result but this will also increase computational time.</p>
 <p>The Spatial Grid can be defined three ways:
-<ol><li>The <code>nseg</code> button sets the number of segments.</li>
-<li>The <code>d_X</code> button allows a specification of the maximum physical length, in &micro;m, for each segment.</li>
-<li>The <code>d_lambda</code> button allows us to specify a maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. This is often the best choice to use.</li>
+<ol><li>The <code>nseg</code> button sets the number of segments.
+<a data-toggle="collapse" data-target="#tip1">More info...</a></li>
+<li>The <code>d_X</code> button allows specification of the maximum physical length, in &micro;m, for each segment.</li>
+<li>The <code>d_lambda</code> button allows specification of the maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. <b>This is often the best choice to use.</b></li>
 </ol></p>
-<button data-toggle="collapse" data-target="#tip1">Important Tip</button>
+
 
 <div id="tip1" class="collapse">
 <p>It is best practice to make the number of segments equal an odd number with <code>nseg</code>. Why? This will ensure there is always a segment at the centre of the section (0.5).</p>
 <table class="table">
 <tr><th><code>nseg</code></th><th>section centre</th></tr>
-<tr><td>1</td><td>0.5</td></tr>
-<tr><td><i>2</i></td><td><i>0.33 and 0.66</i></td></tr>
-<tr><td>3</td><td>0.25, 0.5, 0.75</td></tr>
+<tr><td>1</td><td><b>0.5</b></td></tr>
+<tr><td><i>2</i></td><td><i>0.33, 0.66</i></td></tr>
+<tr><td>3</td><td>0.25, <b>0.5</b>, 0.75</td></tr>
 </table>
 <p>If your code calls for a segment that doesn't exist, then NEURON will round to the nearest segment - this may impact the accuracy of your results.</p>
 </div>
@@ -137,23 +137,28 @@ For the dendrite, we need to enter a reduced HH which means altering the standar
 
 ### STEP A5: Running a simple simulation
 
-We are now ready to load the specifications of our model into the NEURON simulator.  We will use the **Continuous Create** method which is very useful when initially testing a model. So let's go.
+We are now ready to load the specifications of our model into the NEURON simulator.  We will use the **Continuous Create** method which is very useful when initially testing a model as it updates parameters in real time.
 
-1. Click on the **Continuous Create**. We want our model to update in real time if we change any of its properties.
+1. Click **Continuous Create**.
 1. We will need to create a stimulus which is known as a **Point Process** so from the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
-1. In the **PointProcessManager** window, click on **SelectPointProcess**. Here we have all the different types of experiments you can run on NEURON using a point process. Let's select **IClamp**
+1. In the **PointProcessManager** window, click on **SelectPointProcess** then select **IClamp**
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
-1. We will insert a `0.6nA` current of `1ms` pulse width starting at t=`5ms` (allows for initialization) so enter the values as shown.
+1. We will insert a `0.6nA` current of `1ms` pulse width starting at t=`5ms` (a delay allows for initialization of any conductances with dependencies) so enter the values as shown.
 
 ![pointprocess]
 
 
-*Note: Because our cell is distributed in space, and it may have many different ion channels which may voltage-gated, and may have different densities in different parts of the cell, the membrane potential takes some time to come to rest. It is best to leave a period of time before starting your stimulation - run the model for a few thousand milliseconds and see when the membrane potential plateaus.*
+1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip2">More ...</a></li>
 
-
-1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
->Runcontrol allows us to control how our experiment is run. This includes options such as `Init(mV)` which determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start, `Tstop` that will control the duration of our experiment, and `dt/points` `plotted/ms` that will control our temporal resolution of the experiments.
-
+<div id="tip2" class="collapse">
+<p> The **Runcontrol** window allows us to control how our experiment is run. </p>
+<ul>The following options are important:
+<li>`Init(mV)` : determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start</li>
+<li> `Tstop` : controls the duration of our experiment, and</li>
+<li> `dt/points` and `plotted/ms` : controls our temporal resolution of the experiments.</li>
+</ul>
+</div>
+<br/>
 1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
 
 ![runcontrol]
@@ -162,12 +167,12 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. Now in the **RunControl** window, click **Init &amp; Run**
 
 <div class="alert alert-warning">
-<p>Voila! Have a look in the graph and you should see your neuron respond to the current.</p>
+<p>Have a look in the graph and you should see your neuron respond to the current.</p>
 </div>
 
 ![ap1]
 
-Because we are running in **Continuous Create** mode, you can make changes in **CellBuilder** and rerun the simulator to see the effect. You could try increasing the sodium current to allow the cell to first an action potential. However, lets make our neuron fire an action potential by increasing the current injection amplitude!
+Because we are running in **Continuous Create** mode, we will make changes in **CellBuilder** and rerun the simulator to see the effect of increasing the current injection amplitude.
 
 1. In the **PointProcess** window, change `0.6` to `1.0` in the `amp(nA)`
 1. Now rerun in the **RunControl** window, by clicking **Init &amp; Run** and we get a lovely AP.
@@ -175,23 +180,24 @@ Because we are running in **Continuous Create** mode, you can make changes in **
 ![ap2]
 
 <div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <i>bs_iclamprig.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
+ <h4>Save Me</h4> <p>It would be a nuisance to have to repeat all the procedures above, so we can save the session to a file called <i>bs_iclamprig.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
  <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
 </div>
 
 
-### STEP A6: NEURON sessions
+### STEP A6: Reloading sessions
 
-As the session was saved, it can be reloaded with all the parameters already set.
+The saved session can now be reloaded with all the parameters already set.
 
 1. Close down the NEURON application via **File -> Quit**
 1. Restart with `nrngui`
+1. You may need to return to your working directory with **File -> recent dir**
 1. Under **File -> Load session**, select *bs_iclamprig.ses* and Voila!
 
 
 ## Part B: Simple neuron model
 
-We can now add some more features to our Ball and Stick model to create a Simple neuron.
+We can now add some more features to our "Ball and Stick" model to create a "Simple neuron".
 
 ### STEP B1: Multiple dendrites
 
@@ -203,12 +209,14 @@ We will now replace our single dendrite with a tree of branching apical dendrite
 | Apical dendrite branch | `ap[1]` | 300 | 1 | reduced hh |
 | Apical dendrite branch | `ap[2]` | 300 | 1 | reduced hh |
 
-1. Restart NEURON and load the *bs_cell.ses* session
-1. Uncheck "Continuous build"
+1. Restart NEURON and load the *bs_cell.ses* session as abov
+1. Ensure **Continuous Create** is not selected
 1. From the **CellBuilder**, select **Topology**
 1. Select **Delete Section** then click on `dend` to remove this
+<!-- Lee - I don't get this error -?windows vs mac - perhaps save this session before proceeding
 1. Click through all the tabs in the **CellBuilder** to update NEURON
 1. Go back to **Topology** and click on **Basename** and type in `ap` and **Accept**
+-->
 ![basename]
 1. Click on **Make Section**
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
@@ -253,7 +261,7 @@ For all the dendrites, we need to enter a reduced HH which means altering the st
 
 --------
 <div class="alert alert-warning">
-<h4>"Too Easy" Task</h4>
+<h4>Extra Task</h4>
 <p>To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:</p>
 <table>		 
    <thead> 		  
@@ -271,7 +279,7 @@ Now rerun the simulation.</p>
 
 --------
 
-## References
+## Resources
 [Using the CellBuilder](https://www.neuron.yale.edu/neuron/static/docs/cbtut/main.html)
 
 [Units in NEURON](https://www.neuron.yale.edu/neuron/static/docs/units/unitchart.html)

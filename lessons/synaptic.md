@@ -454,7 +454,7 @@ From these can you determine:
 > C) divide your hh conductance in the soma and dendrite by 10
 
 --------
-## References
+## Resources
 
 [Point Process](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#pointprocesses)
 
