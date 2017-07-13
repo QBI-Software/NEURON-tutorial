@@ -75,4 +75,4 @@ Don't lose this window!  We will be using it to launch:
 
 [2]: http://www.scholarpedia.org/article/Neuronal_cable_theory
 
-[mainmenu]: {{ site.github.repository_url }}/raw/master/assets/img/MainMenu.PNG "NEURON's main menu"
+[mainmenu]: {{ site.github.repository_url }}/raw/gh-pages/img/MainMenu.PNG "NEURON's main menu"
