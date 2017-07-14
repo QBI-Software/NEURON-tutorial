@@ -9,6 +9,10 @@ title: Quick setup
 
 NEURON can be downloaded for Windows, MAC and Linux from: [http://www.neuron.yale.edu/neuron/download](http://www.neuron.yale.edu/neuron/download)
 
+We will be using an actual pyramidal neuron traced in Neurolucida, courtesy of Lee Fletcher and the Williams Lab.  
+
+1. Download the [datafile] to your working directory
+
 ## Test
 
 To test your installation, click on (WIN) **NEURON demo** OR (MAC) **neurondemo**.  
@@ -31,8 +35,13 @@ A plain text editor is required for editing the HOC code. (Programs like Microso
 
 ## Running on MAC
 
+You may get a notification of 'unidentified developer' preventing you from running NEURON on a MAC.  Try these steps to handle this:
+
 1. Once installed, go to Finder -> Applications
-1. To prevent notification of 'unidentified developer', right-click (cmd-click) on `nrngui` and select 'Open' then click 'Open' button
-1. Now drag `nrngui` to the toolbar
+1. Right-click (cmd-click) on `nrngui` and select 'Open'
+1. In the popup window, click 'Open' button and this should save this for future launches
+1. You can also drag `nrngui` from the Applications list to the toolbar to make it easier to find
+
 
 [demo]: {{ site.github.repository_url }}/raw/gh-pages/img/NeuronDemo.PNG "NEURON Demo for testing"
+[datafile]: {{ site.github.repository_url }}/raw/gh-pages/data/pyramidal.ASC "Pyramidal neuron Datafile"

@@ -256,7 +256,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 ---------------------
 ## Resources
 
-[datafile]: {{ site.github.repository_url }}/raw/gh-pages/data/131014_S4L1_C_reconstruct.ASC "Pyramidal neuron Datafile"
+[datafile]: {{ site.github.repository_url }}/raw/gh-pages/data/pyramidal.ASC "Pyramidal neuron Datafile"
 
 [pyramidalneuron]: {{ site.github.repository_url }}/raw/gh-pages/img/pyramidal.png "Pyramidal Neuron (Neurolucida)"
 
