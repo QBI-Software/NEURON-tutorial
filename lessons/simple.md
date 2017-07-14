@@ -5,52 +5,46 @@ title: Simple Model
 ---
 # A Simple Model
 
-We start with the most basic model possible so that the focus is to introduce you to the core components of the NEURON application.
+We start with the most basic model possible so we can focus on introducing you to the core components of the NEURON application.
 
 ## Part A: "Ball and Stick" model
 
 To introduce the sequence of events involved in setting up a model, we will create an extremely simple neuron consisting solely of a soma and a dendrite called a "Ball and Stick" model.
-It will have the following characteristics:
-
-+ Resting potential (`Vm`) = -65 mV throughout the cell.
-+ Specific capacitance (`cm`) = 1 &micro;F/cm^2
-+ Cytoplasmic resistance (`Ra`) = 160 ohm cm.
-+ Dendritic membrane resistance (`Rm`) = 10000 ohm cm^2.
-
-| Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
-| ---- | ---- | ---- | ---- | ----|
-| Soma | `soma` | 20 | 20 | hh [1]|
-| Dendrite | `dend` | 1000 | 5 | 10% reduced hh |
-
-> Note: **hh** is an in-built component in NEURON which refers to the combined conductances of voltage-gated Na+ and K+ channels, and the passive leak conductance defined by Hodgkin and Huxley.
-
-> **reduced hh** indicates the Na+ and K+ conductances are reduced to 10% of normal HH and the equilibrium potential of the HH leak current is set to -64 mV.
-
 
 ### STEP A1: Launch CellBuilder
 
 CellBuilder is a graphical interface used to generate the basic *morphology* and *biophysics* of a neuron.  
-From the **Build** menu on the Main Menu window, select **CellBuilder**
+From the **Build** menu on the Main Menu window, select **CellBuilder** and read the descriptions provided.
 
 ![cellbuilder]
 
-There are tabs here to create the **topology** of the neuron, place sections of the neuron into **subsets**, determine the neuron’s **geometry** and **biophysics**, and to **manage** aspects of the cell you create.
 
 ### STEP A2: Create morphology with CellBuilder
 
-NEURON models neuronal cells as distributed electrical cables. Each cell is subdivided into **sections** which are into subdivided into **segments**. Each **section** such as the soma, dendrites, or axon is modelled as a cylinder with set **length** and **diameter**, which either has a sealed or open end depending whether its connected to another section.
+First we will specify the two components of our "ball and stick" model: a soma and a dendrite.
 
 1. First, let's click on **Topology**
-1. The components will be displayed graphically in the white *canvas* region - a soma is created automatically.
-1. Note **Basename** is set as default to `dend` (Hint: click the grey box)
-1. Create the dendrite component by clicking anywhere on the canvas
-1. This generates a `dend` section
+1. The components will be displayed graphically in the white *canvas* region - a `soma` is created automatically
+1. Create the dendrite component by clicking anywhere on the canvas **once**
+1. This generates a `dend` section as specified by **Basename** which is set by default to `dend` (Hint: click the button to change)
 
 ![topol]
 
-In the topology window, the size and angle of the **sections** we create do not matter - we define these in the **geometry** tab. Sections are initially created the same, however, once we start defining rules for each type of section, then the categories we call them - axon, dend, soma etc, will matter.
 
 ### STEP A3: Specify morphological dimensions
+
+The dimensions of the components we created can now be defined in the **Geometry** window.
+
+>NEURON refers to each component as a **section**.  Each section is divided into one or more **segments**.  A **segment** is the core fundamental unit consisting of a cylinder of uniform electrotonic characteristics based on  cable theory.
+
+So the `soma` and `dendrite` are each cylindrical sections of uniform dimensions.  We can now specify exactly what dimensions we would like them to have.
+
+
+| Section | Ref | Length (&micro;m) | Diameter (&micro;m) |
+| ---- | ---- | ---- | ---- |
+| Soma | `soma` | 20 | 20 |
+| Dendrite | `dend` | 1000 | 5 |
+
 
 1. Click on **Geometry**
 1. `all` should be selected by default - if not, select `all` in the side panel
