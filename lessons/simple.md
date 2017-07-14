@@ -5,6 +5,8 @@ title: Simple Model
 ---
 # A Simple Model
 
+We start with the most basic model possible so that the focus is to introduce you to the core components of the NEURON application.
+
 ## Part A: "Ball and Stick" model
 
 To introduce the sequence of events involved in setting up a model, we will create an extremely simple neuron consisting solely of a soma and a dendrite called a "Ball and Stick" model.

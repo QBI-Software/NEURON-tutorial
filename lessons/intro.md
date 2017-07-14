@@ -48,7 +48,7 @@ So let's go!
 
 ### STEP 1: Launch the GUI version of NEURON with nrngui.
 
-From your NEURON folder created during installation, click on **nrngui**.
+From your NEURON folder created during installation, click on `nrngui`.
 *For those preferring the commandline, type the following from the NEURON directory:*
 
 ```
@@ -65,11 +65,20 @@ Don't lose this window!  We will be using it to launch:
 3. Save our files
 4. Load our saved files
 
+## Set NEURON environment
+
+It is recommended to create a project to keep your model files together.  
+
+1. Create a folder on your computer
+1. From the **File** menu, select **working dir**
+1. In the **Directory** text box, enter or select the project folder you created
+1. Click on **Move To**
+1. When you re-open NEURON at a later date, from the **File** menu, select **recent dir** to quickly find your folder again
 
 --------
 
 ## Resources
-[What is NEURON](https://www.neuron.yale.edu/neuron/what_is_neuron).
+[What is NEURON](https://www.neuron.yale.edu/neuron/what_is_neuron)
 
 [1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
 
