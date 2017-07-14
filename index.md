@@ -11,7 +11,7 @@ We are offering an introductory workshop based on the recommended tutorials as w
 ### Installation
 
 NEURON software is freely available from [https://www.neuron.yale.edu/neuron/](https://www.neuron.yale.edu/neuron/).
-Prior to the tutorial, please download and install NEURON on your system - you can refer to our [Quick Setup](setup).
+Prior to the tutorial, please download and install NEURON on your system - you can refer to our [Quick Setup](setup.md).
 
 ### Course syllabus
 

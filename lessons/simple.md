@@ -61,8 +61,8 @@ So the `soma` and `dendrite` are each cylindrical sections of uniform dimensions
 <p>The Spatial Grid can be defined three ways:
 <ol><li>The <code>nseg</code> button sets the number of segments.
 <a data-toggle="collapse" data-target="#tip1">More info...</a></li>
-<li>The <code>d_X</code> button allows specification of the maximum physical length, in &micro;m, for each segment.</li>
-<li>The <code>d_lambda</code> button allows specification of the maximum length for each segment, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. <b>This is often the best choice to use.</b></li>
+<li>The <code>d_X</code> parameter specifies the spacing of segments by <strong>physical</strong> length, in &micro;m</li>
+<li>The <code>d_lambda</code> parameter specifies the spacing of segments by <strong>electrotonic</strong> length, expressed as a fraction of the AC length constant at 100 Hz for a cylindrical cable with the same diameter, Ra, and cm. <strong>This is often the best choice to use.</strong></li>
 </ol></p>
 
 
@@ -91,16 +91,19 @@ Now, we need to specify our lengths and diameters:
 
 ![geo_done]
 
-We now have created a neuron with a soma that is a cylinder 20um long, 20um wide, with one dendrite protruding out 1000um long, 5um wide. Certainly lives up to the name *ball and stick*!
+<div class="alert alert-info">
+<h3>Ball and Stick</h3>
+<p>We now have created a neuron with a soma that is a cylinder 20&micro;m long, 20&micro;m wide, with one dendrite protruding out 1000&micro;m long, 5&micro;m wide. Certainly lives up to the name *Ball and Stick*!<p>
+</div>
 
 ### STEP A4: Specify biophysical characteristics
 
-The next part of defining the neuron is to specify the biophysical characteristics such as the electrical resistance within the cytoplasm (Ra), the capacitance of the plasma membrane (cm), membrane ion channels, buffers and pumps.
+The next part of defining the neuron is to specify the biophysical characteristics such as the electrical resistance within the cytoplasm (`Ra`), the capacitance of the plasma membrane (`cm`), membrane ion channels, buffers and pumps.
 
 1. Click on **Biophysics**
 1. Ensure **Specify Strategy** is selected.
-1. **Ra** and **cm** are uniform in this particular model, so we select the `all` subset and then click on the `Ra` and `cm` checkboxes.
-1. We will add **HH** to `soma` and `dend` by selecting each then click on `hh`
+1. `Ra` and `cm` are uniform in this particular model, so we select the `all` subset and then click on the `Ra` and `cm` checkboxes.
+1. We will add a Hodgkin-Huxley conductance to `soma` and `dend` by selecting each then click on `hh`
 
 ![biophys]
 
@@ -156,7 +159,7 @@ We are now ready to load the specifications of our model into the NEURON simulat
 </div>
 
 
-1. We will accept the default values, except for the time, so enter `20` for both `t(ms)` and `Tstop(ms)`.
+1. We will accept the default values, except for the time, so enter `20` for `Tstop(ms)`.
 
 ![runcontrol]
 
@@ -170,7 +173,7 @@ We are now ready to load the specifications of our model into the NEURON simulat
 
 ![ap1]
 
-Because we are running in **Continuous Create** mode, we will make changes in **CellBuilder** and rerun the simulator to see the effect of increasing the current injection amplitude.
+Now we will rerun the simulator to see the effect of increasing the current injection amplitude.
 
 1. In the **PointProcess** window, change `0.6` to `1.0` in the `amp(nA)`
 1. Now rerun in the **RunControl** window, by clicking **Init &amp; Run** and we get a lovely AP.
@@ -253,6 +256,8 @@ For all the dendrites, we need to enter a reduced HH which means altering the st
 1. For the equilibrium potential (`el_hh`), change this to `-64mV`
 
 ![biophys_reducedhh2]
+
+Because we are running in **Continuous Create** mode, these changes in **CellBuilder** can now be picked up straight away.  Rerun simulation from the **RunControl** window.
 
 <div class="alert alert-info">
  <h4>Save Me</h4> <p>You can save this to a file called <i>simple_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>

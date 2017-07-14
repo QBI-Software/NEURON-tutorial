@@ -16,7 +16,7 @@ To test your installation, click on (WIN) **NEURON demo** OR (MAC) **neurondemo*
 ![alt text][demo]
 
 
-If you don't get a series of windows popping up, check the console window for errors and check the Troubleshooting pages for your OS on the download page.  NEURON runs on C libraries, so these may need updating via gcc or Xcode.
+If you don't get a series of windows popping up, check the console window for errors and check the Troubleshooting pages for your OS on the download page.  
 
 If it all works, exit the application interface from the window called "NEURON Main Menu" under the File menu.
 
@@ -29,5 +29,10 @@ A plain text editor is required for editing the HOC code. (Programs like Microso
 1. Notepad Plus (Windows) - already installed
 1. nano (Linux) - convenient but not necessarily intuitive
 
+## Running on MAC
+
+1. Once installed, go to Finder -> Applications
+1. To prevent notification of 'unidentified developer', right-click (cmd-click) on `nrngui` and select 'Open' then click 'Open' button
+1. Now drag `nrngui` to the toolbar
 
 [demo]: {{ site.github.repository_url }}/raw/gh-pages/img/NeuronDemo.PNG "NEURON Demo for testing"
