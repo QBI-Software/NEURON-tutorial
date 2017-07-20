@@ -115,13 +115,14 @@ Now we will add our values:
 
 ![biophys_all]
 
+#### Adding HH
 
-<a data-toggle="collapse" data-target="#tip2"><h4>Adding HH</h4></a>
+<a data-toggle="collapse" data-target="#tip2">More ...</a>
 <div id="tip2" class="alert alert-success collapse">
 <p>The generic <code>hh</code> conductance is actually composed of three conductances:
 <ul><li><strong>voltage-gated Na+</strong> channel component</li>
-<li><strong>voltage-gated K+</strong> channel component and</li>
-<li>the combined <strong>passive leak</strong> conductance.</li>
+<li><strong>voltage-gated K+</strong> channel component</li>
+<li>the combined <strong>passive leak</strong> conductance</li>
 </ul>
 </p>
 <p><i>Note: If you have no <code>hh</code> you will need to add the passive leak conductance by selecting <code>pas</code> in specify strategy.</i></p>
@@ -144,7 +145,7 @@ You can save this to a file called **bs_cell.ses**.
 ![savesession]
 
 1. Set your working directory using the **File -> working dir** command from the Main Menu window
-1. Enter the file path in the window or double-click on folders as they appear.  The `..\` will return you to the parent directory.
+1. Enter the file path in the window or double-click on folders as they appear.  The `../` will return you to the parent directory.
 1. Select **Move To** which sets you up in the correct directory.
 1. Under the **File -> Save session** command, enter the name of the file in the top window (the bottom window is used as a filter only)
 
@@ -153,7 +154,7 @@ You can save this to a file called **bs_cell.ses**.
 
 We are now ready to load the specifications of our model into the NEURON simulator.  We will use the **Continuous Create** method which is very useful when initially testing a model as it updates parameters in real time.
 
-1. Click **Continuous Create**.
+1. Click **Continuous Create** in the **CellBuilder** window
 1. We will need to create a stimulus which is known as a **Point Process** so from the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
 1. In the **PointProcessManager** window, click on **SelectPointProcess** then select **IClamp**
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
@@ -174,11 +175,14 @@ We are now ready to load the specifications of our model into the NEURON simulat
 </div>
 
 
-![runcontrol] ![ap1]
+![runcontrol]
 
 1. We will accept the default values, except for the time, so enter `20` for `Tstop(ms)`.
 1. To see an output of the simulation, from the Main Menu, select **Graph** -> **Voltage axis**
 1. Now in the **RunControl** window, click **Init &amp; Run**
+
+![ap1]
+
 >Have a look in the graph and you should see your neuron respond to the current.
 
 
@@ -285,7 +289,13 @@ Now it's time for you to complete the simple neuron.  To check you've got the ha
 
 *Don't forget to save this to simple_cell.ses - we will be using it later.*
 
+Check it looks like <a data-toggle="collapse" data-target="#tip4">THIS</a>
+
+<div id="tip4" class="collapse alert alert-success">
+
 ![simpleneuron2]
+
+</div>
 --------
 
 ## Resources
@@ -339,6 +349,6 @@ Now it's time for you to complete the simple neuron.  To check you've got the ha
 
 [simpleneuron]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron.PNG "Modifying cell topology"
 
-[simpleneuron2]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron.PNG "Simple neuron"
+[simpleneuron2]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron_complete.PNG "Simple neuron"
 
 [subsets]: {{ site.github.repository_url }}/raw/gh-pages/img/Subsets.PNG "Creating subsets"
