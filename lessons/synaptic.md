@@ -480,7 +480,7 @@ From these can you determine:
 
 [SectionList](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/classes/seclist.html#SectionList)
 
-[alpha-function]: {{ site.github.repository_url }}/raw/gh-pages/img/Alpha-function.PNG "Alpha function"
+[alpha-function]: {{ site.github.repository_url }}/raw/gh-pages/img/Alpha-function.png "Alpha function"
 
 [alphasyn]: {{ site.github.repository_url }}/raw/gh-pages/img/Alphasynapse_shape.PNG "AlphaSynapse shape"
 
