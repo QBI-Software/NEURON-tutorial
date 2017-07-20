@@ -6,14 +6,18 @@ title: Synaptic Model
 # A synaptic model
 
 In this lesson, we will be stimulating our neuron with a synaptic input instead of current injection.  There are two types of synaptic input available in NEURON:
-1. **AlphaSynapse [1]** : represents a single conductance transient of a particular peak amplitude that starts at a fixed time. It is not meant to connect neurons but to simulate the impact of a synaptic type of stimulus.
-1. **ExpSyn[2] and Exp2Syn [3]** : represent event-driven conductance-changing weighted mechanisms (with single or double decay rate constants, respectively).  They will not activate unless triggered by a Network Connection object (NetCon) where the amplitude is controlled by the NetCon weight but the time course and reversal potential is controlled by the ExpSyn or Exp2Syn.
+1. **AlphaSynapse** : represents a single conductance transient of a particular peak amplitude that starts at a fixed time. It is not meant to connect neurons but to simulate the impact of a synaptic type of stimulus.
+1. **ExpSyn and Exp2Syn** : represent event-driven conductance-changing weighted mechanisms (with single or double decay rate constants, respectively).  They will not activate unless triggered by a Network Connection object (NetCon) where the amplitude is controlled by the NetCon weight but the time course and reversal potential is controlled by the ExpSyn or Exp2Syn.
 
-In NEURON, these are managed as **Point Process** stimuli.
+In NEURON, these are managed as **Point Process** stimuli but unlike IClamp stimulus which is a square wave, synaptic input is modeled with an alpha function which reaches max conductance after an exponential rise.
+
+![alpha-function]
+
+(*Phase Response Curves in Neuroscience - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/278702575_fig10_Figure-2-2-Alpha-function-current-stimuli-plotted-with-different-time-constants-and-the [accessed 20 Jul, 2017]*)
 
 ## Part A: Using CellBuilder
 
-1. Firstly, we will add an **AlphaSynapse** to our *Ball and Stick cell* created in the previous lesson.
+1. Firstly, we will add an **AlphaSynapse** to our *Ball and Stick cell* created in the first lesson.
 1. Launch a fresh version of NEURON via `nrngui`
 1. Load up the "Ball and Stick cell" from the file *bs_cell.ses*
 1. In the **CellBuilder** window, click on the **Continuous Create** button
@@ -169,7 +173,7 @@ Each section has the following parameters:
 | Segments | nseg | The section is divided into nseg compartments of length L/nseg. Membrane potential will be computed at the ends of the section and the middle of each compartment. |
 | Diameter | diam | The diameter in microns. Note that diam is a range variable and therefore must be respecified whenever nseg is changed.|
 | Resistivity | Ra | Axial resistivity in ohm-cm.|
-| connectivity | connect | Defines the parent of the section, which end of the section is attached to the parent, and where on the parent the attachment takes place [4].|
+| connectivity | connect | Defines the parent of the section, which end of the section is attached to the parent, and where on the parent the attachment takes place .|
 
 
 1. Add `axon` in the `topol()` and `basic_shape()` procedures
@@ -218,7 +222,7 @@ proc geom() {
 ```
 #### Repeated actions with Loops
 
-HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall` [5]. You can also call all segments of a section by imbedding `for (x) { }`
+HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall`. You can also call all segments of a section by imbedding `for (x) { }`
 
 1. To specify *hh* in the `biophys()` procedure, make a copy of the `soma` code and call it `axon`.
 (Alternatively, the common code could be moved to the `forsec all` and `soma` and `axon` sections deleted but this makes it harder to manage later.)
@@ -255,7 +259,7 @@ proc biophys() {
 ```
 #### SectionList
 
-Sections are added to a list called a **SectionList** to group components together under one reference name [6].
+Sections are added to a list called a **SectionList** to group components together under one reference name.
 1. In the `subsets()` procedure add the `axon` to a SectionList called `all`:
 
 ```c
@@ -464,17 +468,19 @@ From these can you determine:
 
 [Programming HOC guide](http://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic.html)
 
-[1]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#AlphaSynapse "AlphaSynapse definition"
+[AlphaSynapse](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#AlphaSynapse)
 
-[2]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn "ExpSynapse definition"
+[ExpSyn](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn)
 
-[3]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn "Exp2Synapse definition"
+[Exp2Syn](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn)
 
-[4]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/geometry.html "Geometry definition"
+[Geometry](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/geometry.html#Geometry)
 
-[5]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/secspec.html "Section access definition"
+[Section](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/secspec.html)
 
-[6]:https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/classes/seclist.html#SectionList "SectionList definition"
+[SectionList](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/classes/seclist.html#SectionList)
+
+[alpha-function]: {{ site.github.repository_url }}/raw/gh-pages/img/Alpha-function.PNG "Alpha function"
 
 [alphasyn]: {{ site.github.repository_url }}/raw/gh-pages/img/Alphasynapse_shape.PNG "AlphaSynapse shape"
 
