@@ -32,7 +32,7 @@ As you may have imagined, it would be very time-consuming and difficult to build
 
 1. When you have finished inspecting, select **Export** and **Cellbuilder**.
 
-<a data-toggle="collapse" data-target="#tip1">Guidelines for tracing neurons</a>
+<button class="btn btn-info" data-toggle="collapse" data-target="#tip1">Guidelines for tracing neurons</button>
 
 <div id="tip1" class="collapse alert alert-info">
 <p>Here are some useful guidelines on tracing neurons in programs such as Neurolucida to ensure they are loaded correctly in NEURON</p>
@@ -40,8 +40,8 @@ As you may have imagined, it would be very time-consuming and difficult to build
 <li>All dendrites and axons from a particular neuron must start from within the soma</li>
 <li>All branches must be connected to their parent branch</li>
 <li>Delete any additional content, such as contours demarking layers, etc.</li>
-<li>NEURON will import all 3-dimensional data and the diameter of the processes. Therefore it is important to reconstruct these as accurately as possible.</li>
-<li>To create a 3D soma that NEURON will detect the volume of correctly you must reconstruct it in the following way:
+<li>NEURON will import all 3-dimensional data and the diameter of the processes therefore it is important to reconstruct these as accurately as possible.</li>
+<li>To ensure that NEURON will detect the volume of the soma correctly in 3D:
 <ol>
 <li>Reconstruct the soma via a series of concentric contours demarking the boundary of the cell body</li>
 <li>Start at either the top or bottom (in the z-axis) of the soma</li>
@@ -57,7 +57,7 @@ As you may have imagined, it would be very time-consuming and difficult to build
 </div>
 
 
-### STEP 2: Save Using the Print &amp; File Window Manager
+### STEP 2: Save with the Print &amp; File Window Manager
 
 So far we have been saving our entire session using **File -> Save Session**. However, it is very useful to specify which windows you want to save.
 
@@ -65,22 +65,23 @@ So far we have been saving our entire session using **File -> Save Session**. Ho
 
 1. From the Main Menu, select **Window -> Print &amp; File Window Manager**
 1. The display shows red and blue boxes. The left red square represents your screen, and the blue squares are individual NEURON windows.
-  1. You can click on those windows you want to save in your session. These will translate to the right red square, which denotes the windows being saved into the session.
-1. Click **Session -> Save selected** OR click **Session ->Save all**  
+  1. Click on those windows you want to save in your session - these will move to the right red square
+  1. Identify which square is which by moving the actual window around
+1. Click **Session -> Save selected** or **Session ->Save all**  
 
-You can save this session to a file called **pyramidal_original.ses**.
+You can save this session to a file called **pyramidal.ses**.
 
 ![printfilemanager1]  ![printfilemanager2]
 
 ### STEP 3: Viewing the cell morphology
 
-1. Select **Topology** to display your neuron.
+1. Select **Topology** in **CellBuilder** to display your neuron.
 1. Use the *right click menu* or click on the small square in the top left corner of the canvas
 1. Select **View = Plot**, **zoom in/out** or **translate** to observe your neuron.
 
 ![cellbuilder_topol]
 
->*Be careful not to left click as you will create new sections! If you make changes you do not want you can always close and reload your model. This is why it is vital to keep saving! Alternatively, observe your neuron in the subsets tab.*
+>*Be careful not to left click as you will create new sections! If you make changes you do not want you can always close and reload your model. This is why it is vital to keep saving!*
 
 
 ### STEP 4: Defining a complex neuron
@@ -95,7 +96,7 @@ You can save this session to a file called **pyramidal_original.ses**.
 1. Select the **Geometry** tab.
 1. As in the previous lessons, we can set the geometrical parameters of every section or for a group of sections defined as a subset.
 1. We can set the length (L), diameter (diam) and the degree of compartmentalization of the model (spatial grid). Since our morphology is already imported, including the length and diameter of each segment, all we need to define is the spatial grid.
-1. Select `all` (all segments should be red) then select `d_lambda`. We will use the default value of 0.1
+1. Select `all` (all segments should be red) then select `d_lambda`. We will use the default value of 0.1.
 
 ![spatialgrid]
 
@@ -145,6 +146,7 @@ As in our previous lesson, we will inject a square-wave current step into the so
 #### 5A: Adding a stimulus
 1. In the **CellBuilder** window, select **Continuous Create**
 1. Next, we will create a current clamp electrode (a type of **Point process**).
+
   1. Open **Tools > Point Processes > Managers > Point manager**
   1. By default, the IClamp point process is positioned half-way along the `soma`.  We will accept this default.
   1. Click **SelectPointProcess** and select **IClamp**.
@@ -163,14 +165,15 @@ Previously, we added a graph and accepted defaults.  Now we will see how to cust
   1. Find `soma` in the first panel and double-click
   1. Find `v(0.5)` in the second panel and double-click
   1. Click **Accept**
-  1. Multiple traces can be added in the same window for comparison
-  1.
+1. Multiple traces can be added in the same window for comparison
+  1. From the right-click menu, under **Plot what?**, select **Keep lines**
+  1. From this menu, then select **Color/Brush** and pick a color to differentiate
 
 
 ![vgraph]
 
 1. **Graph -> current axis** to show the *current vs time*
-  1. There is no default selected here so as above,
+  1. There is no default selected here so nothing will be displayed if it is run now
   1. Right click on the graph select **Plot what?**
   1. In the window, type `IClamp[0].i`. (This will display what your point process is doing in terms of current.)
 
@@ -185,6 +188,7 @@ Now we have a whole rig:
 
 1. Open **Tools -> RunControl**
   1. Set `Tstop` to `1000` ms. This makes our recorded period 1000 ms long.
+  1. Increase the IClamp amplitude to `2nA`
   1. Hit **Init &amp; Run** in the **RunControl** window. What do you see?
 1. If part of the trace is missing, right-click on the graph, select **View...** and **View=plot** to rescale
 
@@ -195,8 +199,7 @@ Now we have a whole rig:
 1. Select just the windows to save then select **session -> save selected** and
 1. Save as **pyramidal_iclamprig.ses**
 
-
-
+-------------------------------
 ### STEP 7: Experiments
 
 Now it's time to do your own investigations:
@@ -232,7 +235,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 ## Resources
 
 
-[Neurolucida software]: (http://www.mbfbioscience.com/neurolucida){:target="_blank"}
+[Neurolucida software](http://www.mbfbioscience.com/neurolucida)
 
 [pyramidalneuron]: {{ site.github.repository_url }}/raw/gh-pages/img/pyramidal.png "Pyramidal Neuron (Neurolucida)"
 
