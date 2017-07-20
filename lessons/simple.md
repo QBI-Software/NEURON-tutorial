@@ -93,8 +93,9 @@ Now, we need to specify our lengths and diameters:
 
 <div class="alert alert-info">
 <h3>Ball and Stick</h3>
-<p>We now have created a neuron with a soma that is a cylinder 20&micro;m long, 20&micro;m wide, with one dendrite protruding out 1000&micro;m long, 5&micro;m wide. Certainly lives up to the name *Ball and Stick*!</p>
+<p>We now have created a neuron with a soma that is a cylinder 20&micro;m long, 20&micro;m wide, with one dendrite protruding out 1000&micro;m long, 5&micro;m wide. Certainly lives up to the name *Ball and Stick*. </p>
 </div>
+
 
 ### STEP A4: Specify biophysical characteristics
 
