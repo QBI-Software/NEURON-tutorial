@@ -51,13 +51,9 @@ Click on **Show** then **Parameters** which shows the panel for control of the *
 
 ## Part B: Using HOC
 
-We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) and we will aim to allow you to understand the code more than having to write it.
+We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed in ancient times as a UNIX interpreter for calculations.  It is now only found in NEURON.  If you have not had any exposure to programming constructs, have a read of the [Help page](help) with the aim that you will be able to understand the code more than having to write it.
 
-Everything you just did with the **graphic user interface** can be also be done with **hoc**.
-
-You may be wondering why you would do this in hoc if you can more easily make the neuron with the GUI. If you make more complicated models, you will find tasks that are easier to do with hoc code. Likewise, there are some tasks that are simply just easier to do in the GUI. Furthermore, while the using code allows many tasks to be quickly and efficiently carried out, it is often prone to bugs – the worst being those that *do not* break your model. The GUI allows you to see what you are doing and is often very helpful. The most effective use of NEURON is by using **both together**.
-
-In the Part, we will use hoc to create a **template** for a cell in NEURON. Templates are very efficient when creating networks as they allow you to generate stereotyped cells.
+As we go through the lesson, it will become clear that the GUI version of NEURON (CellBuilder, etc) is actually generating HOC code to run.  As the models you create become more complex and if you are keen to try out some of the many models available online, it is important that you know how to understand the HOC code.
 
 **Recommended structure of a HOC program:**
 
@@ -68,7 +64,7 @@ In the Part, we will use hoc to create a **template** for a cell in NEURON. Temp
 
 #### Commands in the console
 
-A console window running the HOC interpreter is launched when `nrngui` is run. The HOC code can be run directly from the commandline which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
+A console window running the HOC interpreter is launched when `nrngui` is run. HOC code can be run directly in this console which can be useful.  In the console window, check you see `oc>` (if not, just press "Enter" on the keyboard) then type:
 
 ```
 oc> soma psection()
@@ -87,7 +83,7 @@ From our CellBuilder model, we can generate HOC code to get started.
 1. Click on **Classname** and enter `BScell`
 1. Click on **Save hoc code in file** and provide a filename (and path) - here we are calling it *bscell.hoc*
 
-Creating a cell type class, allows us to use this in network models as well as allowing more complexity to be added.  We are now going to see what has been generated.
+Creating a cell type class or template, allows us to use this in network models as well as allowing more complexity to be added.  We are now going to see what has been generated.
 
 ### STEP 2: Understanding the HOC code
 
@@ -102,50 +98,60 @@ endtemplate BScell
 ```
 #### Variables
 
-+ **Global variables** are indicated by the starting word: `public`. You should recognize a few names from our CellBuilder model: `soma`, `dend`
-+ **Local variables** are indicated by the starting word: `objref` or `objvar `
++ **Global variables** are indicated by the starting word: `public`. These are available anywhere in the code. You should recognize a few names from our CellBuilder model: `soma`, `dend`
++ **Local variables** are indicated by the starting word: `objref` or `objvar`. These are only available in this file.
 
-```
+```c
 public soma, dend
 public all
 ```
 #### Program Sequence
 
-When the code is first loaded in the NEURON interpreter, it creates the `soma` and `dend` sections:
+When the code is first loaded in the NEURON interpreter, it runs **procedures** which are sets of instructions.
 
-```
+1. Find where the code first creates the `soma` and `dend` sections (they are empty at this point):
+
+```c
 create soma, dend
 ```
 
-Then it will look for a method called `init()` (which stands for initialize).
+1. Now find the procedure (shown as `proc`) called `init()` (which stands for initialize). By default, this is the first procedure run.
+>Note that comments can be added with "//" in front
 
 ```c
 proc init() {
-  topol()               //Runs first
-  subsets()             //Runs second
-  geom()
-  biophys()
-  geom_nseg()
-  synlist = new List()
-  synapses()
+  topol()               //Step 1
+  subsets()             //Step 2
+  geom()                //Step 3
+  biophys()             //Step 4
+  geom_nseg()           //Step 5
+  synlist = new List()  //Step 6
+  synapses()            //Step 7
   x = y = z = 0 // only change via position
 }
 ```
 
-Each procedure listed in `init()` is run in sequential order.  So to begin, the first call is to `topol()` (topology). This was where we added the soma and two dendrites in the CellBuilder.  `topol()` is defined as:
+Each procedure listed in `init()` is run in sequential order.  
+So the first call is to `topol()` (topology).
+1. Look in the code to see what `topol()` is defined as:
 
 ```c
 proc topol() { local i
-  connect dend(0), soma(1)
-  basic_shape()
+  connect dend(0), soma(1)   //Connects dendrite to soma
+  basic_shape()              //Calls another procedure
 }
 ```
 
-So here we see that the `dend` is connected to the soma object. Each section is indexed from 0 to 1 along it's length so that `dend(0)` refers to the **start of the section** and `dend(1)` refers to the **end of the section**.  
+So here we see that the `dend` is connected to the `soma` object.
+>This was where we added the soma and dendrite in the CellBuilder under the Topology tab.
+
+Each section is indexed from 0 to 1 along it's length so that:
++ `dend(0)` refers to the **start of the section** and
++ `dend(1)` refers to the **end of the section**.  
 
 ![connect]
 
-The method then calls `basic_shape()` then returns to `init()` to run the next procedure in the list which is `subsets()` and so on.
+Within the procedure, there is a call to another procedure: `basic_shape()` so it is fine to embed procedures within each other.  The remaining procedures are all run in sequence until the end is reached.
 
 ### STEP 3: Adding an axon section via HOC
 
@@ -222,7 +228,7 @@ proc geom() {
 ```
 #### Repeated actions with Loops
 
-HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall`. You can also call all segments of a section by imbedding `for (x) { }`
+HOC provides a **for loop** type construct to apply repeated actions to multiple sections. Most commonly this is the `forsec` (for section) function for example, `forsec all` which can also be written as `forall`.
 
 1. To specify *hh* in the `biophys()` procedure, make a copy of the `soma` code and call it `axon`.
 (Alternatively, the common code could be moved to the `forsec all` and `soma` and `axon` sections deleted but this makes it harder to manage later.)
@@ -260,7 +266,7 @@ proc biophys() {
 #### SectionList
 
 Sections are added to a list called a **SectionList** to group components together under one reference name.
-1. In the `subsets()` procedure add the `axon` to a SectionList called `all`:
+1. In the `subsets()` procedure add the `axon` to the SectionList called `all`:
 
 ```c
 proc subsets() { local i
@@ -273,9 +279,9 @@ proc subsets() { local i
 ```
 ------------------
 
-<div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <i>bscellaxon.hoc</i>.</p>
-</div>
+#### Save Me
+
+You can save this to a file called **bscellaxon.hoc**
 
 
 > Hopefully, it is now apparent that the HOC code is underlying the tasks undertaken in CellBuilder.
@@ -288,7 +294,7 @@ proc subsets() { local i
 proc synapses() {}
 ```
 
-1. To insert an AlphaSynapse, we create an instance of it with
+To insert an AlphaSynapse, we create an instance of it with
 
 ```c
 objectvar syn
@@ -328,8 +334,6 @@ proc synapses() {
 }
 
 ```
-
-
 
 
 ### STEP 5: Running the HOC code
@@ -406,9 +410,9 @@ If it works, you can see that
 + the `dendrite` also has the `AlphaSynapse` connected and ready to go
 
 
-#### Runnning the HOC
+#### Runnning the Simulation
 
-Now we will launch a couple of windows to run the code (this can also be automated but let's just do it this way for now).
+As previously, we will use the Run Control and Graphical windows to view our simulation.
 
 1. Open the **File -> RunControl** (you will see our parameters in the `init.hoc` are set)
 1. Open a **Graph -> Voltage Axis** window
@@ -418,44 +422,14 @@ Now we will launch a couple of windows to run the code (this can also be automat
 
 > CONGRATULATIONS! This is no mean feat and you deserve a MEDAL!!
 
-#### Creating a Space Plot
 
-A space plot allows you to view the changes in conductance along a section.
+------------------------
+### Experiments
 
-1. To create a space plot, select **Shape plot** from the **Graph** menu in the NEURON Main Menu.
-1. From this window, you can select from the plot menu with the *right mouse button*.
-1. Select a **Space Plot**.
-1. By default, voltage is the variable to plot, but you can change this with the **Plot What?** menu item.
-1. The plot shown is a schematic of our neuron so just looks like a straight line.
+1. How would you generate more than one BScellAxon for a network?
 
-![space1]
+1. Try changing the properties of the AlphaSynapse to see the effect on the AP. How could these properties be changed dynamically?
 
-1. To create the space plot graph, you need to select a section of the neuron to include in the space plot by clicking the left mouse button at the beginning of the section, dragging the mouse across the section you want to plot (while holding the mouse button down), and releasing the mouse button when you have covered the sections you want to plot. A line will appear from where you first clicked the mouse button to the current location of the pointer. When you release the mouse button, the sections you selected will be highlighted in colour, and a new window with the space plot will be opened.
-1. Press the **Init &amp; Run** button in the **RunControl** window to see the space plot in action.
-1. You may have to zoom in with **right-click menu -> View... -> View = plot**
-
-![space2]
-
-2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**. (This won't do much with our model but good for branching dendrites.)
-3. The middle mouse button is used to move the whole representation.
-
-## Extra Extra!
-
-Lets try slowing things dooowwwwnnn to be able to see what the voltage is doing in real time. Try putting `50000` into the `Points plotted/ms` box in your **run control**. `Init and Run` and have a look at your **voltage axis** and **space plot**.
-
-From these can you determine:
-
-•	Is the voltage uniform in all parts of the cell? Why/why not?
-
-•	Where does the action potential generate?
-
-•	Does the action potential invade all parts of the cell? What happens to its amplitude when it moves away from its point of origin? What happens when you:
-
-> A) change Ra to 2000
-
-> B) change your dendrite length to 2000um
-
-> C) divide your hh conductance in the soma and dendrite by 10
 
 --------
 ## Resources

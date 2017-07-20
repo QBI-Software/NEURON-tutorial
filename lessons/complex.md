@@ -179,6 +179,27 @@ Previously, we added a graph and accepted defaults.  Now we will see how to cust
 
 ![igraph] ![iclamp_axis]
 
+#### Creating a Space Plot
+
+A space plot allows you to view the changes in conductance along a section.
+
+1. To create a space plot, select **Shape plot** from the **Graph** menu in the NEURON Main Menu.
+1. From this window, you can select from the plot menu with the *right mouse button*.
+1. Select a **Space Plot**.
+1. By default, voltage is the variable to plot, but you can change this with the **Plot What?** menu item.
+1. The plot shown is a schematic of our neuron so just looks like a straight line.
+
+![space1]
+
+1. To create the space plot graph, you need to select a section of the neuron to include in the space plot by clicking the left mouse button at the beginning of the section, dragging the mouse across the section you want to plot (while holding the mouse button down), and releasing the mouse button when you have covered the sections you want to plot. A line will appear from where you first clicked the mouse button to the current location of the pointer. When you release the mouse button, the sections you selected will be highlighted in colour, and a new window with the space plot will be opened.
+1. Press the **Init &amp; Run** button in the **RunControl** window to see the space plot in action.
+1. You may have to zoom in with **right-click menu -> View... -> View = plot**
+
+![space2]
+
+2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**. (This won't do much with our model but good for branching dendrites.)
+3. The middle mouse button is used to move the whole representation.
+
 
 #### 5C: Run the simulation
 
@@ -224,7 +245,27 @@ Compare how they differ. (*Hint: plot what?*)
 
 Investigate the changes in voltage responses and voltage transfer across the neuron.
 
-#### 7.6 Impedance tools
+#### 7.6 Investigate the origin of the action potential
+
+Slow down the output to see what the voltage is doing in real time.
+1. Try putting `50000` into the `Points plotted/ms` box in the **Run Control**.
+1. Click `Init &amp; Run` and have a look at the **voltage axis** and **space plot**.
+
+From these can you determine:
+
+•	Is the voltage uniform in all parts of the cell? Why/why not?
+
+•	Where does the action potential generate?
+
+•	Does the action potential invade all parts of the cell? What happens to its amplitude when it moves away from its point of origin? What happens when you:
+
+> A) change Ra to 2000
+
+> B) change your dendrite length to 2000um
+
+> C) divide your hh conductance in the soma and dendrite by 10
+
+#### 7.7 Impedance tools
 
 NEURON is very powerful and has a number of extra additions that can aid your analysis of results. For example we can observe voltage decay throughout the cell using the impedance tools. Discover for yourself how these work and how they may aid your analysis.
 
