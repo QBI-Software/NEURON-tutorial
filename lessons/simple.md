@@ -5,7 +5,7 @@ title: Simple Model
 ---
 # A Simple Model
 
-We start with the most basic model possible so we can focus on introducing you to the core components of the NEURON application.
+We start with the most basic model possible so we can focus on introducing you to the core components of the NEURON application and navigating the graphical user interface (GUI).
 
 ## Part A: "Ball and Stick" model
 
@@ -37,7 +37,7 @@ The dimensions of the components we created can now be defined in the **Geometry
 
 >NEURON refers to each component as a **section**.  Each section is divided into one or more **segments**.  A **segment** is the core fundamental unit consisting of a cylinder of uniform electrotonic characteristics based on  cable theory.
 
-So the `soma` and `dendrite` are each cylindrical sections of uniform dimensions.  We can now specify exactly what dimensions we would like them to have.
+The `soma` and `dendrite` are each cylindrical sections of uniform dimensions.  We can now specify exactly what dimensions we would like them to have.
 
 
 | Section | Ref | Length (&micro;m) | Diameter (&micro;m) |
@@ -114,9 +114,12 @@ Now we will add our values:
 
 ![biophys_all]
 
-NEURON specifies ion channel density by setting the maximum combined conductance in Siemens of those channels in that particular section.
+NEURON specifies **ion channel density** by setting the *maximum combined conductance* in Siemens of those channels in that particular segment.
 
-The generic `hh` conductance is actually 3 conductances: the **voltage-gated Na+ channel** component, **voltage-gated K+** channel component, and the combined **passive leak** conductance.
+The generic `hh` conductance is actually composed of three conductances:
++ **voltage-gated Na^+** channel component
++ **voltage-gated K+** channel component and
++ the combined **passive leak** conductance.
 
 *Note: If you have no `hh` you will need to add the passive leak conductance by selecting `pas` in specify strategy.*
 
@@ -286,6 +289,7 @@ Now rerun the simulation.</p>
 --------
 
 ## Resources
+
 [Using the CellBuilder](https://www.neuron.yale.edu/neuron/static/docs/cbtut/main.html)
 
 [Units in NEURON](https://www.neuron.yale.edu/neuron/static/docs/units/unitchart.html)

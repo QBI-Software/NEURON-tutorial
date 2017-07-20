@@ -28,7 +28,8 @@ If it all works, exit the application interface from the window called "NEURON M
 
 A plain text editor is required for editing the HOC code. (Programs like Microsoft Word and Wordpad are not plain text editors and cannot be used for code.)  The following editors are recommended if you don't have a favourite already.
 
-1. [ATOM](https://atom.io) - the only editor known with HOC syntax highlighting! (to install this, go to Packages, search for `language-hoc` and install) - Multi-platform and very cool
+1. [ATOM](https://atom.io) - the only editor known with HOC syntax highlighting!  - Multi-platform and very cool
+  1. to install this, go to Packages, search for `language-hoc` and install or download from https://atom.io/packages/language-hoc
 1. [JEdit](http://jedit.org) - extremely easy to use and Multi-platform
 1. Notepad Plus (Windows) - already installed
 1. nano (Linux) - convenient but not necessarily intuitive
@@ -44,4 +45,4 @@ You may get a notification of 'unidentified developer' preventing you from runni
 
 
 [demo]: {{ site.github.repository_url }}/raw/gh-pages/img/NeuronDemo.PNG "NEURON Demo for testing"
-[datafile]: {{ site.github.repository_url }}/raw/gh-pages/data/pyramidal.ASC "Pyramidal neuron Datafile"
+[datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"
