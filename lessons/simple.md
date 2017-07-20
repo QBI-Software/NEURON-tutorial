@@ -273,7 +273,7 @@ For all the dendrites, we need to enter a reduced HH which means altering the st
 
 ![biophys_reducedhh2]
 
-### STEP B6 Save Me
+### STEP B6: Save Me
 
 You can save this to a file called **simple_cell.ses**.
 
@@ -289,11 +289,11 @@ Now it's time for you to complete the simple neuron.  To check you've got the ha
 
 *Don't forget to save this to simple_cell.ses - we will be using it later.*
 
-Check it looks like <a data-toggle="collapse" data-target="#tip4">THIS</a>
+Check it looks similar to <a data-toggle="collapse" data-target="#tip4">THIS</a>
 
-<div id="tip4" class="collapse alert alert-success">
+<div id="tip4" class="collapse">
 
-<img src="{{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron_complete.PNG" title="Complete Simple Neuron"/>
+<img src="{{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron_complete.PNG" title="Complete Simple Neuron" alt="SimpleNeuron_complete"/>
 
 </div>
 --------
