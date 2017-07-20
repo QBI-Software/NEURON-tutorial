@@ -293,7 +293,7 @@ Check it looks like <a data-toggle="collapse" data-target="#tip4">THIS</a>
 
 <div id="tip4" class="collapse alert alert-success">
 
-![simpleneuron2]
+<img src="{{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron_complete.PNG" title="Complete Simple Neuron"/>
 
 </div>
 --------
