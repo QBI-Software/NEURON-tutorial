@@ -48,9 +48,9 @@ The `soma` and `dendrite` are each cylindrical sections of uniform dimensions.  
 
 1. Click on **Geometry**
 1. `all` should be selected by default - if not, select `all` in the side panel
-1. Ensure **Specify Strategy** is ticked. *(Having **select strategy** checked allows us to select which aspects of the geometry we want to alter)*
+1. Ensure **Specify Strategy** is ticked.
 1. Select length `L`, diameter `diam` from **Distinct values over subset**
-1. Select `d_lambda` from **Spatial grid** (This parameter ensures segments are dynamically distributed [2]).
+1. Select `d_lambda` from **Spatial grid** (This parameter ensures segments are dynamically distributed - see ref [1]).
 
 
 ![geo]
@@ -93,18 +93,18 @@ Now, we need to specify our lengths and diameters:
 
 <div class="alert alert-info">
 <h3>Ball and Stick</h3>
-<p>We now have created a neuron with a soma that is a cylinder 20&micro;m long, 20&micro;m wide, with one dendrite protruding out 1000&micro;m long, 5&micro;m wide. Certainly lives up to the name *Ball and Stick*. </p>
+<p>We have now created a neuron with a soma that is a cylinder 20&micro;m long, 20&micro;m wide, with one dendrite protruding out 1000&micro;m long, 5&micro;m wide. Certainly lives up to the name "Ball and Stick"! </p>
 </div>
 
 
 ### STEP A4: Specify biophysical characteristics
 
-The next part of defining the neuron is to specify the biophysical characteristics such as the electrical resistance within the cytoplasm (`Ra`), the capacitance of the plasma membrane (`cm`), membrane ion channels, buffers and pumps.
+The next part of defining the neuron is to specify the biophysical characteristics such as the electrical resistance within the cytoplasm (`Ra`), the capacitance of the plasma membrane (`cm`), membrane ion channels, buffers and pumps. NEURON specifies **ion channel density** by setting the *maximum combined conductance* (in Siemens) of those channels in that particular segment.
 
 1. Click on **Biophysics**
 1. Ensure **Specify Strategy** is selected.
 1. `Ra` and `cm` are uniform in this particular model, so we select the `all` subset and then click on the `Ra` and `cm` checkboxes.
-1. We will add a Hodgkin-Huxley conductance to `soma` and `dend` by selecting each then click on `hh`
+1. We will add a Hodgkin-Huxley (`hh`) conductance to `soma` and `dend` by selecting each then click on `hh`
 
 ![biophys]
 
@@ -115,16 +115,21 @@ Now we will add our values:
 
 ![biophys_all]
 
-NEURON specifies **ion channel density** by setting the *maximum combined conductance* in Siemens of those channels in that particular segment.
 
-The generic `hh` conductance is actually composed of three conductances:
-+ **voltage-gated Na^+** channel component
-+ **voltage-gated K+** channel component and
-+ the combined **passive leak** conductance.
+<a data-toggle="collapse" data-target="#tip2"><h4>Adding HH</h4></a>
+<div id="tip2" class="alert alert-success collapse">
+<p>The generic <code>hh</code> conductance is actually composed of three conductances:
+<ul><li><strong>voltage-gated Na+</strong> channel component</li>
+<li><strong>voltage-gated K+</strong> channel component and</li>
+<li>the combined <strong>passive leak</strong> conductance.</li>
+</ul>
+</p>
+<p><i>Note: If you have no <code>hh</code> you will need to add the passive leak conductance by selecting <code>pas</code> in specify strategy.</i></p>
+</div>
 
-*Note: If you have no `hh` you will need to add the passive leak conductance by selecting `pas` in specify strategy.*
+We will now insert HH into the soma and dendrite.
 
-For the dendrite, we need to enter a reduced HH which means altering the standard HH conductances to be 10% of their initial values.
+For the dendrite, we will enter a `reduced hh` which means altering the standard HH conductances to be 10% of their initial values.
 1. Select `hh` under `dend` and enter 10% of the Na+ (`gnabar_hh`) and  K+ (`gnakbar_hh`) conductance values
 1. No change to leak current of HH (`gl_hh`)
 1. For the equilibrium potential (`el_hh`), change this to `-64mV`
@@ -132,10 +137,16 @@ For the dendrite, we need to enter a reduced HH which means altering the standar
 ![biophys_reducedhh]
 
 
-<div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <i>bs_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
- <p><i>TIP: set your working directory via <b>File -> working dir</b> first	</i></p>
-</div>
+#### Save Me
+
+You can save this to a file called **bs_cell.ses**.
+
+![savesession]
+
+1. Set your working directory using the **File -> working dir** command from the Main Menu window
+1. Enter the file path in the window or double-click on folders as they appear.  The `..\` will return you to the parent directory.
+1. Select **Move To** which sets you up in the correct directory.
+1. Under the **File -> Save session** command, enter the name of the file in the top window (the bottom window is used as a filter only)
 
 
 ### STEP A5: Running a simple simulation
@@ -146,36 +157,30 @@ We are now ready to load the specifications of our model into the NEURON simulat
 1. We will need to create a stimulus which is known as a **Point Process** so from the Main Menu window, select **Tools** -> **Point Processes** -> **Managers** -> **Point Manager**
 1. In the **PointProcessManager** window, click on **SelectPointProcess** then select **IClamp**
 1. We will accept the default of `soma(0.5)` which means the stimulus has been placed in the middle of the soma
-1. We will insert a `0.6nA` current of `1ms` pulse width starting at t=`5ms` (a delay allows for initialization of any conductances with dependencies) so enter the values as shown.
+1. We will insert a `0.6nA` current of `1ms` pulse width starting at del=`5ms` (a delay allows for initialization of any conductances with dependencies) so enter the values as shown.
 
 ![pointprocess]
 
 
-1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip2">More ...</a>
+1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip3">More ...</a>
 
-<div id="tip2" class="alert alert-info collapse">
-<h3>Runcontrol window parameters </h3>
+<div id="tip3" class="alert alert-info collapse">
+<h3>Run control window parameters </h3>
 <ul>The following options can be set:
 <li><code>Init(mV)</code> : determines the voltage we start at (generally keep this at the resting membrane potential you will expect from your ion channels you have placed in – the further away it is from that, the longer your cell will take to reach an equilibrium at the start</li>
 <li> <code>Tstop</code> : controls the duration of our experiment, and</li>
-<li> <code>dt/points</code> and <code>plotted/ms</code> : controls our temporal resolution of the experiments.</li>
+<li> <code>dt</code> and <code>Points plotted/ms</code> : controls our temporal resolution of the experiments.</li>
 </ul>
 </div>
 
 
+![runcontrol] ![ap1]
+
 1. We will accept the default values, except for the time, so enter `20` for `Tstop(ms)`.
-
-![runcontrol]
-
-1. We will need to see an output of the simulation, so from the Main Menu, select **Graph** -> **Voltage axis**
+1. To see an output of the simulation, from the Main Menu, select **Graph** -> **Voltage axis**
 1. Now in the **RunControl** window, click **Init &amp; Run**
+>Have a look in the graph and you should see your neuron respond to the current.
 
-<div class="alert alert-success">
-<h3><span class="glyphicon glyphicon-check alert-success"></span>  Success!</h3>
-<p>Have a look in the graph and you should see your neuron respond to the current.</p>
-</div>
-
-![ap1]
 
 Now we will rerun the simulator to see the effect of increasing the current injection amplitude.
 
@@ -184,29 +189,15 @@ Now we will rerun the simulator to see the effect of increasing the current inje
 
 ![ap2]
 
-<div class="alert alert-info">
- <h4>Save Me</h4> <p>It would be a nuisance to have to repeat all the procedures above, so we can save the session to a file called <i>bs_iclamprig.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
- <p><i>TIP: set your working directory via <b>File -> recent dir</b> first.</i></p>
-</div>
+### STEP A6 Save Me
 
+You can save this to a file called **bs_iclamprig.ses**. (Saving to a new file separates our simulation from our cell.)
 
-### STEP A6: Reloading sessions
-
-The saved session can now be reloaded with all the parameters already set.
-
-1. Close down the NEURON application via **File -> Quit**
-1. Restart with `nrngui`
-1. You may need to return to your working directory with **File -> recent dir**
-1. Under **File -> Load session**, select *bs_iclamprig.ses* and Voila!
 
 
 ## Part B: Simple neuron model
 
-We can now add some more features to our "Ball and Stick" model to create a "Simple neuron".
-
-### STEP B1: Multiple dendrites
-
-We will now replace our single dendrite with a tree of branching apical dendrites with the following characteristics:
+We have covered the basics of creating a simple model and simulation.  We can now turn our "Ball and Stick" model into a "Simple neuron" by replacing our single dendrite with a tree of branching apical dendrites with the following characteristics:
 
 | Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
 | ---- | ---- | ---- | ---- | ----|
@@ -214,24 +205,35 @@ We will now replace our single dendrite with a tree of branching apical dendrite
 | Apical dendrite branch | `ap[1]` | 300 | 1 | reduced hh |
 | Apical dendrite branch | `ap[2]` | 300 | 1 | reduced hh |
 
-1. Restart NEURON and load the *bs_cell.ses* session as above
-1. Ensure **Continuous Create** is not selected
+### STEP B1: Reloading sessions
+
+A saved session can now be reloaded with all the parameters and windows already set.
+
+1. Close down the NEURON application via **File -> Quit**
+1. Restart with `nrngui`
+1. You may need to return to your working directory with **File -> recent dir**
+1. Under **File -> Load session**, select the *bs_cell.ses* session created above
+
+### STEP B2: Modifying neurons
+
+We will now modify the topology of the "ball and stick" neuron.
+
+![simpleneuron]
+
 1. From the **CellBuilder**, select **Topology**
 1. Select **Delete Section** then click on `dend` to remove this
-1. Click on **Basename** and type in `ap` and **Accept**
-
-<!-- Lee - I don't get this error -?windows vs mac - perhaps save this session before proceeding
-1. Click through all the tabs in the **CellBuilder** to update NEURON
-1. Go back to **Topology** and click on **Basename** and type in `ap` and **Accept**
--->
 
 ![basename]
+
+1. Click on **Basename** and type in `ap` and **Accept**
 1. Click on **Make Section**
 1. Create two apical dendrite components by clicking anywhere on the canvas (twice!)
 1. Add a third dendrite as a branch by click and hold from the joint of the first two dendrites, then drag and release.  Errors can be rectified by selecting the commands as required.
 1. This generates `ap` (root), `ap[1]` and `ap[2]`
 
 ![canvas]
+
+### STEP B3: Creating subsets
 
 1. As they share common properties, we will group the dendrite components so click on **Subsets**
 1. Click on **Select Subtree**
@@ -240,12 +242,18 @@ We will now replace our single dendrite with a tree of branching apical dendrite
 1. In the popup window, enter `apicals` and **Accept**
 1. This new list should appear in the sets.
 
+![subsets]
+
+### STEP B4: Modifying parameters - Geometry
+
 We will need to specify the morphological characteristics of the new dendrites
 1. Click on **Geometry**
 1. Ensure **Specify Strategy** is unticked
 1. Enter the lengths and diameters of the `ap` sections as per the table
 
 ![strategy_done]
+
+### STEP B5: Modifying parameters - Biophysics
 
 For all the dendrites, we need to enter a reduced HH which means altering the standard HH conductances to be 10% of their initial values.
 1. Click on **Biophysics**
@@ -261,32 +269,23 @@ For all the dendrites, we need to enter a reduced HH which means altering the st
 
 ![biophys_reducedhh2]
 
-Because we are running in **Continuous Create** mode, these changes in **CellBuilder** can now be picked up straight away.  Rerun simulation from the **RunControl** window.
+### STEP B6 Save Me
 
-<div class="alert alert-info">
- <h4>Save Me</h4> <p>You can save this to a file called <i>simple_cell.ses</i> using the <b>File->Save session</b> command from the Main Menu window.</p>
- <p><i>TIP: set your working directory via <b>File -> recent dir</b> first	</i></p>
-</div>
-
+You can save this to a file called **simple_cell.ses**.
 
 --------
-<div class="alert alert-warning">
-<h4>Extra Task</h4>
-<p>To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:</p>
-<table>		 
-   <thead> 		  
-   <tr><th>Section</th><th>Ref</th><th>Length (&micro;m)</th><th>Diameter (&micro;m)</th><th>Biophysics</th></tr>		 
-   </thead>		
-   <tbody>		
-   <tr><td>Basal dendrite</td><td><code class="highlighter-rouge">bas</code></td><td>200</td><td>3</td><td>pas</td></tr>		
-   <tr><td>Axon</td><td><code class="highlighter-rouge">axon</code></td><td>800</td><td>1</td><td>hh</td></tr>		
-   </tbody>		
- </table>
+### B. EXPERIMENTS
 
-<p>where <i>pas</i> is a passive current with a reversal potential (<code>e_pas</code>) of <code>-65mV</code>.
-Now rerun the simulation.</p>
-</div>
+Now it's time for you to complete the simple neuron.  To check you've got the hang of it, go back to the CellBuilder and add a basal dendrite and an axon with the following characteristics:
 
+| Section | Ref | Length (&micro;m) | Diameter (&micro;m) | Biophysics |
+| ---- | ---- | ---- | ---- | ----|
+| Basal dendrite | `bas` | 200 | 3 | pas (`e_pas` =-65mV) |
+| Axon | `axon` | 800 | 1 | `hh` |
+
+*Don't forget to save this to simple_cell.ses - we will be using it later.*
+
+![simpleneuron2]
 --------
 
 ## Resources
@@ -295,8 +294,8 @@ Now rerun the simulation.</p>
 
 [Units in NEURON](https://www.neuron.yale.edu/neuron/static/docs/units/unitchart.html)
 
-[1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
-[2]: https://www.neuron.yale.edu/neuron/static/docs/d_lambda/d_lambda.html
+[2]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
+[1]: https://www.neuron.yale.edu/neuron/static/docs/d_lambda/d_lambda.html
 
 [cellbuilder]: {{ site.github.repository_url }}/raw/gh-pages/img/CellBuilder.PNG "Cell builder for morphology"
 
@@ -330,8 +329,16 @@ Now rerun the simulation.</p>
 
 [runcontrol]: {{ site.github.repository_url }}/raw/gh-pages/img/RunControl.PNG "Run control window"
 
+[savesession]: {{ site.github.repository_url }}/raw/gh-pages/img/SaveSession.PNG "Set working directory and save session"
+
 [ap1]: {{ site.github.repository_url }}/raw/gh-pages/img/AP_bs_1.PNG "AP Output of BS Model"
 
 [ap2]: {{ site.github.repository_url }}/raw/gh-pages/img/AP_bs_2.PNG "AP Output of BS Model"
 
 [simpleoutput]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleOutput.PNG "Output of Simple Model"
+
+[simpleneuron]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron.PNG "Modifying cell topology"
+
+[simpleneuron2]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron.PNG "Simple neuron"
+
+[subsets]: {{ site.github.repository_url }}/raw/gh-pages/img/Subsets.PNG "Creating subsets"
