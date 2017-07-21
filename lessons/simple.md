@@ -115,9 +115,9 @@ Now we will add our values:
 
 ![biophys_all]
 
-#### Adding HH
+#### Inserting ionic conductances
 
-<a data-toggle="collapse" data-target="#tip2">More ...</a>
+<button class="btn btn-info" data-toggle="collapse" data-target="#tip2">What is hh?</button>
 <div id="tip2" class="alert alert-success collapse">
 <p>The generic <code>hh</code> conductance is actually composed of three conductances:
 <ul><li><strong>voltage-gated Na+</strong> channel component</li>

@@ -4,19 +4,41 @@ layout: default
 title: Network Model
 ---
 # A Network Model
-Now we are going to build a network of two cells. We will build these between two ball and stick neurons but they equally apply to other models such as those based on neuron reconstructions you have uploaded.
+Now we are going to build a small network of connected cells. We will use the template we created in the previous lesson (**BScellAxon**) but the steps apply equally to more complex models such as those based on neuron reconstructions you have uploaded.
 
-A connection between cells will be created with **NetCon** and **ExpSyn**.
+## NetCon
 
-## Part A:
+In NEURON, a connection between cells is created with a Network Connection object (**NetCon**). A NetCon is defined by the following five parameters:
 
-### STEP A1:
+| Component     | Description    |
+| :------------- | :------------- |
+| Source       | The source is normally a reference to a membrane potential but any range variable can be used. The source may also be a POINT_PROCESS with a NET_RECEIVE block which contains a call to net_event. PointProcesses like this serve as entire artificial cells.  The source may be a NULLObject.  |
+| Target  |The target must be a POINT_PROCESS that defines a NET_RECEIVE procedure. The target is allowed to be nil (NULLObject) in which case the NetCon is always inactive but this can be useful for recording the spike train from an output cell.|
+| Threshold |(Optional) If not specified the default value is 10 (mV). For all NetCon objects that share a source, you can only specify one threshold. |
+| Delay |(Optional) If not specified the default value is 1 (ms) |
+| Weight |(Optional) If not specified the default value is 0 |
 
-Lets create two of our bs cells.
+When the `source` passes `threshold` at time t (`delay`), the `target` will receive an **event** at time t along with `weight` information. There is no limit on delay and there is no limit on the number of events pending delivery.
 
-1. Modify your `init.hoc` file like so:
+
+
+### STEP 1: Creating multiple cells
+
+We will use the template BSCellAxon to create multiple cells.
+
+1. Open `init.hoc` in an editor
+1. We will change the single cell `objectvar bsa` to a list of 2 cells `objectvar bsa[2]` where the square brackets represents an array of items.
+1. We can then add a cell to each place in the list where `0` is the first place:
+
+```c
+bsa[0] = new BScellAxon()
+bsa[1] = new BScellAxon()
 
 ```
+
+1. To make this more versatile, we can instead create a programming loop where the number of cells to be created is stored as `n_bsa` so if more cells are required, simply change the value of `n_bsa`.
+
+```c
 //=================================================
 // Create our cell from the template
 //=================================================
@@ -29,7 +51,7 @@ for i = 0, n_bsa-1 {
     bsa[i] = new BScellAxon()
 }
 ```
-This creates *two* (`n_bsa`) cells; `bsa[0]` and `bsa[1]` both based on the `BScellAxon` template. To create more simply change `n_bsa`.
+
 
 If you want to make any modifications to both cells simply modify the template `bscellaxon.hoc` file.
 
