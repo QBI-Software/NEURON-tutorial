@@ -55,9 +55,9 @@ You can save this to a file called **bs_cell_alpha.ses**.
 
 ## Part B: Understanding HOC
 
-We are now ready to take a look under the hood of NEURON at the code which runs through the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed originally as a UNIX interpreter for calculations.  It is now only found in NEURON.  
+We are now ready to take a look under the hood of NEURON at the code which runs the simulator.  The scripting code is written in **HOC (High Order Calculator)** which is an interpretive language loosely resembling C code developed originally as a UNIX interpreter for calculations.  It is now only found in NEURON.  
 
-As we go through the lesson, it will become clear that the GUI version of NEURON (CellBuilder, etc) is actually generating HOC code to run.  As the models you create become more complex and if you are keen to try out some of the many models available online, it is important that you know how to understand the HOC code.
+As we go through the lesson, it will become clear that the GUI version of NEURON (CellBuilder, etc) is actually generating HOC code to run.  As the models you create become more complex and you need to add specific distributions of ion channels or synapses or even if you are just keen to try out some of the many models available online, it is important that you know how to understand the HOC code.
 
 **Recommended structure of a HOC program:**
 
@@ -79,9 +79,9 @@ oc> soma psection()
 The output will be explained as we investigate HOC further.
 
 
-### STEP 1: Generate a cell class
+### STEP 1: Generate a cell template
 
-Creating a cell type class or template, allows us to use this in network models as well as allowing more complexity to be added.  From our CellBuilder model, we can generate HOC code to get started.
+Creating a cell type template, allows us to create one or more of the same cell type which can then be used in network models as well as allowing more complexity to be added.  From our CellBuilder model, we can generate HOC code to get started.
 
 1. From the **CellBuilder** window, select **Management** then **Cell Type**
 1. Click on **Classname** and enter `BScell`
@@ -197,13 +197,13 @@ proc basic_shape() {
   soma {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}      
   dend {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(150, 0, 0, 1)}
   //Add this line
-  axon {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-119, 0, 0, 1)}    
+  axon {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-120, 0, 0, 1)}    
 }
 
 ```
 #### Geometry
 
-<button class="btn btn-info" data-toggle="collapse" data-target="#tipG">Geometry parameters explained</button>
+<button class="btn btn-info" data-toggle="collapse" data-target="#tipG">Geometry parameters ...</button>
 <div id="tipG" class="alert alert-success collapse">
 <p>It is important to refer to the <code class="highlighter-rouge">soma</code> and <code class="highlighter-rouge">dendrite</code> as <em>sections</em> rather than <em>segments</em>. A <strong>section</strong> contains one or more segments (<code class="highlighter-rouge">nseg</code>) and it is by dividing the section this way into smaller compartmental units which can provide the fine-grained detail underlying a more realistic model.</p>
 
@@ -358,14 +358,14 @@ syn = new AlphaSynapse(x)
 ```
 where `x` is the location on the section.
 
-1. So to insert an AlphaSynapse at the distal end of the dendrite, we specify the section first and the location as `1`:
+So to insert an AlphaSynapse at the distal end of the dendrite, we specify the section first and the location as `1`:
 
 ```c
 objectvar syn
 dend syn = new AlphaSynapse(1)
 ```
 
-2. Now we can set the properties as per our table, similar to the parameters window in the previous lesson:
+The properties are set for the `syn` object as per our table, similar to the parameters window in the previous lesson:
 
 ```c
 syn.onset = 0     // time to onset in ms
@@ -375,13 +375,13 @@ syn.e	    = -15   // reversal potential in	mV
 syn.i     = 0     //	nA
 ```
 
-so the final code is:
+1. So now go ahead and enter the final code as follows:
 
 ```c
 objectvar syn       // this must be outside the procedure
 proc synapses() {
-  access dend       // add synapse to the dendrite
-  syn = new AlphaSynapse(1) // position is end of dendrite
+  // add synapse to the dendrite
+  dend syn = new AlphaSynapse(1) // position is end of dendrite
   syn.onset = 0     // time to onset in ms
   syn.tau	  = 0.1   // rise time constant in ms
   syn.gmax  = 10    // peak conductance	in %mmicro;S (umho)
@@ -453,9 +453,9 @@ dt = 0.025 //ms 40khz
 To test that our code has actually loaded we will use the console commands:
 
 ```
-oc> bsa
-oc> bsa.soma psection()
-oc> bsa.dend psection()
+oc> bs
+oc> bs.soma psection()
+oc> bs.dend psection()
 
 ```
 
@@ -463,10 +463,21 @@ This should show the following output:
 
 ![console_bsa]
 
-If it works, you can see that
-+ the `bsa` object is our template `BScellAxon`
+If it all goes well, you can see that
++ the `bs` object is our template `BScell`
 + the `soma` has all the properties we set in the template code
-+ the `dendrite` also has the `AlphaSynapse` connected and ready to go
++ the `dend` has the properties we set and also has 21 `nseg` (segments) which has been determined by the `d_lambda` option.
+
+#### Viewing the model
+
+Unfortunately, we can no longer use the CellBuilder as although there is an *import* function, it is fairly limited.  So how do we see what we have built?
+
+1. From the Main menu, select **Tools -> Model View**
+1. Click on the line **1 real cells** then **BScell**
+1. Further lines will continue to reveal more information.
+1. Our AlphaSynapse can be seen in both the **BScell** region and under **Density Mechanisms**
+
+![modelview]
 
 
 #### Runnning the Simulation
@@ -487,7 +498,7 @@ As previously, we will use the Run Control and Graphical windows to view our sim
 
 1. How would you generate more than one BScellAxon for a network?
 
-1. Try changing the properties of the AlphaSynapse to see the effect on the AP. How could these properties be changed dynamically?
+1. Try changing the properties of the AlphaSynapse to see the effect on the AP, for example, introduce a delay to the onset to allow for equilibration. How could these properties be changed dynamically?
 
 1. How would you add multiple dendrites?
 
