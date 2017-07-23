@@ -4,7 +4,7 @@ layout: default
 title: Network Model
 ---
 # A Network Model
-Now we are going to build a small network of connected cells. We will use the template we created in the previous lesson (**BScellAxon**) but the steps apply equally to more complex models such as those based on neuron reconstructions you have uploaded.
+Now we are going to build a small network of connected cells. We will use the template we created in the previous lesson (**BScell**) but the steps apply equally to more complex models such as those based on neuron reconstructions you have uploaded.
 
 ## NetCon
 
@@ -18,45 +18,49 @@ In NEURON, a connection between cells is created with a Network Connection objec
 | Delay |(Optional) If not specified the default value is 1 (ms) |
 | Weight |(Optional) If not specified the default value is 0 |
 
-When the `source` passes `threshold` at time t (`delay`), the `target` will receive an **event** at time t along with `weight` information. There is no limit on delay and there is no limit on the number of events pending delivery.
+When the `source` passes `threshold`, the `target` will receive an **event** at time t (`delay`) along with `weight` information. There is no limit on delay and there is no limit on the number of events pending delivery.
 
 
 
 ### STEP 1: Creating multiple cells
 
-We will use the template BSCellAxon to create multiple cells.
+We will use the template BSCell to create multiple cells.
 
-1. Open `init.hoc` in an editor
-1. We will change the single cell `objectvar bsa` to a list of 2 cells `objectvar bsa[2]` where the square brackets represents an array of items.
+1. Open `bs_run.hoc` in an editor
+1. We will change the single cell `objectvar bs` to a list of 2 cells `objectvar bs[2]` where the square brackets represents an array of items.
 1. We can then add a cell to each place in the list where `0` is the first place:
 
 ```c
-bsa[0] = new BScellAxon()
-bsa[1] = new BScellAxon()
+bs[0] = new BScell()
+bs[1] = new BScell()
 
 ```
 
-1. To make this more versatile, we can instead create a programming loop where the number of cells to be created is stored as `n_bsa` so if more cells are required, simply change the value of `n_bsa`.
+1. To make this more versatile, we can instead create a programming loop where the number of cells to be created is stored as `n_bs` so if more cells are required, simply change the value of `n_bs`.
+1. The format of the for loop is: `for var = lower-bound, upper-bound command`
 
 ```c
 //=================================================
-// Create our cell from the template
+// Create multiple cells from the template
 //=================================================
 
-n_bsa = 2
+n_bs = 2
 
-objectvar bsa[n_bsa]
+objectvar bs[n_bs]
 
-for i = 0, n_bsa-1 {
-    bsa[i] = new BScellAxon()
+for i = 0, n_bs-1 {           // i is the counter, set to 0 to start then
+    bs[i] = new BScell()      // increments by 1 each loop until n_bs - 1
 }
 ```
 
+### STEP 2: Changes to template
 
-If you want to make any modifications to both cells simply modify the template `bscellaxon.hoc` file.
+Any modifications to the template `bscell.hoc` file will affect both cells.
 
-1. Lets also **comment** out the call for the synapse generation within our `init()` procedure in `bscellaxon.hoc`:
-```
+1. As we will not be using the AlphaSynapse component, **comment** out the call for the synapse generation within our `init()` procedure, so it won't run
+1. Do the same for the line that centres the x, y, z position of the cells as this will exactly overlay the cells so they won't be seen
+
+```c
 proc init() {
     topol()
     subsets()
@@ -65,135 +69,144 @@ proc init() {
     geom_nseg()
     //synlist = new List()
     //synapses()
-    x = y = z = 0 // only change via position
+    //x = y = z = 0 // only change via position
 }
 ```
 
-1. Do the same for the line that centres the x, y, z position of the cells.
+### STEP 3: Creating an ExpSyn
 
-1. Let's have a look at what we have created. Double click `init.hoc` and type  into the command line:
-```
-forall {psection()}
-```
+We have created two cells which we now will connect.
 
-1. Change `Tstop` to 200ms and observe how it takes some time for both neurons to approach a plateau potential.
+Returning to the **bs_run.hoc**, we will make `BScell[0]` the presynaptic cell, and `BScell[1]` the postsynaptic cell.
 
-1. Finally, let's add an **alpha synapse** to just one cell.
-Example code: (hidden by dropdown menu)
+1. Declare a variable to hold the postsynaptic POINT_PROCESS called `net_syn`
+1. Create a **ExpSyn** POINT_PROCESS and locate it halfway down the dendrite (0.5)
 
-```
-//==================================================
-//Stimulation
-//==================================================
-objectvar syn       // this must be outside the procedure
-proc synapses() { // add synapse to the dendrite
-  BScellAxon[$1].dend syn = new AlphaSynapse($2) // position is end of dendrite
-  syn.onset = 100     // time to onset in ms
-  syn.tau	  = 0.1   // rise time constant in ms
-  syn.gmax  = 10    // peak conductance	in %mmicro;S (umho)
-  syn.e	    = -15   // reversal potential in	mV
-  syn.i     = 0     //	nA
-}
-
-synapses(0, 1)
-
-```
-
-
-If you observe the example code provided, we have used two **place holders**, `$1` and `$2`. These placeholders allow you to specify the value in this location when you run the procedure. For example, if we change `synapses(0, 1)` to `synapse(1, 0.5)`, this will instead place our alpha synapse into `BScellAxon[1]` halfway down the dendrite.
-
-### STEP A2:
-Setting the scene.
-1. Run `init.hoc`.
-
-2. Open a **runcontrol** window and press `init & run`.
-
-3. Graph a **voltage axis** and plot the voltage at the `soma(0.5)` of both cells in different colours (hint right click>color/brush, select the desired cell in the top right).
-
-4. Save the **runcontrol** and **voltage axis** in seperate `.ses` files and make your `init.hoc` file open them *(make sure to load the voltage axis after you have created the cells in the `init.hoc` file)*.
-
-### STEP A3:
-Now lets try connecting our cells.
-
-Lets make `BScellAxon[0]` the presynaptic cell, and `BScellAxon[1]` postsynaptic.
-
-The **NetCon** is the method NEURON uses to connect cells. It works by taking a particular *event* which then drives a *point process* in the post synaptic cell. NetCon cannot drive an Alphasynapse, rather, you can use **ExpSyn** for an alpha-like conductance, or **Exp2Syn** to be able to define the rise and decay time constants.
-
-1. Define the location you want to put the synapse:
-
-```
+```c
 objectvar net_syn[1]
-BScellAxon[1].dend net_syn[0] = new ExpSyn(0.5) //places a ExpSyn point process halfway down the dend of BScellAxon[1]
+BScell[1].dend net_syn[0] = new ExpSyn(0.5) //places an ExpSyn halfway on dend of BScell[1]
+
 ```
 
-1. The parameters of the synaptic connection are defined when you generate the **NetCon**. This takes the form:
-```
+### STEP 4: Creating a connection with NetCon
+
+1. Create a **NetCon** object which will trigger when the presynaptic source reaches threshold
+1. The parameters of the synaptic connection are defined on creation of the **NetCon**
+
+```c
 new NetCon(&source_v, synapse, threshold, delay, weight)
 ```
-    *`source_v`* = source voltage - we will use the voltage at the soma of `BScellAxon[0]`
+    *`source_v`* = source will be the presynaptic membrane potential (`BScell[0].axon.v(1)`)
 
-    *`synapse`* = refers to the synaptic object receiving the event - `net_syn[0]`
+    *`synapse`* = refers to the ExpSyn receiving the event (`net_syn[0]`)
 
-    *`threshold`* = **threshold** of the *source_v* to generate the synaptic process
+    *`threshold`* = potential in mV of the *source_v* to trigger the event
 
-    *`delay`* = connection **delay**
+    *`delay`* = time (ms) after the triggered event is received
 
-    *`weight`* = connection **weight** strength at the synapse. Setting the strength this way allows one cell to generate synapses in multiple locations of different weights.
+    *`weight`* = which represents the strength of the synapse
 
-1. Lets do it!
+1. Add the following code in **bs_run.hoc**
 
-```
-objectvar con_01
-con_01 = new NetCon(&BScellAxon[0].axon.v(1), net_syn[0], -20, 1, 0.5) //places a connection that will trigger net_syn when BScellAxon[0] axon's voltage exceeds -20mV
-
-```
-
-Congratulations!!! You have modelled a simple neural network.
-
-### STEP A4:
-
-Why don't you clean up your network code a little? Its looking a little filthy.
-
-1. Embed your definitions of `net_syn` and `con_01` into a **proc** like we did for the alpha synapse. However, make sure you declare the `objectvar` **outside** the proc.
-
-1. Why not try setting all your important network parameters as stand alone variables that is called by the *procs*? Try using placeholders too! E.g.
+```c
+objectvar con
+con = new NetCon(&BScell[0].axon.v(1), net_syn[0], -20, 1, 0.5)
 
 ```
+
+>Congratulations!!! You have modelled a simple neural network.
+
+### STEP 5: Improving the code
+
+We have provided this code within the **bs_run.hoc** but it is often better to separate this into a separate file such as **stimulus.hoc** and include a call in the **bs_run.hoc** to load it.  This allows you to use the same code for different models.  However, the code itself must be modified to use variable parameters that do not explicitly refer to the template. To manage this:
+
+1. Put code into procedures to reduce duplication of code and thus reduce likelihood of errors. *Note, make sure you declare the `objectvar` outside the proc so it can be accessed by other procs.*
+1. Set parameters as **variables** to reduce the effort in finding all the places a certain parameter is referenced. *Note use obvious names rather than a,b,c etc so it is clear what they are referring to but also check that they do not clash with global variables*
+1. Refer to parameters with placeholders (ie $1, $2) which allows them to be loaded as arguments to the procedures.
+1. It is best to add comments to tell yourself and others what it is you are actually doing but you can also use **print** statements which output to the console and let you keep track of what is going on.  
+
+```c
+//declare variables
 pre_cell = 0
 pre_loc = 1
 pre_threshold = -20
 net_syn_weight = 1
 con_delay = 0.5
 
-objectvar con_01
+//declare proc
+objectvar con
 proc connect_cells () {
-  a=$1 //presynaptic cell
-  b=$2 //voltage source location
-  c=$3 //threshold voltage
-  d=$4 //synaptic weight
-  e=$5 //synaptic delay
+  i=$1 //presynaptic cell
+  vm=$2 //voltage source location
+  t0=$3 //threshold voltage
+  weight=$4 //synaptic weight
+  t=$5 //synaptic delay
   print "Setting network connection..."
-  print "Presynaptic cell: BScellAxon[", a,"], Location: ", b, ", Threshold: ", c, "mV, Synaptic weight: ", d, ", Synaptic delay: ", e, "ms"
-  BScellAxon[a].axon con_01 = new NetCon(&v(b), net_syn, c, d, e)
+  print "Presynaptic cell: BScell[", i,"], Location: ", vm, ", Threshold: ", t0, "mV, Synaptic weight: ", weight, ", Synaptic delay: ", t , "ms"
+  BScell[i].axon con = new NetCon(&v(vm), net_syn, t0, weight, t)
 }
+
+//call proc
 connect_cells(pre_cell, pre_loc, pre_threshold, net_syn_weight, con_delay)
+
 ```
 
-So why would you do this to yourself? This may seem extreme in this example, but using some of these ideas such as setting variables and using placeholders, will make your code easier to decipher. Also, they come especially in handy when you want to change the parameters of your simulation! Instead of having to go back through your code to find all the places you have to change the particular presynaptic cell, you can just change the pre_cell variable and you are done!
+>So we have covered many of the basic functions of NEURON which should help you get started. There are many more functions available and it is recommended that you work through the NEURON online tutorials but also learn by example from the many models available in ModelDB.
 
-1. Make sure to always add comments to tell yourself and others what it is you are actually doing.  
+## NMODL and NOCMODL
 
-## Extras:
+For a more advanced use of NEURON, membrane mechanisms with complex activation kinetics can be developed and inserted into sections.
+
+The kinds of mechanisms that can be added are:
++ Channels in which the model consists of current-voltage relationships
++ Calculation of internal and external ionic concentration changes due to currents carried by specific ions
+
+Many user defined mechanisms can be simultaneously inserted into sections in NEURON. NEURON will keep track of the total current for each ionic species used and the effect of that current on the membrane potential.
+
+For example, suppose a calcium pump, sodium-calcium exchanger, calcium channel, radial calcium diffusion, and calcium activated potassium mechanisms are inserted into a cable section. Then the total calcium current is calculated as the sum of the individual currents from the calcium pump, exchanger, and channel. The internal calcium concentration just under the membrane is calculated from the total calcium current and diffusion away from the surface. The potassium current through the `cagk` channel is calculated from the internal calcium concentration next to the membrane and the membrane potential. And the membrane potential is calculated from the total current. (The above is only a partial list of the interactions among these channels. The point is that the ionic current, membrane voltage, and concentration computations are consistent regardless of the channels inserted into the cable section.)
+
+Mechanisms are normally local. That is they do not depend on what is happening at other places on the neuron. However, a method exists for writing mechanisms that depend on variables of mechanisms at other locations. For example the calcium concentration at a presynaptic mechanism can be used to calculate the conductance change at a postsynaptic mechanism.  
+
+The language for specifying these mechanisms is called NMODL (NEURON model description language) and the model description translator that emits code suitable for NEURON V3 is called NOCMODL. NMODL and NOCMODL handle identical input model descriptions, they differ merely in the output interface code.
+
+Compiling the code for NMODL mechanisms is specific to the operating system you are on so they cannot just be copied from one system to another.  
+
++ A compiler called **mknrndll** is provided with your NEURON download which will generate the c libraries from NMODL.
++ A utility **modlunit** is provided which should be used to check for problems with the code.
+
+
+## ModelDB
+
+Ref: [https://senselab.med.yale.edu/modeldb/](https://senselab.med.yale.edu/modeldb/)
+A great resource is ModelDB, a database of models for NEURON.  Models can be found by:
++ Cell type
++ Ion channel type
++ Receptor type
+
+as well as whole networks and synapses and more.  Usually the code can viewed online and often models can be run directly on line using an embedded interpreter. When you find one you are really interested in, download and carefully follow the instructions for running the code.  *Be aware that differences in versions of c libraries may cause issues on some systems and errors may be difficult to fix.*
+
+QBI has NEURON available on the HPC cluster but the NEURON community has also provided an online accessible HPC environment: [NeuroscienceGateway](https://www.nsgportal.org/software.html)
+
+There are also many resources listed on this site: [https://senselab.med.yale.edu/ModelDB/mdbresources.cshtml](https://senselab.med.yale.edu/ModelDB/mdbresources.cshtml) although some are more reliable than others!
+
+--------
+## Experiments
 
 Have a play around! You get to play god with your own little neural system.
 
-Try creating a 3 cell network e.g. A connects to B connect to C connects back to A.
+1. Try creating a 3 cell network e.g. A connects to B connect to C connects back to A.
 
-Try creating a 100 cell network where 99 cells converge on 1 cell but that cell **inhibits** the 99.
+1. Try creating a 100 cell network where 99 cells converge on 1 cell but that cell **inhibits** the 99.
 
-Try making the post-synaptic cell the real neuron from the **Complex model** section.
+1. Try making the post-synaptic cell the real neuron from the **Complex model** section.
 
 --------
 
 ## Resources
-http://web.mit.edu/neuron_v7.4/nrntuthtml/tutorial/tutC.html
+[ExpSyn](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#ExpSyn)
+
+[Exp2Syn](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/mech.html#Exp2Syn)
+
+[NetCon](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/neuron/classes/netcon.html#NetCon)
+
+[NMODL](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/nmodl/nmodl.html)

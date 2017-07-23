@@ -452,7 +452,7 @@ dt = 0.025 //ms 40khz
 
 To test that our code has actually loaded we will use the console commands:
 
-```
+```c
 oc> bs
 oc> bs.soma psection()
 oc> bs.dend psection()
@@ -467,6 +467,11 @@ If it all goes well, you can see that
 + the `bs` object is our template `BScell`
 + the `soma` has all the properties we set in the template code
 + the `dend` has the properties we set and also has 21 `nseg` (segments) which has been determined by the `d_lambda` option.
+
+Alternatively, to see all sections:
+```c
+oc> forall {psection()}
+```
 
 #### Viewing the model
 
@@ -496,14 +501,35 @@ As previously, we will use the Run Control and Graphical windows to view our sim
 ------------------------
 ### Experiments
 
-1. How would you generate more than one BScellAxon for a network?
+1. How would you generate more than one BScell for a network?
 
 1. Try changing the properties of the AlphaSynapse to see the effect on the AP, for example, introduce a delay to the onset to allow for equilibration. How could these properties be changed dynamically?
+(*Note the template hoc file must be reloaded with each change by restarting NEURON. Alternatively, if the AlphaSynapse code is moved to bs_run.hoc, it can be reloaded with `xopen("bs_run.hoc")`*)
 
 1. How would you add multiple dendrites?
 
-1. How would you add other biophysical properties?
+1. How might you make the synapse generation more dynamic?
 
+```
+//==================================================
+//Synapses proc with arguments
+//==================================================
+objectvar syn       
+proc synapses() {
+  dend syn = new AlphaSynapse($1) // where $1 is an argument
+  syn.onset = 100     // time to onset in ms
+  syn.tau	  = 0.1   // rise time constant in ms
+  syn.gmax  = 10    // peak conductance	in %mmicro;S (umho)
+  syn.e	    = -15   // reversal potential in	mV
+  syn.i     = 0     //	nA
+}
+
+//The function could then be called with
+synapses(1)
+//or maybe if the position was changed to 0.4
+synapses(0.4)
+
+```
 
 --------
 ## Resources
