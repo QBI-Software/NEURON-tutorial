@@ -49,8 +49,8 @@ n_bs = 2
 
 objectvar bs[n_bs]
 
-for i = 0, n_bs-1 {           // i is the counter, set to 0 to start then
-    bs[i] = new BScell()      // increments by 1 each loop until n_bs - 1
+for i = 0, n_bs-1 {           // i is the counter, from 0 to n_bs-1
+    bs[i] = new BScell()      // a new cell for each loop
 }
 ```
 
@@ -83,8 +83,8 @@ As we are adding multiple cells, to view them in the space plot, we will need to
 1. We can reposition cells dynamically by adding a call to `position()`  in **bs_net_run.hoc**
 
 ```c
-for i = 0, n_bs-1 {           // i is the counter, from 0 to n_bs-1
-    bs[i] = new BScell()      // a new cell for each loop
+for i = 0, n_bs-1 {           
+    bs[i] = new BScell()      
     z = i * 100
     x = i * 10
     y = i * 10
@@ -299,8 +299,7 @@ Compiling the code for NMODL mechanisms is specific to the operating system you 
 
 ## ModelDB
 
-Ref: [https://senselab.med.yale.edu/modeldb/](https://senselab.med.yale.edu/modeldb/)
-A great resource is ModelDB, a database of models for NEURON.  Models can be found by:
+A great resource is [ModelDB](https://senselab.med.yale.edu/modeldb/), a database of models for NEURON.  Models can be found by:
 + Cell type
 + Ion channel type
 + Receptor type
