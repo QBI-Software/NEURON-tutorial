@@ -71,6 +71,6 @@ nrngui "bs_run.hoc"
 
 
 
-[bash]: {{ site.github.repository_url }}/raw/gh-pages/img/bash.PNG "NEURON bash console"
+[bash]: {{site.github.repository_url}}/raw/gh-pages/img/bash.PNG "NEURON bash console"
 
-[datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"
+[datafile]: {{site.github.repository_url}}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"

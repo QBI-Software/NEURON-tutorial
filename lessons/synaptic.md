@@ -579,3 +579,5 @@ synapses(0.4)
 [console_bsa]:{{ site.github.repository_url }}/raw/gh-pages/img/Console_bsa.PNG "Console with bsa output"
 
 [hocoutput]:{{ site.github.repository_url }}/raw/gh-pages/img/hocoutput.PNG "Running our HOC code"
+
+[modelview]:{{ site.github.repository_url }}/raw/gh-pages/img/ModelView.PNG "Model View"

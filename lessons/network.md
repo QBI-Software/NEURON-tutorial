@@ -170,10 +170,10 @@ objectvar bs[n_bs]
 
 for i = 0, n_bs-1 {           // i is the counter, set to 0 to start then
     bs[i] = new BScell()      // increments by 1 each loop until n_bs - 1
-    z = i * 100
-    x = i * 10
-    y = i * 10
-    bs[i].position(x,y,z)      // reposition cells for viewing
+    bs_z = i * 100
+    bs_x = i * 100
+    bs_y = i * 100
+    bs[i].position(bs_x,bs_y,bs_z)      // reposition cells for viewing
 }
 
 //=================================================
@@ -225,14 +225,14 @@ dt = 0.025 //ms 40khz
 1. Save the session as **bs_net.ses**
 1. At the end of the **bs_net_run.hoc**, add a line
 
-```
+```c
 load_file("bs_net.ses")
 ```
 Now when the **bs_net_run.hoc** file is loaded, the windows will also appear, ready to run your simulation.
 
 ![SimpleNetwork]
 
-Try increasing the value of the `weight` variable to `0.8` - makes a difference right?!
+Try increasing the value of the `weight` variable to `0.8` - this is how you would model ion channel density at a synapse.
 
 ![SimpleNetwork2]
 
