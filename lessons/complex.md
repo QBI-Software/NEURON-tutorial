@@ -197,7 +197,7 @@ A space plot allows you to view the changes in conductance along a section.
 
 ![space2]
 
-2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**. (This won't do much with our model but good for branching dendrites.)
+2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**.
 3. The middle mouse button is used to move the whole representation.
 
 
@@ -321,6 +321,10 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 [iclamp_rig]:{{ site.github.repository_url }}/raw/gh-pages/img/iclamp_rig.png "Virtual IClamp rig"
 
 [impedance]:{{ site.github.repository_url }}/raw/gh-pages/img/impedance.png "Impedance tools"
+
+[space1]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.gif "Space plot window"
+
+[space2]:{{ site.github.repository_url }}/raw/gh-pages/img/spaceplot.gif "Space plot trace"
 
 
 [datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"

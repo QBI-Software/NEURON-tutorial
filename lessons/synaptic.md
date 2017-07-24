@@ -568,10 +568,6 @@ synapses(0.4)
 
 [console_soma]:{{ site.github.repository_url }}/raw/gh-pages/img/Console_soma.PNG "Console with soma"
 
-[space1]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.gif "Space plot window"
-
-[space2]:{{ site.github.repository_url }}/raw/gh-pages/img/spaceplot.gif "Space plot trace"
-
 [connect]:{{ site.github.repository_url }}/raw/gh-pages/img/sthAeqsec.gif "Connecting sections"
 
 [console_init]:{{ site.github.repository_url }}/raw/gh-pages/img/Console_init.PNG "Console init"
