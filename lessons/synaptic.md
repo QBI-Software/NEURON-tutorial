@@ -489,7 +489,7 @@ Unfortunately, we can no longer use the CellBuilder as although there is an *imp
 
 As previously, we will use the Run Control and Graphical windows to view our simulation.
 
-1. Open the **File -> RunControl** (you will see our parameters in the `init.hoc` are set)
+1. Open the **File -> RunControl** (you will see our parameters in the `bs_run.hoc` are set)
 1. Open a **Graph -> Voltage Axis** window
 1. Click on **Init &amp; Run** -> Voila!
 

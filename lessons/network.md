@@ -12,7 +12,7 @@ In NEURON, a connection between cells is created with a Network Connection objec
 
 | Component     | Description    |
 | :------------- | :------------- |
-| Source       | The source is normally a reference to a membrane potential but any range variable can be used. The source may also be a POINT_PROCESS with a NET_RECEIVE block which contains a call to net_event. PointProcesses like this serve as entire artificial cells.  The source may be a NULLObject.  |
+| Source       | The source is normally a reference to a membrane potential but any range variable can be used. The source may also be a POINT_PROCESS with a NET_RECEIVE block which contains a call to net_event (these serve as entire artificial cells).  The source may even be a NULLObject.  |
 | Target  |The target must be a POINT_PROCESS that defines a NET_RECEIVE procedure. The target is allowed to be nil (NULLObject) in which case the NetCon is always inactive but this can be useful for recording the spike train from an output cell.|
 | Threshold |(Optional) If not specified the default value is 10 (mV). For all NetCon objects that share a source, you can only specify one threshold. |
 | Delay |(Optional) If not specified the default value is 1 (ms) |
@@ -20,11 +20,12 @@ In NEURON, a connection between cells is created with a Network Connection objec
 
 When the `source` passes `threshold`, the `target` will receive an **event** at time t (`delay`) along with `weight` information. There is no limit on delay and there is no limit on the number of events pending delivery.
 
->See Help page for an easy way to rerun HOC files
 
 ### STEP 1: Creating multiple cells
 
-We will use the template BSCell to create multiple cells.
+We will use the template BScell to create multiple cells.
+
+>See Help page for an easy way to rerun HOC files
 
 1. Open **bs_run.hoc** in an editor and save it as a new file **bs_net_run.hoc**
 1. We will change the single cell `objectvar bs` to a list of 2 cells `objectvar bs[2]` where the square brackets represents an array of items.
@@ -73,31 +74,28 @@ proc init() {
     geom_nseg()
     synlist = new List()
     //synapses()
-    //x = y = z = 0 // only change via position
+    x = y = z = 0 // only change via position()
 }
 ```
 
-As we are also adding multiple cells, to view them in the space plot, we will need to change the topology.
+As we are adding multiple cells, to view them in the space plot, we will need to change the topology or they will lie exactly on top of each other.
 
-1. Remove or comment out the line that centres the x, y, z position of the cells as this will exactly overlay the cells so they won't be seen
-1. We will then reposition cells dynamically by adding a call to `position()`  in **bs_net_run.hoc**
+1. We can reposition cells dynamically by adding a call to `position()`  in **bs_net_run.hoc**
 
 ```c
-for i = 0, n_bs-1 {           // i is the counter, set to 0 to start then
-    bs[i] = new BScell()      // increments by 1 each loop until n_bs - 1
+for i = 0, n_bs-1 {           // i is the counter, from 0 to n_bs-1
+    bs[i] = new BScell()      // a new cell for each loop
     z = i * 100
     x = i * 10
     y = i * 10
     bs[i].position(x,y,z)      // reposition cells for viewing
 }
 
-
 ```
-
 
 ### STEP 3: Creating an ExpSyn
 
-We have created two cells which we now will connect.
+We have created two cells which we will now connect.
 
 ![netcondiagram]
 
@@ -125,27 +123,29 @@ bs[1].dend net_syn[0] = new ExpSyn(0.5)
 
 ### STEP 4: Creating a connection with NetCon
 
-1. Create a **NetCon** object which will trigger when the presynaptic source reaches threshold
+1. We will create the actual connection with a **NetCon** object which will trigger when the presynaptic source reaches threshold
 1. The parameters of the synaptic connection are defined on creation of the **NetCon**
 
 ```c
 new NetCon(&source_v, synapse, threshold, delay, weight)
+
 ```
-    *`source_v`* = source will be the presynaptic membrane potential (`BScell[0].axon.v(1)`)
 
-    *`synapse`* = refers to the ExpSyn receiving the event (`net_syn[0]`)
+    `source_v` = source will be the presynaptic membrane potential (`bs[0].soma.v(1)`)
 
-    *`threshold`* = potential in mV of the *source_v* to trigger the event
+    `synapse` = refers to the ExpSyn receiving the event stored in an array (`net_syn[0]`)
 
-    *`delay`* = time (ms) after the triggered event is received
+    `threshold` = potential in mV of the `source_v` to trigger the event
 
-    *`weight`* = which represents the strength of the synapse
+    `delay` = time (ms) after the triggered event is received
+
+    `weight` = which represents the strength of the synapse
 
 1. Add the NetCon object to the synapse list in the postsynaptic cell, with reference to the soma membrane potential (mV) of the presynaptic cell.
 
 ```c
 objectvar con
-con = new NetCon(&bs[0].soma.v(1), net_syn[0], -20, 1, 0.8)
+con = new NetCon(&bs[0].soma.v(1), net_syn[0], -20, 1, 0.5)
 bs[0].soma bs[1].synlist.append(con)
 
 ```
@@ -187,7 +187,7 @@ objectvar net_syn[1]
 bs[1].dend net_syn[0] = new ExpSyn(0.5)
 //Create a connection from cell0 to cell1
 objectvar con
-con = new NetCon(&bs[0].soma.v(1), net_syn[0], -20, 1, 0.8)
+con = new NetCon(&bs[0].soma.v(1), net_syn[0], -20, 1, 0.5)
 bs[0].soma bs[1].synlist.append(con)
 
 //==================================================
@@ -199,10 +199,46 @@ dt = 0.025 //ms 40khz
 
 ```
 
+### STEP 5: Run network simulation
+
+1. Load the **bs_net_run.hoc** into a fresh version of NEURON with `nrngui`.
+1. Open the following windows:
+   1. Run Control
+   1. Graph voltage:
+       1. Select **Plot what?**
+       1. Click on **Show**
+       1. Select **Object refs**
+       1. Double-click on `bs[0]`
+       1. In the middle panel, double-click on `soma`
+       1. In the third panel, double-click on `v(0.5)`
+       1. Click on **Accept**
+       1. Repeat these steps for `bs[1]`
+       1. Right-click menu, select **Delete**, click on `v(0.5)` to remove it
+       1. Right-click menu, select **Color/Brush**, select a color, click on `bs[0].soma.v(0.5)`
+       1. Repeat for `bs[1]` with another color
+   1. Graph shape plot:
+       1. Right-click menu, select **Shape plot**
+       1. Right-click menu, select **3D rotate**
+       1. Drag cursor along z-axis until 2 lines are showing (these are your cells!)
+       1. Right-click menu, select **Shape style** then **Show diam** (this indicates which is the axon)
+
+1. Save the session as **bs_net.ses**
+1. At the end of the **bs_net_run.hoc**, add a line
+
+```
+load_file("bs_net.ses")
+```
+Now when the **bs_net_run.hoc** file is loaded, the windows will also appear, ready to run your simulation.
+
+![SimpleNetwork]
+
+Try increasing the value of the `weight` variable to `0.8` - makes a difference right?!
+
+![SimpleNetwork2]
 
 >Congratulations!!! You have modelled a simple neural network.
 
-### STEP 5: Improving the code
+### STEP 6: Improving the code
 
 We have provided this code within the **bs_net_run.hoc** but it is often better to separate this into a separate file such as **stimulus.hoc** and include a call in the **bs_net_run.hoc** to load it.  This allows you to use the same code for different models.  However, the code itself must be modified to use variable parameters that do not explicitly refer to the template. To manage this:
 
@@ -229,7 +265,7 @@ proc connect_cells () {
   t=$5 //synaptic delay
   print "Setting network connection..."
   print "Presynaptic cell: BScell[", i,"], Location: ", vm, ", Threshold: ", t0, "mV, Synaptic weight: ", weight, ", Synaptic delay: ", t , "ms"
-  BScell[i].axon con = new NetCon(&v(vm), net_syn, t0, weight, t)
+  bs[i].axon con = new NetCon(&v(vm), net_syn, t0, weight, t)
 }
 
 //call proc
@@ -268,8 +304,10 @@ A great resource is ModelDB, a database of models for NEURON.  Models can be fou
 + Cell type
 + Ion channel type
 + Receptor type
++ Synapse type
++ Networks
 
-as well as whole networks and synapses and more.  Usually the code can viewed online and often models can be run directly on line using an embedded interpreter. When you find one you are really interested in, download and carefully follow the instructions for running the code.  *Be aware that differences in versions of c libraries may cause issues on some systems and errors may be difficult to fix.*
+Usually the code can be viewed online and often models can be run directly online using an embedded interpreter. When you find one you are really interested in, download and carefully follow the instructions for running the code (not everyone follows recommended conventions).  *Be aware that differences in versions of c libraries may cause issues on some systems and errors may be difficult to fix.*
 
 QBI has NEURON available on the HPC cluster but the NEURON community has also provided an online accessible HPC environment: [NeuroscienceGateway](https://www.nsgportal.org/software.html)
 
@@ -286,6 +324,10 @@ Have a play around! You get to play god with your own little neural system.
 
 1. Try making the post-synaptic cell the real neuron from the **Complex model** section.
 
+1. Turn the shape plot into a time plot, then select portions of each cell by clicking on them for a comparative plot.
+
+1. Turn the shape plot into a space plot to see the potential change along the whole neuron - slow down the time by reducing dt.
+
 --------
 
 ## Resources
@@ -297,4 +339,8 @@ Have a play around! You get to play god with your own little neural system.
 
 [NMODL](https://www.neuron.yale.edu/neuron/static/docs/help/neuron/nmodl/nmodl.html)
 
-[netcondiagram]: {{ site.github.repository_url }}/raw/gh-pages/img/Netcon_diagram.PNG "NetCon diagram"
+[netcondiagram]: {{ site.github.repository_url }}/raw/gh-pages/img/Netcon_diagram.png "NetCon diagram"
+
+[SimpleNetwork]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNetwork.PNG "Simple Network"
+
+[SimpleNetwork2]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNetwork2.PNG "Simple Network - higher weight value"

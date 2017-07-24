@@ -24,7 +24,7 @@ Prior to the tutorial, please download and install NEURON on your system - you c
 | 12:00-13:00 | Lunch | 60 mins |
 | 13:00-14:30 | [A synaptic model](lessons/synaptic) (creating a model with HOC, simulating a synaptic input)  | 90 mins |
 | 14:30-14:45 | Afternoon tea | 15 mins |
-| 14:45-16:30 | [A simple network](lessons/network) | 135 mins |
+| 14:45-16:30 | [A simple network](lessons/network) (connecting neurons, creating an event-driven network ) | 135 mins |
 
 ### Acknowledgements
 

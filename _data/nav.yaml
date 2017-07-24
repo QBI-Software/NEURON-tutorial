@@ -4,7 +4,11 @@ docs:
 - title: Home
   url: index
   pagurl: ../index
-  
+
+- title: Setup
+  url: setup
+  pagurl: ../setup
+
 - title: Introduction
   url: lessons/intro
   pagurl: intro
@@ -24,10 +28,6 @@ docs:
 - title: Simple Network
   url: lessons/network
   pagurl: network
-
-- title: Setup
-  url: setup
-  pagurl: ../setup
 
 - title: Help
   url: lessons/help

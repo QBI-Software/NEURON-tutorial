@@ -25,7 +25,7 @@ If it all works, exit the application interface from the window called "NEURON M
 
 ## Changing default temperature
 
-NEURON sets the default temperature to `6.3oC` in line with the squid axon experiments by Hodgkin and Huxley.  For our purposes, this should be changed to match physiological or lab conditions.
+NEURON sets the default temperature to `6.3 celsius` in line with the squid axon experiments by Hodgkin and Huxley.  For our purposes, this should be changed to match physiological or lab conditions.
 
 1. From the main menu, select **Tools -> Distributed mechanisms -> celsius**
 1. Enter required value (eg `37`)
@@ -56,7 +56,8 @@ You may get a notification of 'unidentified developer' preventing you from runni
 
 As we make changes to the files, we will need to reload them cleanly in NEURON.  
 1. In can be time consuming to relaunch the `nrngui` every time and change into your working directory via **File -> recent dir**.  
-1. An alternative is to run the `bash` command downloaded with NEURON, change to your working directory and run the hoc file directly.
+1. An alternative is to run the `bash` command downloaded with NEURON, change to your working directory and type `nrngui` then Enter.
+1. HOC and session files can be launched directly as shown.
 1. To quit the `oc>` type `quit()` and use key 'UP' to rerun the `nrngui` command
 
 ```
@@ -66,6 +67,7 @@ nrngui "bs_run.hoc"
 ```
 
 ![bash]
+
 
 
 
