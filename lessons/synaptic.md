@@ -193,9 +193,9 @@ proc topol() { local i
 }
 
 proc basic_shape() {
-  //The parameters for this function are: pt3dadd(x,y,z,diam pt)
-  soma {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}      
-  dend {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(150, 0, 0, 1)}
+  //format is pt3dadd(x,y,z,diam)
+  soma {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(20, 0, 0, 1)}
+  dend {pt3dclear() pt3dadd(20, 0, 0, 1) pt3dadd(120, 0, 0, 1)}
   //Add this line
   axon {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-120, 0, 0, 1)}    
 }

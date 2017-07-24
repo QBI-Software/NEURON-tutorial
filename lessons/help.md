@@ -2,6 +2,24 @@
 layout: default
 title: Help
 ---
+## Running from commandline
+
+As we make changes to the files, we will need to reload them cleanly in NEURON.  
+1. One option is to relaunch the `nrngui` every time and change into your working directory via **File -> recent dir**.  
+1. An alternative is to run the `bash` command downloaded with NEURON, change to your working directory and run the hoc file directly.
+1. To quit the `oc>` type `quit()` and use key 'UP' to rerun the `nrngui` command
+
+```
+cd /d/Projects/Tutorial/Tutorial
+nrngui "bs_run.hoc"
+
+```
+
+![bash]
+
+
+[bash]: {{ site.github.repository_url }}/raw/gh-pages/img/bash.PNG "NEURON bash console"
+
 ## Some programming concepts for non-programmers
 
 ### Variable
@@ -15,7 +33,7 @@ In HOC, a variable must first be *declared*:
 
 ### Procedure
 
-A program will run through a series of steps which can be grouped together as a *procedure* and given a name of your choice followed by parentheses `()`.  *A procedure is called a &quot;method&quot; in most other languages.* 
+A program will run through a series of steps which can be grouped together as a *procedure* and given a name of your choice followed by parentheses `()`.  *A procedure is called a &quot;method&quot; in most other languages.*
 
 1. A procedure must first be *defined* which is written as `proc methodname()` and contains the actual code to run within curly brackets `{}`
 1. To run the procedure, it is *called* by the name and parentheses `methodname()`.

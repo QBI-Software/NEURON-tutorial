@@ -17,12 +17,20 @@ We will be using an actual pyramidal neuron traced in Neurolucida, courtesy of L
 
 To test your installation, click on (WIN) **NEURON demo** OR (MAC) **neurondemo**.  
 
-![alt text][demo]
-
+![demo]
 
 If you don't get a series of windows popping up, check the console window for errors and check the Troubleshooting pages for your OS on the download page.  
 
 If it all works, exit the application interface from the window called "NEURON Main Menu" under the File menu.
+
+## Changing default temperature
+
+NEURON sets the default temperature to `6.3oC` in line with the squid axon experiments by Hodgkin and Huxley.  For our purposes, this should be changed to match physiological or lab conditions.
+
+1. From the main menu, select **Tools -> Distributed mechanisms -> celsius**
+1. Enter required value (eg `37`)
+1. This will be saved when the session is saved otherwise it will need to manually done each time.
+
 
 ## Text editor
 
@@ -44,5 +52,23 @@ You may get a notification of 'unidentified developer' preventing you from runni
 1. You can also drag `nrngui` from the Applications list to the toolbar to make it easier to find
 
 
-[demo]: {{ site.github.repository_url }}/raw/gh-pages/img/NeuronDemo.PNG "NEURON Demo for testing"
+## Running from commandline
+
+As we make changes to the files, we will need to reload them cleanly in NEURON.  
+1. In can be time consuming to relaunch the `nrngui` every time and change into your working directory via **File -> recent dir**.  
+1. An alternative is to run the `bash` command downloaded with NEURON, change to your working directory and run the hoc file directly.
+1. To quit the `oc>` type `quit()` and use key 'UP' to rerun the `nrngui` command
+
+```
+cd /d/Projects/Tutorial/Tutorial
+nrngui "bs_run.hoc"
+
+```
+
+![bash]
+
+
+
+[bash]: {{ site.github.repository_url }}/raw/gh-pages/img/bash.PNG "NEURON bash console"
+
 [datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"
