@@ -5,14 +5,14 @@ title: Complex Model
 ---
 # A complex model
 
-As you may have imagined, it would be very time-consuming and difficult to build an actual neuron in CellBuilder.  Fortunately, there is a way of loading data obtained from neuron tracing directly into NEURON. We will use a simplified thick-tufted layer 5 pyramidal neuron from the rat primary visual cortex which was filled with biocytin through a patch pipette and visualized with Streptavidin-Alexa 488. The filled cell was imaged using spinning disk confocal microscopy and reconstructed using [Neurolucida software].
+As you may have imagined, it would be very time-consuming and difficult to build an actual neuron in CellBuilder.  Fortunately, there is a way of loading data obtained from neuron tracing directly into NEURON. We will use a simplified thick-tufted layer 5 pyramidal neuron from the rat primary visual cortex which was filled with biocytin through a patch pipette and visualized with Streptavidin-Alexa 488. The filled cell was imaged using spinning disk confocal microscopy and reconstructed using [Neurolucida] software.
 
 ![pyramidalneuron]
 
 ### Preliminary setup
 
 1. Launch a fresh version of NEURON via `nrngui`
-1. Download the [datafile] to your working directory
+1. If you haven't already done so, download the [datafile] to your working directory
 
 ### STEP 1: Importing the cell data
 
@@ -166,8 +166,10 @@ Previously, we added a graph and accepted defaults.  Now we will see how to cust
   1. Find `v(0.5)` in the second panel and double-click
   1. Click **Accept**
 1. Multiple traces can be added in the same window for comparison
-  1. From the right-click menu, under **Plot what?**, select **Keep lines**
+  1. From the right-click menu, under **Plot what?**
   1. From this menu, then select **Color/Brush** and pick a color to differentiate
+
+  > If you select **Keep lines**, you can run successive traces on top of each other (useful for IV)
 
 
 ![vgraph]
@@ -179,39 +181,40 @@ Previously, we added a graph and accepted defaults.  Now we will see how to cust
 
 ![igraph] ![iclamp_axis]
 
-#### Creating a Space Plot
-
-A space plot allows you to view the changes in conductance along a section.
-
-1. To create a space plot, select **Shape plot** from the **Graph** menu in the NEURON Main Menu.
-1. From this window, you can select from the plot menu with the *right mouse button*.
-1. Select a **Space Plot**.
-1. By default, voltage is the variable to plot, but you can change this with the **Plot What?** menu item.
-1. The plot shown is a schematic of our neuron so just looks like a straight line.
-
-![space1]
-
-1. To create the space plot graph, you need to select a section of the neuron to include in the space plot by clicking the left mouse button at the beginning of the section, dragging the mouse across the section you want to plot (while holding the mouse button down), and releasing the mouse button when you have covered the sections you want to plot. A line will appear from where you first clicked the mouse button to the current location of the pointer. When you release the mouse button, the sections you selected will be highlighted in colour, and a new window with the space plot will be opened.
-1. Press the **Init &amp; Run** button in the **RunControl** window to see the space plot in action.
-1. You may have to zoom in with **right-click menu -> View... -> View = plot**
-
-![space2]
-
-2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**.
-3. The middle mouse button is used to move the whole representation.
-
 
 #### 5C: Run the simulation
 
 Now we have a whole rig:
 
+1. Open **Tools -> RunControl**
+    1. Set `Tstop` to `1000` ms. This makes our recorded period 1000 ms long.
+    1. Increase the IClamp amplitude to `2nA`
+    1. Hit **Init &amp; Run** in the **RunControl** window. What do you see?
+
 ![iclamp_rig]
 
-1. Open **Tools -> RunControl**
-  1. Set `Tstop` to `1000` ms. This makes our recorded period 1000 ms long.
-  1. Increase the IClamp amplitude to `2nA`
-  1. Hit **Init &amp; Run** in the **RunControl** window. What do you see?
 1. If part of the trace is missing, right-click on the graph, select **View...** and **View=plot** to rescale
+
+#### 5D: Creating a Space Plot
+
+A space plot allows you to view the changes in conductance along the neuron.
+
+1. To create a space plot, select **Shape plot** from the **Graph** menu in the NEURON Main Menu.
+1. From this window, you can select from the plot menu with the *right mouse button*.
+1. Select a **Space Plot**.
+2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**.
+3. The middle mouse button is used to move the whole representation.
+
+![space2]
+
+1. To create the space plot graph, select a section of the neuron to include in the space plot by clicking the left mouse button at the beginning of the section, dragging the mouse across the section you want to plot (while holding the mouse button down), and releasing the mouse button when you have covered the sections you want to plot. (In our diagram, we have selected from top to bottom)
+1. When you release the mouse button, the sections you selected will be highlighted in colour.
+1. A new graph will appear representing voltage vs distance. (*By default, voltage is the variable to plot, but you can change this with the Plot What? menu item*)
+1. Press the **Init &amp; Run** button in the **RunControl** window to see the space plot in action.
+1. You may have to zoom in with right-click menu, then **View... -> View = plot**
+
+![space2]
+
 
 
 ### STEP 6: Save Me
@@ -225,47 +228,19 @@ Now we have a whole rig:
 
 Now it's time to do your own investigations:
 
-#### 7.1 Perform an IV
+1. Perform an IV : Change parameters of your current clamp and see what happens.
+1. Measure voltage at different locations in the cell simultaneously: Compare how they differ.
+  + (*Hint: plot what?*)
+1. Inject current into different regions of the cell
+  + (*Hint: right click on the shape plot of the point process and select section. Then left click on the neuron to move the blue circle.*)
+1. Find the delay required to reach steady state
+  + (*Hint: alter the delay parameter in Run Control and zoom into the Voltage graph*)
+1. Modify values of Ra, Cm and g_pas in CellBuilder: Investigate the changes in voltage responses and voltage transfer across the neuron.
+1. Investigate the origin of the action potential : Slow down the output to see what the voltage is doing in real time.
+  + Try putting `50000` into the `Points plotted/ms` box in the **Run Control**.
+  + Click `Init &amp; Run` and have a look at the **voltage axis** and **space plot**.
 
-Change parameters of your current clamp and see what happens.
-
-#### 7.2 Measure voltage at different locations in the cell simultaneously
-
-Compare how they differ. (*Hint: plot what?*)
-
-#### 7.3 Inject current into different regions of the cell
-
-(*Hint: right click on the shape plot of the point process and select section. Then left click on the neuron to move the blue circle.*)
-
-#### 7.4 Find the delay required to reach steady state
-
-(*Hint: alter the delay parameter in Run Control and zoom into the Voltage graph* )
-
-#### 7.5 Modify values of Ra, Cm and g_pas in CellBuilder
-
-Investigate the changes in voltage responses and voltage transfer across the neuron.
-
-#### 7.6 Investigate the origin of the action potential
-
-Slow down the output to see what the voltage is doing in real time.
-1. Try putting `50000` into the `Points plotted/ms` box in the **Run Control**.
-1. Click `Init &amp; Run` and have a look at the **voltage axis** and **space plot**.
-
-From these can you determine:
-
-•	Is the voltage uniform in all parts of the cell? Why/why not?
-
-•	Where does the action potential generate?
-
-•	Does the action potential invade all parts of the cell? What happens to its amplitude when it moves away from its point of origin? What happens when you:
-
-> A) change Ra to 2000
-
-> B) change your dendrite length to 2000um
-
-> C) divide your hh conductance in the soma and dendrite by 10
-
-#### 7.7 Impedance tools
+#### Impedance tools
 
 NEURON is very powerful and has a number of extra additions that can aid your analysis of results. For example we can observe voltage decay throughout the cell using the impedance tools. Discover for yourself how these work and how they may aid your analysis.
 
@@ -276,7 +251,7 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 ## Resources
 
 
-[Neurolucida software](http://www.mbfbioscience.com/neurolucida)
+[Neurolucida]:(http://www.mbfbioscience.com/neurolucida)
 
 [pyramidalneuron]: {{ site.github.repository_url }}/raw/gh-pages/img/pyramidal.png "Pyramidal Neuron (Neurolucida)"
 
@@ -322,9 +297,9 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [impedance]:{{ site.github.repository_url }}/raw/gh-pages/img/impedance.png "Impedance tools"
 
-[space1]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.gif "Space plot window"
+[space1]:{{ site.github.repository_url }}/raw/gh-pages/img/space1.PNG "Space plot window"
 
-[space2]:{{ site.github.repository_url }}/raw/gh-pages/img/spaceplot.gif "Space plot trace"
+[space2]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.PNG "Space plot trace"
 
 
 [datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"

@@ -25,7 +25,7 @@ If it all works, exit the application interface from the window called "NEURON M
 
 ## Changing default temperature
 
-NEURON sets the default temperature to `6.3 celsius` in line with the squid axon experiments by Hodgkin and Huxley.  For our purposes, this should be changed to match physiological or lab conditions.
+NEURON sets the default temperature to `6.3 celsius` in line with the squid axon experiments by Hodgkin and Huxley.  For mammalian experiments, this should be changed to match physiological or lab conditions.
 
 1. From the main menu, select **Tools -> Distributed mechanisms -> celsius**
 1. Enter required value (eg `37`)
@@ -37,7 +37,7 @@ NEURON sets the default temperature to `6.3 celsius` in line with the squid axon
 A plain text editor is required for editing the HOC code. (Programs like Microsoft Word and Wordpad are not plain text editors and cannot be used for code.)  The following editors are recommended if you don't have a favourite already.
 
 1. [ATOM](https://atom.io) - the only editor known with HOC syntax highlighting!  - Multi-platform and very cool
-  1. to install this, go to Packages, search for `language-hoc` and install or download from https://atom.io/packages/language-hoc
+    1. to install this, go to Packages, search for `language-hoc` and install or download from https://atom.io/packages/language-hoc
 1. [JEdit](http://jedit.org) - extremely easy to use and Multi-platform
 1. Notepad Plus (Windows) - already installed
 1. nano (Linux) - convenient but not necessarily intuitive
@@ -56,20 +56,20 @@ You may get a notification of 'unidentified developer' preventing you from runni
 
 As we make changes to the files, we will need to reload them cleanly in NEURON.  
 1. In can be time consuming to relaunch the `nrngui` every time and change into your working directory via **File -> recent dir**.  
-1. An alternative is to run the `bash` command downloaded with NEURON, change to your working directory and type `nrngui` then Enter.
+1. An alternative is to run the `bash` console downloaded with NEURON, change to your working directory and type `nrngui` then Enter.
 1. HOC and session files can be launched directly as shown.
 1. To quit the `oc>` type `quit()` and use key 'UP' to rerun the `nrngui` command
 
 ```
-cd /d/Projects/Tutorial/Tutorial
+cd /d/Projects/Tutorial/tutorial
 nrngui "bs_run.hoc"
 
 ```
 
 ![bash]
 
-
-
+-----
+[demo]: {{site.github.repository_url}}/raw/gh-pages/img/NeuronDemo.PNG "NEURON demo"
 
 [bash]: {{site.github.repository_url}}/raw/gh-pages/img/bash.PNG "NEURON bash console"
 

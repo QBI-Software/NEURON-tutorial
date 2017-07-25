@@ -163,7 +163,9 @@ We are now ready to load the specifications of our model into the NEURON simulat
 ![pointprocess]
 
 
-1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched. <a data-toggle="collapse" data-target="#tip3">More ...</a>
+1. Now from the Main Menu window, select **Tools**->**RunControl**. This is our stimulus parameter window and is where the simulation is launched.
+
+<button  class="btn btn-info" data-toggle="collapse" data-target="#tip3">More about Run Control</button>
 
 <div id="tip3" class="alert alert-info collapse">
 <h3>Run control window parameters </h3>
@@ -287,17 +289,17 @@ Now it's time for you to complete the simple neuron.  To check you've got the ha
 | Basal dendrite | `bas` | 200 | 3 | pas (`e_pas` =-65mV) |
 | Axon | `axon` | 800 | 1 | `hh` |
 
-*Don't forget to save this to simple_cell.ses - we will be using it later.*
+*Don't forget to save your changes to simple_cell.ses*
 
-Check it looks similar to <a data-toggle="collapse" data-target="#tip4">THIS</a>
+<button class="btn btn-info" data-toggle="collapse" data-target="#tip4">View updated neuron</button>
 
 <div id="tip4" class="collapse">
 
 <img src="{{ site.github.repository_url }}/raw/gh-pages/img/SimpleNeuron_complete.PNG" title="Complete Simple Neuron" alt="SimpleNeuron_complete"/>
 
 </div>
---------
 
+--------
 ## Resources
 
 [Using the CellBuilder](https://www.neuron.yale.edu/neuron/static/docs/cbtut/main.html)

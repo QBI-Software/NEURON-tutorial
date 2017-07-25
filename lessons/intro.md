@@ -14,7 +14,7 @@ Many aspects of neural behaviour can be demonstrated with NEURON, for example, t
 
 Several predefined features are provided with NEURON, some of which we will use, are:
 
-+ Hodgkin-Huxley (HH) current [1]
++ Hodgkin-Huxley (HH) current
 + Moore-Cox sodium channel
 + Ca channel
 + Ca-sensitive K channels
@@ -38,7 +38,7 @@ The main aim of this course is to understand how you can produce a simulated ele
 
 ## Background knowledge
 
-NEURON models electrophysiological data and a good background understanding of neuronal electrophysiology is essential for creating accurate models.  This tutorial is a practical guide on how to input data into NEURON to create models so it will not cover any of the theories behind the algorithms. The major aspect of NEURON to be aware of, is that the basic the basic building block is the **segment** component, which is a cylinder of uniform conductance based on cable theory [2].  
+NEURON models electrophysiological data and a good background understanding of neuronal electrophysiology is essential for creating accurate models.  This tutorial is a practical guide on how to input data into NEURON to create models so it will not cover any of the theories behind the algorithms. The major aspect of NEURON to be aware of, is that the basic building block is the **segment** component, which is a cylinder of uniform conductance based on cable theory.  
 
 ## Getting started
 
@@ -46,7 +46,7 @@ NEURON models electrophysiological data and a good background understanding of n
 
 So let's go!
 
-### STEP 1: Launch the GUI version of NEURON with nrngui.
+### STEP 1: Launch the GUI version of NEURON with nrngui
 
 From your NEURON folder created during installation, click on `nrngui`.
 *For those preferring the commandline, type the following from the NEURON directory:*
@@ -62,10 +62,11 @@ Don't lose this window!  We will be using it to launch:
 1. Cell Builder
 2. Current clamp processes
 2. Simulation controls
+1. Output graphs
 3. Save our files
 4. Load our saved files
 
-## Set NEURON environment
+### STEP 2: Setup your NEURON project
 
 It is recommended to create a project to keep your model files together.  
 
@@ -76,12 +77,12 @@ It is recommended to create a project to keep your model files together.
 1. When you re-open NEURON at a later date, from the **File** menu, select **recent dir** to quickly find your folder again
 
 --------
-
 ## Resources
+
 [What is NEURON](https://www.neuron.yale.edu/neuron/what_is_neuron)
 
-[1]: http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod
+[NEURON's HH defined](http://www.neuron.yale.edu/hg/neuron/nrn/file/d887332b34c3/src/nrnoc/hh.mod)
 
-[2]: http://www.scholarpedia.org/article/Neuronal_cable_theory
+[Neuronal Cable Theory](http://www.scholarpedia.org/article/Neuronal_cable_theory)
 
 [mainmenu]: {{ site.github.repository_url }}/raw/gh-pages/img/MainMenu.PNG "NEURON's main menu"
