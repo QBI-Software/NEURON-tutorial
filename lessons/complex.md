@@ -217,7 +217,7 @@ A space plot allows you to view the changes in conductance along the neuron.
 
 1. Now have a make another shape plot, and this time right click and select "shape plot"
 2. A space plot will colour map any variable of each section across your neuron(s) and will change as your simulation is running. The default variable is voltage.
-3. Try slowing down the simulation by change "dt" in run control to 0.0025.
+3. Try slowing down the simulation by change "dt" in run control to 0.0025. (you might also want to reduce the delay on your iclamp)
 4. Hit run.
 5. Try dt = 0.00025
 

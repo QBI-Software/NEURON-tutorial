@@ -323,9 +323,9 @@ Have a play around! You get to play god with your own little neural system.
 
 1. Try making the post-synaptic cell the real neuron from the **Complex model** section.
 
-1. Turn the shape plot into a time plot, then select portions of each cell by clicking on them for a comparative plot.
+1. Turn the space plot into a time plot, then select portions of each cell by clicking on them for a comparative plot.
 
-1. Turn the shape plot into a space plot to see the potential change along the whole neuron - slow down the time by reducing dt.
+1. Turn the space plot into a shape plot to see the potential change along the whole neuron - slow down the time by reducing dt.
 
 --------
 
