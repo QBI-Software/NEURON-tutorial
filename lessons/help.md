@@ -50,21 +50,24 @@ myarray[1] = dendrite2   //add item to position 1
 
 A **List** is also a list of objects but it does not need to say what size it will be at the start (sometimes you don't know in advance). It is declared by the format:
 
-```
+```c
 mylist = new List()
+mylist.append(item)    //add item with append()
 ```
 
 ### For loops
 
 A **for loop** is a programming construct which repeats an action a set amount of times.
-It generally takes the format, where `i` is a variable like a counter which increments from start to end and can also be used as an index of an array:
-```
+It generally takes the following format, where `i` is a variable which acts like a counter and increments from `start` to `end`:
+
+```c
 for (i=start; i < end; i++){
-  print a[i]  //repeats this command
+  print a[i]  //repeats this command for every increment of i
+              //i can also be used as the index of an array
 }
 ```
 
-In HOC, the format is slightly different:
+In HOC, the format is slightly different but the concept is the same:
 ```c
 for i=start, end command{   //command is optional
   print a[i]
