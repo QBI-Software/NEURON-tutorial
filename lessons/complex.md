@@ -160,14 +160,14 @@ Previously, we added a graph and accepted defaults.  Now we will see how to cust
 
 1. **Graph -> voltage axis** to show the *somatic membrane potential vs time*  
   1. The default voltage axis measures the voltage at the soma (0.5) which is fine
-  1. If we wanted to change this, right click on the graph (or click on the square)
-  1. Select **Plot what?**
-  1. Find `soma` in the first panel and double-click
-  1. Find `v(0.5)` in the second panel and double-click
-  1. Click **Accept**
-1. Multiple traces can be added in the same window for comparison
-  1. From the right-click menu, under **Plot what?**
-  1. From this menu, then select **Color/Brush** and pick a color to differentiate
+  1. If we wanted to change this:
+    - right click on the graph (or click on the square)
+    - Select **Plot what?**
+    - Find `soma` in the first panel and double-click
+    - Find `v(0.5)` in the second panel and double-click
+    - Click **Accept**
+    - Multiple traces can be added in the same window for comparison
+  1. From the right-click menu, then select **Color/Brush** and pick a color to differentiate the traces
 
   > If you select **Keep lines**, you can run successive traces on top of each other (useful for IV)
 
@@ -215,7 +215,13 @@ A space plot allows you to view the changes in conductance along the neuron.
 
 ![space2]
 
+1. Now have a make another shape plot, and this time right click and select "shape plot"
+2. A space plot will colour map any variable of each section across your neuron(s) and will change as your simulation is running. The default variable is voltage.
+3. Try slowing down the simulation by change "dt" in run control to 0.0025.
+4. Hit run.
+5. Try dt = 0.00025
 
+![space3]
 
 ### STEP 6: Save Me
 
@@ -301,5 +307,6 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [space2]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.PNG "Space plot trace"
 
+[space3]:{{ site.github.repository_url }}/raw/gh-pages/img/space3.PNG "Shape plot trace"
 
 [datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"
