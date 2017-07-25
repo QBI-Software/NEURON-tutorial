@@ -12,7 +12,7 @@ As you may have imagined, it would be very time-consuming and difficult to build
 ### Preliminary setup
 
 1. Launch a fresh version of NEURON via `nrngui`
-1. If you haven't already done so, download the [datafile] to your working directory
+1. If you haven't already done so, download the [datafile] to your working directory. (Save the link as a file with the suffix .asc: eg reconstruction.asc)
 
 ### STEP 1: Importing the cell data
 
