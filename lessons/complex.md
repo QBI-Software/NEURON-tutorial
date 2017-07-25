@@ -307,6 +307,6 @@ NEURON is very powerful and has a number of extra additions that can aid your an
 
 [space2]:{{ site.github.repository_url }}/raw/gh-pages/img/space2.PNG "Space plot trace"
 
-[space3]:{{ site.github.repository_url }}/raw/gh-pages/img/space3.PNG "Shape plot trace"
+[space3]:{{ site.github.repository_url }}/raw/gh-pages/img/space3.png "Shape plot trace"
 
 [datafile]: {{ site.github.repository_url }}/raw/gh-pages/_data/pyramidal.ASC "Pyramidal neuron Datafile"
