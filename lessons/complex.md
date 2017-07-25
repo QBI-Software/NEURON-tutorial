@@ -205,7 +205,7 @@ A space plot allows you to view the changes in conductance along the neuron.
 2. You can rotate the axes by selecting **3D Rotate** from the **Graph Properties menu**.
 3. The middle mouse button is used to move the whole representation.
 
-![space2]
+![space1]
 
 1. To create the space plot graph, select a section of the neuron to include in the space plot by clicking the left mouse button at the beginning of the section, dragging the mouse across the section you want to plot (while holding the mouse button down), and releasing the mouse button when you have covered the sections you want to plot. (In our diagram, we have selected from top to bottom)
 1. When you release the mouse button, the sections you selected will be highlighted in colour.
