@@ -232,9 +232,25 @@ Now when the **bs_net_run.hoc** file is loaded, the windows will also appear, re
 
 ![SimpleNetwork]
 
-Try increasing the value of the `weight` variable to `0.8` - this is how you would model ion channel density at a synapse.
+
+Finally, allow for dynamic adjustment of the weight variable by adding a procedure below:
+
+```
+proc set_weight()
+    bs[1].synlist.object(0).weight = $1
+}
+
+//For example, call this from the console before Init&Run with:
+set_weight(0.6)
+```
+Try increasing the value of the `weight` variable to `0.8`
 
 ![SimpleNetwork2]
+
+What happens if you provide a negative value for weight?
+
+![SimpleNetwork3]
+
 
 >Congratulations!!! You have modelled a simple neural network.
 
@@ -285,7 +301,16 @@ The kinds of mechanisms that can be added are:
 
 Many user defined mechanisms can be simultaneously inserted into sections in NEURON. NEURON will keep track of the total current for each ionic species used and the effect of that current on the membrane potential.
 
-For example, suppose a calcium pump, sodium-calcium exchanger, calcium channel, radial calcium diffusion, and calcium activated potassium mechanisms are inserted into a cable section. Then the total calcium current is calculated as the sum of the individual currents from the calcium pump, exchanger, and channel. The internal calcium concentration just under the membrane is calculated from the total calcium current and diffusion away from the surface. The potassium current through the `cagk` channel is calculated from the internal calcium concentration next to the membrane and the membrane potential. And the membrane potential is calculated from the total current. (The above is only a partial list of the interactions among these channels. The point is that the ionic current, membrane voltage, and concentration computations are consistent regardless of the channels inserted into the cable section.)
+For example, a section with the following membrane mechanisms inserted:
++ calcium pump
++ sodium-calcium exchanger
++ calcium channel
++ radial calcium diffusion
++ calcium activated potassium
+Then the total calcium current is calculated as the sum of the individual currents from the calcium pump, exchanger, and channel.
+The internal calcium concentration just under the membrane is calculated from the total calcium current and diffusion away from the surface.
+The potassium current through the `cagk` channel is calculated from the internal calcium concentration next to the membrane and the membrane potential.
+The membrane potential is calculated from the total current.
 
 Mechanisms are normally local. That is they do not depend on what is happening at other places on the neuron. However, a method exists for writing mechanisms that depend on variables of mechanisms at other locations. For example the calcium concentration at a presynaptic mechanism can be used to calculate the conductance change at a postsynaptic mechanism.  
 
@@ -323,9 +348,9 @@ Have a play around! You get to play god with your own little neural system.
 
 1. Try making the post-synaptic cell the real neuron from the **Complex model** section.
 
-1. Turn the space plot into a time plot, then select portions of each cell by clicking on them for a comparative plot.
+1. Turn the shape plot into a time plot, then select portions of each cell by clicking on them for a comparative plot.
 
-1. Turn the space plot into a shape plot to see the potential change along the whole neuron - slow down the time by reducing dt.
+1. Turn the shape plot into a space plot to see the potential change along the whole neuron - slow down the time by reducing dt.
 
 --------
 
@@ -343,3 +368,5 @@ Have a play around! You get to play god with your own little neural system.
 [SimpleNetwork]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNetwork.PNG "Simple Network"
 
 [SimpleNetwork2]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNetwork2.PNG "Simple Network - higher weight value"
+
+[SimpleNetwork3]: {{ site.github.repository_url }}/raw/gh-pages/img/SimpleNetwork3.PNG "Simple Network - negative value (inhibitory synapse)"
